@@ -1,0 +1,12 @@
+# Non fanno parte del sito: restano solo sul PC
+Claude_Code/
+.claude/
+*.bat
+*.ps1
+*.log
+Modello voce archivio.md
+
+# File di sistema
+desktop.ini
+Thumbs.db
+.DS_Store
