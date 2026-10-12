@@ -1296,18 +1296,57 @@
 
 /* ---- intro ---- */
 
+  /* La pagina d'ingresso: la scritta di presentazione, due righe di
+     testo e l'infografica dei gesti (sposta · clicca · scrivimi). */
   #intro{
     position:fixed; inset:0;
     background:var(--paper);
     z-index:200;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:1.4rem;
+    display:flex; flex-direction:column; align-items:center;
+    padding:1.5rem 0;
+    overflow-x:hidden; overflow-y:auto;
     cursor:pointer;
     transition:opacity .7s ease;
     touch-action:manipulation;              /* niente ritardo del doppio tap */
     -webkit-tap-highlight-color:transparent;
   }
   #intro.hide{ opacity:0; pointer-events:none; }
+  /* il contenuto sta al centro; su uno schermo basso si scorre, non si taglia */
+  #intro .intro-in{
+    margin:auto; max-width:100%;
+    display:flex; flex-direction:column; align-items:center;
+    gap:1.4rem;
+  }
+  /* la seconda riga: fa coppia con la scritta sopra */
+  #intro .intro-sub{
+    margin-top:-0.9rem;
+    font-family:var(--mono); font-size:11px; letter-spacing:0.04em; line-height:1.6;
+    color:var(--faint); text-align:center; padding:0 1.5rem;
+  }
+  #intro .intro-gesti{
+    width:min(30rem, calc(100vw - 3rem)); margin-top:0.5rem;
+    transition:opacity .4s ease;
+  }
+  #intro .intro-gesti .sl-box{ max-height:none; }
+  /* senza camera i gesti non si possono usare: restano, attenuati */
+  #intro.no-cam .intro-gesti{ opacity:0.35; }
+  @media (max-height:600px){
+    #intro .intro-in{ gap:1rem; }
+    #intro .intro-gesti .sl-box{ max-height:5.5rem; }
+  }
+  /* telefono in orizzontale: tutto più raccolto, per stare in una schermata */
+  @media (max-height:420px){
+    #intro{ padding:0.6rem 0; }
+    #intro .intro-in{ gap:0.7rem; }
+    #intro .intro-sub{ margin-top:-0.4rem; }
+    #intro .intro-gesti{ margin-top:0; }
+    #intro .intro-gesti .sl-box{ max-height:4rem; }
+    #intro .intro-gesti .sl-gesto{ gap:0.3rem; }
+  }
+  @media (prefers-reduced-motion: no-preference){
+    #intro .intro-sub, #intro .intro-gesti{ animation:introSu .9s ease .5s backwards; }
+  }
+  @keyframes introSu{ from{ opacity:0; transform:translateY(6px); } }
   #intro .intro-title{
     font-size:clamp(20px, 3vw, 34px);
     letter-spacing:0.1em;
@@ -1555,7 +1594,10 @@ const I18N = {
     lbWhy:'perché è qui ↓', lbWhyOpen:'perché è qui ↑', lbWhyLabel:'perché è qui',
     lbSource:'fonte ↗', copyLink:'copia link', copied:'copiato ✓', fromProject:'dal progetto', photo:'foto',
     arButton:'vedi nella tua stanza', modelHint:'trascina per ruotare · pizzica per avvicinare', modelError:'modello non disponibile',
-    /* MODIFICA: l'infografica dei gesti (titolo, due righe, tre riquadri) */
+    /* MODIFICA: la seconda riga della pagina d'ingresso (con e senza camera) */
+    introSub:'oppure clicca per entrare · nessuna immagine viene mostrata o salvata',
+    introSubNoCam:'la camera non è attiva: i gesti si accendono dopo, dalla mano in basso',
+    /* MODIFICA: l'infografica dei gesti (i tre riquadri) e il suo promemoria */
     scanTitle:'Muovi il sito con le mani',
     scanLine1:'La camera legge i tuoi gesti e li trasforma in comandi.',
     scanLine2:'Nessuna immagine viene mostrata o salvata.',
@@ -1631,6 +1673,8 @@ const I18N = {
     lbWhy:"why it's here ↓", lbWhyOpen:"why it's here ↑", lbWhyLabel:"why it's here",
     lbSource:'source ↗', copyLink:'copy link', copied:'copied ✓', fromProject:'from the project', photo:'photo',
     arButton:'view in your room', modelHint:'drag to rotate · pinch to zoom', modelError:'model not available',
+    introSub:'or click to enter · no image is ever shown or saved',
+    introSubNoCam:'the camera is off: turn gestures on later, from the hand below',
     scanTitle:'Move the site with your hands',
     scanLine1:'The camera reads your gestures and turns them into commands.',
     scanLine2:'No image is ever shown or saved.',
@@ -1706,27 +1750,19 @@ function t(key){
 <div id="intro" aria-label="Introduzione" role="button" tabindex="0">
   <!-- il wordmark si "sviluppa" in caratteri, come una stampa;
        lo span sotto è la riserva se il canvas non è disponibile -->
+  <div class="intro-in">
   <canvas class="intro-canvas" id="introCanvas" aria-hidden="true"></canvas>
   <span class="intro-title" id="introTitle" hidden>edoardo tavoni / archivio</span>
   <!-- MODIFICA: la scritta dell'ingresso (resta uguale in IT e EN) -->
   <p class="intro-text" id="introText">show your hands to the camera</p>
-</div>
+  <!-- MODIFICA: la seconda riga (chiavi introSub / introSubNoCam nel dizionario
+       I18N). Cambia da sola se la camera non c'è: vedi introSenzaCamera. -->
+  <p class="intro-sub" id="introSub" data-i18n="introSub">oppure clicca per entrare · nessuna immagine viene mostrata o salvata</p>
 
-<!-- interfaccia SCAN e reticoli delle mani: vivono a livello di <body>
-     (non dentro una singola vista) così restano visibili — e i gesti
-     restano attivi — qualunque sia la sezione del sito che stai
-     guardando, non solo l'archivio. -->
-<div class="scan-ui" id="scanUI" hidden>
-  <video id="scanVideo" playsinline muted aria-hidden="true"></video>
-  <span id="scanStatus">avvio…</span>
-</div>
-<div class="scan-legend hide" id="scanLegend" role="note" aria-live="polite">
-  <button type="button" id="scanLegendClose" aria-label="Chiudi la legenda">✕</button>
-  <!-- MODIFICA: i testi dell'infografica stanno nel dizionario I18N (chiavi scan…) -->
-  <h2 data-i18n="scanTitle">Muovi il sito con le mani</h2>
-  <p class="sl-text" data-i18n="scanLine1">La camera legge i tuoi gesti e li trasforma in comandi.</p>
-  <p class="sl-text" data-i18n="scanLine2">Nessuna immagine viene mostrata o salvata.</p>
-  <div class="sl-gesti">
+  <!-- L'INFOGRAFICA DEI GESTI: tre riquadri con la mano e il nome del gesto.
+       I testi stanno nel dizionario I18N (chiavi scan…). Gli stessi riquadri
+       vengono ricopiati nel promemoria che apre la mano ✋ in basso. -->
+  <div class="sl-gesti intro-gesti" id="introGesti">
     <div class="sl-gesto">
       <div class="sl-box">
         <!-- mano aperta, con la freccia: scorri di lato -->
@@ -1772,6 +1808,25 @@ function t(key){
       <span data-i18n="scanWriteHow">indice e medio alzati, fermi un attimo: si apre il modulo</span>
     </div>
   </div>
+  </div>
+</div>
+
+<!-- interfaccia SCAN e reticoli delle mani: vivono a livello di <body>
+     (non dentro una singola vista) così restano visibili — e i gesti
+     restano attivi — qualunque sia la sezione del sito che stai
+     guardando, non solo l'archivio. -->
+<div class="scan-ui" id="scanUI" hidden>
+  <video id="scanVideo" playsinline muted aria-hidden="true"></video>
+  <span id="scanStatus">avvio…</span>
+</div>
+<div class="scan-legend hide" id="scanLegend" role="note" aria-live="polite">
+  <button type="button" id="scanLegendClose" aria-label="Chiudi la legenda">✕</button>
+  <!-- MODIFICA: i testi dell'infografica stanno nel dizionario I18N (chiavi scan…) -->
+  <h2 data-i18n="scanTitle">Muovi il sito con le mani</h2>
+  <p class="sl-text" data-i18n="scanLine1">La camera legge i tuoi gesti e li trasforma in comandi.</p>
+  <p class="sl-text" data-i18n="scanLine2">Nessuna immagine viene mostrata o salvata.</p>
+  <!-- i tre riquadri sono quelli della pagina d'ingresso: li ricopia qui lo script -->
+  <div class="sl-gesti" id="scanLegendGesti"></div>
   <p class="sl-more" data-i18n-html="scanMore"><b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice</p>
 </div>
 <div class="hand-cursor" id="handCursorL" hidden><span class="halo"></span><span class="ring"></span><span class="tag">L</span></div>
@@ -3093,17 +3148,19 @@ async function caricaManoModello(){
   catch(e){ return await mod.HandLandmarker.createFromOptions(fileset, opzioni('CPU')); }
 }
 
-/* legenda dei gesti: compare la prima volta, poi a ogni riattivazione dal ✋ */
+/* promemoria dei gesti. L'infografica vera sta nella pagina d'ingresso:
+   questo la ripropone, uguale, quando accendi le mani dal ✋ in basso
+   (per chi è entrato da un link diretto e l'ingresso non l'ha visto). */
+(function(){
+  const da = document.getElementById('introGesti'), a = document.getElementById('scanLegendGesti');
+  if (da && a) a.innerHTML = da.innerHTML;
+})();
 let legendT = null;
-function mostraLegenda(forza){
+function mostraLegenda(){
   if (!scanLegend) return;
-  let vista = false;
-  try{ vista = localStorage.getItem('et_scan_legend_v1') === '1'; }catch(e){}
-  if (vista && !forza) return;
   scanLegend.classList.remove('hide');
-  try{ localStorage.setItem('et_scan_legend_v1', '1'); }catch(e){}
   clearTimeout(legendT);
-  legendT = setTimeout(() => scanLegend.classList.add('hide'), 16000);   /* è un tutorial: il tempo di leggerlo */
+  legendT = setTimeout(() => scanLegend.classList.add('hide'), 16000);   /* il tempo di leggerlo */
 }
 document.getElementById('scanLegendClose').addEventListener('click', () => scanLegend.classList.add('hide'));
 
@@ -3166,8 +3223,6 @@ async function startScan(){
 
     scanStatus.textContent = t('scanShow');
     hideHint();
-    /* con l'intro ancora davanti la legenda aspetta (la mostra dismissIntro) */
-    if (intro.classList.contains('hide')) mostraLegenda(false);
   }catch(err){
     scanStarting = false;
     if (stream) stream.getTracks().forEach(tr => tr.stop());
@@ -3204,20 +3259,25 @@ const scanToggle = document.getElementById('scanToggle');
 if (scanToggle){
   scanToggle.addEventListener('click', () => {
     if (scanning || scanStarting) stopScan();
-    else { startScan(); mostraLegenda(true); }
+    else { startScan(); mostraLegenda(); }
   });
 }
 
 /* ---- intro: "show your hands to the camera" ----
-   Una sola scritta. Si entra in due modi:
+   La pagina d'ingresso: il nome, due righe e l'infografica dei gesti
+   (sposta · clicca · scrivimi), così chi entra sa già come muoversi.
+   Si entra in due modi:
      - mostrando le mani alla camera (il primo gesto riconosciuto
        dissolve l'intro, vedi onHands);
      - con un clic / tocco / Invio: avvia la camera (se non è già
        attiva) ed entra. Se la camera viene negata si entra lo stesso.
    Dove la camera non può esistere (http, permesso negato, nessuna
-   camera), la scritta diventa "click to enter": nessuno resta fuori. */
+   camera), la scritta diventa "click to enter": nessuno resta fuori.
+   In quel caso i gesti restano in vista, attenuati, e la seconda riga
+   dice da dove si accendono. */
 const intro     = document.getElementById('intro');
 const introText = document.getElementById('introText');
+const introSub  = document.getElementById('introSub');
 const cameraPossibile = () => !!(window.isSecureContext && navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
 
 function dismissIntro(){
@@ -3225,11 +3285,13 @@ function dismissIntro(){
   intro.classList.add('hide');
   /* lo stage prende il fuoco: frecce e +/- funzionano subito */
   setTimeout(() => { try{ if (currentViewName() === 'archivio') stage.focus({ preventScroll:true }); }catch(e){} }, 50);
-  /* la legenda dei gesti compare ora, non dietro l'intro */
-  if (scanning) mostraLegenda(false);
 }
 function introSenzaCamera(){
-  if (introText && !intro.classList.contains('hide')) introText.textContent = 'click to enter';
+  if (!intro || intro.classList.contains('hide')) return;
+  if (introText) introText.textContent = 'click to enter';
+  intro.classList.add('no-cam');
+  /* la chiave cambia sul nodo, così anche il cambio lingua trova il testo giusto */
+  if (introSub){ introSub.dataset.i18n = 'introSubNoCam'; introSub.textContent = t('introSubNoCam'); }
 }
 function introEnter(){
   if (!scanning && !scanStarting && cameraPossibile()) startScan();
