@@ -1343,9 +1343,17 @@
      I nomi dei gesti sono spenti; quello che stai facendo si accende in
      negativo, quelli già fatti restano accesi. */
   #intro .intro-specchio{
-    display:block; width:min(36rem, calc(100vw - 3rem)); height:13rem;
+    display:block; width:min(36rem, calc(100vw - 3rem)); height:16rem;
     margin:-0.4rem 0 -0.6rem;
+    transition:opacity .3s ease;
   }
+  /* la mano di esempio è più chiara di quella vera */
+  #intro .intro-specchio.demo{ opacity:0.38; }
+  #intro:not(.no-cam) .intro-gesti .sl-gesto.demo{ opacity:0.8; }
+  /* il sito si usa con le mani: la scritta che lo dice è la più grande */
+  #intro:not(.no-cam) .intro-text{ font-size:clamp(18px, 2.4vw, 26px); font-weight:600; letter-spacing:-0.02em; line-height:1.15; }
+  #intro:not(.no-cam) .intro-sub{ margin-top:-0.9rem; }
+  #intro .intro-gesti .sl-gesto p{ font-size:15px; }
   #intro.no-cam .intro-specchio{ display:none; }
   #intro:not(.no-cam) .intro-gesti .sl-gesto{ opacity:0.35; transition:opacity .35s ease; }
   #intro:not(.no-cam) .intro-gesti .sl-gesto.fatto{ opacity:1; }
@@ -3570,9 +3578,14 @@ function trackHand(lm, i){
   const piegato = t => lmDist(lm[t], lm[0]) < size * 1.3;
   const dueDita = !pinch && steso(8) && steso(12) && piegato(16) && piegato(20);
 
-  if (fist && !dueDita && st.prev && !dialogAperto() && currentViewName() === 'archivio'){
-    camX += (x - st.prev.x) * 1.4;
-    camY += (y - st.prev.y) * 1.4;
+  if (fist && !dueDita && st.prev){
+    const nellaNuvola = !dialogAperto() && currentViewName() === 'archivio' && !(typeof indexOpen !== 'undefined' && indexOpen);
+    if (nellaNuvola){
+      camX += (x - st.prev.x) * 1.4;
+      camY += (y - st.prev.y) * 1.4;
+    } else {
+      scorriConLaMano(x, y, y - st.prev.y);   /* nelle altre pagine: scorri */
+    }
   }
 
   const now = performance.now();
@@ -3646,10 +3659,11 @@ const SPECCHIO_DITA  = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19
 const specchioStato  = { refX: null, refT: 0, spostaFino: 0, fatti: {}, chiude: null };
 const introAperta = () => !!intro && !intro.classList.contains('hide');
 
-function specchioIntro(list){
+/* disegna le mani (vere o della dimostrazione) come stampa in caratteri;
+   risponde false se la tela non c'è o è nascosta */
+function disegnaSpecchio(list){
   const r = introSpecchio ? introSpecchio.getBoundingClientRect() : null;
-  /* senza tela (o tela nascosta) vale la regola di prima: la prima mano fa entrare */
-  if (!specchioCtx || !r || r.width < 8){ if (list.length) dismissIntro(); return; }
+  if (!specchioCtx || !r || r.width < 8) return false;
 
   const dpr = Math.min(devicePixelRatio || 1, 2);
   const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
@@ -3686,6 +3700,21 @@ function specchioIntro(list){
       if (ch !== ' ') specchioCtx.fillText(ch, x * cella + cella / 2, y * cella + cella / 2);
     }
   }
+  return true;
+}
+
+function specchioIntro(list){
+  /* nessuna mano in vista: la tela resta alla dimostrazione (vedi sotto) */
+  if (!list.length){
+    intro.querySelectorAll('#introGesti .sl-gesto.ora').forEach(g => g.classList.remove('ora'));
+    specchioStato.refX = null;
+    return;
+  }
+  specchioStato.vera = performance.now();
+  introSpecchio.classList.remove('demo');
+  intro.querySelectorAll('#introGesti .sl-gesto.demo').forEach(g => g.classList.remove('demo'));
+  /* senza tela (o tela nascosta) vale la regola di prima: la prima mano fa entrare */
+  if (!disegnaSpecchio(list)){ dismissIntro(); return; }
 
   /* quale gesto stai facendo (gli stessi criteri che poi comandano il sito) */
   const ora = { sposta: false, clicca: false, scrivimi: false };
@@ -3721,6 +3750,55 @@ function specchioIntro(list){
       lastGestureAt = performance.now();
       dismissIntro();
     }, 1000);
+  }
+}
+
+/* ---- la dimostrazione ----
+   Finché nessuna mano vera è in vista, nello specchio una mano di esempio
+   (più chiara) fa i tre gesti uno dopo l'altro, e sotto si illumina il
+   nome di quello che sta facendo: chi entra capisce subito che il sito
+   si usa con le mani, e come. Appena compare una mano vera, lascia il
+   posto a quella. */
+const DEMO_BASE = [[.5,.9],[.44,.84],[.39,.77],[.35,.71],[.32,.65],[.44,.64],[.42,.53],[.41,.46],[.40,.40],[.5,.62],[.5,.50],[.5,.42],[.5,.35],[.555,.64],[.57,.53],[.58,.46],[.585,.40],[.60,.68],[.63,.60],[.645,.55],[.655,.50]];
+const DEMO_POSE = {
+  sposta:   {},
+  clicca:   { 3:[.38,.62], 4:[.405,.555], 6:[.42,.56], 7:[.41,.545], 8:[.405,.55] },
+  scrivimi: { 3:[.44,.72], 4:[.47,.70], 6:[.415,.53], 7:[.40,.45], 8:[.385,.38], 14:[.57,.60], 15:[.565,.66], 16:[.56,.70], 18:[.62,.66], 19:[.615,.70], 20:[.61,.74] }
+};
+const DEMO_GIRO = ['sposta', 'clicca', 'scrivimi'], DEMO_DURATA = 2200;
+function manoDemo(now){
+  const fase = Math.floor(now / DEMO_DURATA) % 3, k = (now % DEMO_DURATA) / DEMO_DURATA;
+  const gesto = DEMO_GIRO[fase], prima = DEMO_GIRO[(fase + 2) % 3];
+  const m = Math.min(1, k / 0.18);                       /* passa morbida da un gesto all'altro */
+  const dx = gesto === 'sposta' ? Math.sin(k * Math.PI * 2) * 0.16 : 0;
+  const lm = DEMO_BASE.map((b, i) => {
+    const a = DEMO_POSE[prima][i] || b, z = DEMO_POSE[gesto][i] || b;
+    return { x: a[0] + (z[0] - a[0]) * m + dx, y: a[1] + (z[1] - a[1]) * m - 0.12 };
+  });
+  return { gesto, lm };
+}
+(function dimostra(){
+  if (!introAperta()) return;
+  const now = performance.now();
+  if (!intro.classList.contains('no-cam') && now - (specchioStato.vera || 0) > 700){
+    const d = manoDemo(now);
+    if (disegnaSpecchio([d.lm])){
+      introSpecchio.classList.add('demo');
+      intro.querySelectorAll('#introGesti .sl-gesto').forEach(g => g.classList.toggle('demo', g.dataset.gesto === d.gesto));
+    }
+  }
+  requestAnimationFrame(dimostra);
+})();
+
+/* scorrere con la mano: fuori dalla nuvola (lavori, about, contatti, indice,
+   schede aperte) la mano chiusa trascina la pagina su e giù, come un dito
+   su uno schermo */
+function scorriConLaMano(x, y, dy){
+  let el = document.elementFromPoint(x, y);
+  while (el && el !== document.documentElement){
+    const s = getComputedStyle(el);
+    if (/(auto|scroll)/.test(s.overflowY) && el.scrollHeight > el.clientHeight + 4){ el.scrollTop -= dy * 2.4; return; }
+    el = el.parentElement;
   }
 }
 
