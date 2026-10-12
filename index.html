@@ -3127,6 +3127,7 @@ let handState = [nuovoStatoMano(), nuovoStatoMano()];
 /* gesti "di sistema": un raffreddamento comune evita che un solo
    movimento scateni più cambi di sezione o più aperture dell'indice */
 let lastGestureAt = 0;
+let schedaApertaDa = 0;   /* da quando c'è una scheda aperta (per il gesto di uscita) */
 let bothPinchWas = false;
 const GESTURE_COOLDOWN = 900;   /* ms tra un gesto "di sistema" e il successivo */
 
@@ -3604,7 +3605,9 @@ function trackHand(lm, i){
   }
 
   /* swipe orizzontale a mano aperta = cambia sezione del sito */
-  if (!pinch && !fist && !dueDita){
+  /* a voce aperta lo sfogliare vale con la mano in qualsiasi posa (lì non c'è nulla da trascinare) */
+  const voceAperta = !!(document.getElementById('lightbox') && document.getElementById('lightbox').open);
+  if (!pinch && !dueDita && (!fist || voceAperta)){
     if (st.swipeRefX === null){ st.swipeRefX = x; st.swipeRefT = now; }
     else if (now - st.swipeRefT > 260){
       st.swipeRefX = x; st.swipeRefT = now;   /* finestra scaduta: si ricomincia a misurare */
@@ -3612,7 +3615,10 @@ function trackHand(lm, i){
       const dx = x - st.swipeRefX;
       if (Math.abs(dx) > 260 && now - lastGestureAt > GESTURE_COOLDOWN){
         lastGestureAt = now;
-        changeView(dx > 0 ? 1 : -1);
+        /* con una voce dell'archivio aperta, di lato si sfoglia: successiva / precedente */
+        const voce = document.getElementById('lightbox');
+        if (voce && voce.open && typeof openItem === 'function') openItem(currentIndex + (dx > 0 ? 1 : -1));
+        else changeView(dx > 0 ? 1 : -1);
         st.swipeRefX = x; st.swipeRefT = now;
       }
     }
@@ -3631,6 +3637,28 @@ function trackHand(lm, i){
   if (!fist && !pinch && !dialogAperto() && Math.abs(dz) > 0.0015){
     focusAnim = null;
     camZTarget = clampZ(camZTarget + dz * 4500);
+  }
+
+  /* uscire da una scheda: la mano che si allontana in fretta la chiude,
+     come "mano indietro = esci" nella nuvola. Si tara da sola su chi la
+     usa: la grandezza della mano nell'inquadratura dice quanto è lontana,
+     e conta di quanto rimpicciolisce rispetto a un attimo prima (un quarto
+     in poco più di mezzo secondo), non una distanza fissa. Appoggiarsi
+     piano allo schienale non basta; appena aperta la scheda, per un
+     momento, il gesto non vale (la mano sta ancora tornando dal pizzico). */
+  const scheda = dialogAperto();
+  if (!scheda) schedaApertaDa = 0;
+  else if (!schedaApertaDa) schedaApertaDa = now;
+  st.storia = (st.storia || []).filter(p => now - p.t < 650);
+  st.storia.push({ t: now, s: st.sizeSmooth });
+  if (scheda && !pinch && now - schedaApertaDa > 800 && now - lastGestureAt > GESTURE_COOLDOWN){
+    const prima = Math.max.apply(null, st.storia.map(p => p.s));
+    if (st.sizeSmooth < prima * 0.76){
+      lastGestureAt = now;
+      st.storia = [];
+      const chiudi = scheda.querySelector('.close, .cw-close');
+      if (chiudi) chiudi.click(); else scheda.close();
+    }
   }
 
   st.pinchWas = pinch;
