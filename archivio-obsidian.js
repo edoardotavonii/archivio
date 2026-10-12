@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-08 13:37.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-12 21:52.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-08T13:37";
+window.ARCHIVE_SYNC = "2026-10-12T21:52";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -643,6 +643,31 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "Una lampada da terra di 120 cm: uno stelo sottile in alluminio anodizzato nero con in cima un piccolo proiettore (LED da 8 W) e un sistema ottico progettato apposta. Non illumina la stanza in senso classico: proietta sul muro un cerchio di luce con dentro tutte le sfumature di un tramonto, dal giallo all\u0027arancio al rosso al viola, insieme e senza stacchi. Lo studio milanese Mandalaki (Enrico De Lotto, George Kolliopoulos, Giovanni Senin) dice che la novità è che si progetta la luce stessa, non solo la lampada: un normale LED ti fa scegliere un colore o una temperatura alla volta, qui le tinte sono tante e insieme, \"come in natura\".",
         "source":  "https://www.mandalaki.com/halo-horizon"
+    },
+    {
+        "id":  "inspo-the-ned-doha-chipperfield",
+        "src":  "images/obsidian/inspo-the-ned-doha-chipperfield.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-the-ned-doha-chipperfield.jpg",
+        "title":  "The Ned Doha — David Chipperfield Architects",
+        "year":  "2023",
+        "description":  "The Ned Doha, riuso adattivo del Ministero dell\u0027Interno brutalista di William Sednaoui (anni \u002770) — David Chipperfield Architects, interni Soho House Design.",
+        "medium":  "riuso adattivo, cemento a vista, marmo di Tinos e Calacatta, travertino",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "riuso-adattivo",
+                     "brutalismo",
+                     "cemento-a-vista",
+                     "pergola",
+                     "ombra",
+                     "qatar"
+                 ],
+        "addedAt":  "2026-10-12",
+        "kind":  "riferimento",
+        "note":  "The Ned Doha non è un progetto ex novo: è il riuso del Ministero dell\u0027Interno del Qatar, un edificio brutalista degli anni \u002770 firmato dall\u0027architetto libanese William Sednaoui, tra i più significativi e tra i più antichi della Doha moderna. David Chipperfield Architects non lo nasconde sotto un involucro nuovo: mantiene a vista il soffitto a cassettoni in cemento nelle camere, aggiunge un solo piano in sommità, e avvolge l\u0027edificio con un podio di 260 metri rivestito in travertino chiaro — un gesto che rafforza, non nega, l\u0027orizzontalità originaria.",
+        "source":  "https://davidchipperfield.com/projects/the-ned, più Wallpaper* e Identity.ae (vedi Fonte)"
     }
 ];
 window.PROJECTS_OBSIDIAN = [];
