@@ -315,18 +315,52 @@
   @keyframes hand-spin{ to{ transform:rotate(360deg); } }
 
   /* legenda dei gesti: compare la prima volta che attivi le mani */
+  /* È un'infografica: titolo, due righe, tre riquadri con la mano
+     disegnata e il nome del gesto (sposta · clicca · scrivimi). */
   .scan-legend{
-    position:fixed; right:1.5rem; bottom:5.6rem; z-index:15;
-    max-width:18rem;
+    position:fixed; left:50%; bottom:5.6rem; z-index:15;
+    transform:translateX(-50%);
+    width:min(34rem, calc(100vw - 3rem));
+    max-height:calc(100vh - 7rem); overflow-y:auto;
     background:var(--paper); border:1px solid var(--ink);
-    padding:0.65rem 0.8rem;
-    font-family:var(--mono); font-size:10px; letter-spacing:0.03em; line-height:1.75;
+    padding:1rem 1.1rem 0.9rem;
     transition:opacity .4s ease;
   }
   .scan-legend.hide{ opacity:0; pointer-events:none; }
-  .scan-legend b{ font-weight:600; }
-  .scan-legend button{ float:right; color:var(--faint); margin-left:0.6rem; }
-  .scan-legend button:hover{ color:var(--ink); }
+  .scan-legend > button{
+    position:absolute; top:0.7rem; right:0.9rem;
+    font-size:11px; color:var(--faint);
+  }
+  .scan-legend > button:hover{ color:var(--ink); }
+  .scan-legend h2{
+    font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+    padding:0 2rem 0.45rem 0; border-bottom:1px solid var(--ink);
+  }
+  .scan-legend .sl-text{ margin-top:0.55rem; font-size:12px; line-height:1.5; }
+  .scan-legend .sl-text + .sl-text{ margin-top:0.1rem; color:var(--faint); }
+  .sl-gesti{ display:flex; gap:0.6rem; margin-top:0.9rem; }
+  .sl-gesto{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-align:center; }
+  .sl-gesto .sl-box{
+    width:100%; aspect-ratio:1 / 1; max-height:7.5rem;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--ink);
+  }
+  .sl-gesto svg{
+    height:72%; width:auto;
+    fill:var(--paper); stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .sl-gesto svg .aria{ fill:none; }
+  .sl-gesto b{ font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; }
+  .sl-gesto span{ font-family:var(--mono); font-size:10px; letter-spacing:0.02em; line-height:1.5; color:var(--faint); }
+  .scan-legend .sl-more{
+    margin-top:0.8rem; padding-top:0.6rem; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.03em; line-height:1.7; color:var(--faint);
+  }
+  .scan-legend .sl-more b{ font-weight:600; color:var(--ink); }
+  @media (max-width:520px){
+    .scan-legend{ padding:0.8rem 0.8rem 0.7rem; }
+    .sl-gesti{ gap:0.4rem; }
+  }
 
   footer{
     position:fixed; inset:auto 0 0 0;
@@ -1521,7 +1555,14 @@ const I18N = {
     lbWhy:'perché è qui ↓', lbWhyOpen:'perché è qui ↑', lbWhyLabel:'perché è qui',
     lbSource:'fonte ↗', copyLink:'copia link', copied:'copiato ✓', fromProject:'dal progetto', photo:'foto',
     arButton:'vedi nella tua stanza', modelHint:'trascina per ruotare · pizzica per avvicinare', modelError:'modello non disponibile',
-    scanLegend:'<b>pizzico</b> apri · <b>pugno</b> trascina<br><b>mano avanti/indietro</b> entra/esci<br><b>swipe</b> cambia sezione · <b>due pizzichi</b> indice<br><b>su un modello 3D</b> pizzica e muovi per ruotarlo,<br>due pizzichi per avvicinarlo',
+    /* MODIFICA: l'infografica dei gesti (titolo, due righe, tre riquadri) */
+    scanTitle:'Muovi il sito con le mani',
+    scanLine1:'La camera legge i tuoi gesti e li trasforma in comandi.',
+    scanLine2:'Nessuna immagine viene mostrata o salvata.',
+    scanMove:'sposta', scanMoveHow:'muovi la mano di lato: ti sposti nel sito',
+    scanPinch:'clicca', scanPinchHow:'unisci pollice e indice su ciò che vuoi aprire',
+    scanWrite:'scrivimi', scanWriteHow:'indice e medio alzati, fermi un attimo: si apre il modulo',
+    scanMore:'<b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice',
     scanNoCamHttps:'camera non disponibile: apri il sito da https o localhost',
     scanAsk:'consenti la camera…', scanLoading:'carico il modello delle mani…', scanShow:'mostra le mani alla camera',
     scanDenied:'permesso camera negato: abilitalo nelle impostazioni del browser',
@@ -1590,7 +1631,13 @@ const I18N = {
     lbWhy:"why it's here ↓", lbWhyOpen:"why it's here ↑", lbWhyLabel:"why it's here",
     lbSource:'source ↗', copyLink:'copy link', copied:'copied ✓', fromProject:'from the project', photo:'photo',
     arButton:'view in your room', modelHint:'drag to rotate · pinch to zoom', modelError:'model not available',
-    scanLegend:'<b>pinch</b> open · <b>fist</b> drag<br><b>hand forward/back</b> zoom in/out<br><b>swipe</b> change section · <b>two pinches</b> index<br><b>on a 3D model</b> pinch and move to rotate it,<br>two pinches to zoom',
+    scanTitle:'Move the site with your hands',
+    scanLine1:'The camera reads your gestures and turns them into commands.',
+    scanLine2:'No image is ever shown or saved.',
+    scanMove:'move', scanMoveHow:'move your hand sideways: you move through the site',
+    scanPinch:'click', scanPinchHow:'join thumb and index over what you want to open',
+    scanWrite:'write to me', scanWriteHow:'index and middle up, hold a moment: the form opens',
+    scanMore:'<b>fist</b> drag the cloud · <b>hand forward/back</b> zoom in and out · <b>two pinches</b> index',
     scanNoCamHttps:'camera unavailable: open the site over https or localhost',
     scanAsk:'allow the camera…', scanLoading:'loading the hand model…', scanShow:'show your hands to the camera',
     scanDenied:'camera permission denied: enable it in your browser settings',
@@ -1675,10 +1722,57 @@ function t(key){
 </div>
 <div class="scan-legend hide" id="scanLegend" role="note" aria-live="polite">
   <button type="button" id="scanLegendClose" aria-label="Chiudi la legenda">✕</button>
-  <div data-i18n-html="scanLegend"><b>pizzico</b> apri · <b>pugno</b> trascina<br>
-  <b>mano avanti/indietro</b> entra/esci<br>
-  <b>swipe</b> cambia sezione · <b>due pizzichi</b> indice<br>
-  <b>su un modello 3D</b> pizzica e muovi per ruotarlo,<br>due pizzichi per avvicinarlo</div>
+  <!-- MODIFICA: i testi dell'infografica stanno nel dizionario I18N (chiavi scan…) -->
+  <h2 data-i18n="scanTitle">Muovi il sito con le mani</h2>
+  <p class="sl-text" data-i18n="scanLine1">La camera legge i tuoi gesti e li trasforma in comandi.</p>
+  <p class="sl-text" data-i18n="scanLine2">Nessuna immagine viene mostrata o salvata.</p>
+  <div class="sl-gesti">
+    <div class="sl-gesto">
+      <div class="sl-box">
+        <!-- mano aperta, con la freccia: scorri di lato -->
+        <svg viewBox="0 0 64 70" aria-hidden="true">
+          <rect x="19" y="9" width="6.5" height="28" rx="3.25"/>
+          <rect x="26.5" y="5" width="6.5" height="32" rx="3.25"/>
+          <rect x="34" y="8" width="6.5" height="29" rx="3.25"/>
+          <rect x="41.5" y="14" width="6.5" height="24" rx="3.25"/>
+          <rect x="7.5" y="29" width="6.5" height="20" rx="3.25" transform="rotate(-38 10.75 39)"/>
+          <rect x="17" y="31" width="33" height="23" rx="9"/>
+          <path class="aria" d="M18 64h28M18 64l4.5-3.5M18 64l4.5 3.5M46 64l-4.5-3.5M46 64l-4.5 3.5"/>
+        </svg>
+      </div>
+      <b data-i18n="scanMove">sposta</b>
+      <span data-i18n="scanMoveHow">muovi la mano di lato: ti sposti nel sito</span>
+    </div>
+    <div class="sl-gesto">
+      <div class="sl-box">
+        <!-- pollice e indice che si toccano -->
+        <svg viewBox="0 0 64 70" aria-hidden="true">
+          <rect x="30" y="7" width="6.5" height="32" rx="3.25"/>
+          <rect x="37.5" y="10" width="6.5" height="29" rx="3.25"/>
+          <rect x="45" y="16" width="6.5" height="24" rx="3.25"/>
+          <rect x="22" y="33" width="31" height="24" rx="9"/>
+          <circle cx="19" cy="31" r="8.5"/>
+          <circle class="aria" cx="19" cy="31" r="3"/>
+        </svg>
+      </div>
+      <b data-i18n="scanPinch">clicca</b>
+      <span data-i18n="scanPinchHow">unisci pollice e indice su ciò che vuoi aprire</span>
+    </div>
+    <div class="sl-gesto">
+      <div class="sl-box">
+        <!-- indice e medio alzati -->
+        <svg viewBox="0 0 64 70" aria-hidden="true">
+          <rect x="21" y="5" width="6.5" height="34" rx="3.25" transform="rotate(-11 24.25 39)"/>
+          <rect x="34" y="5" width="6.5" height="34" rx="3.25" transform="rotate(11 37.25 39)"/>
+          <rect x="17" y="33" width="31" height="24" rx="9"/>
+          <path class="aria" d="M36 39.5v7M42 40.5v6.5M19.5 49c5 1.5 9.5 0 13-4"/>
+        </svg>
+      </div>
+      <b data-i18n="scanWrite">scrivimi</b>
+      <span data-i18n="scanWriteHow">indice e medio alzati, fermi un attimo: si apre il modulo</span>
+    </div>
+  </div>
+  <p class="sl-more" data-i18n-html="scanMore"><b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice</p>
 </div>
 <div class="hand-cursor" id="handCursorL" hidden><span class="halo"></span><span class="ring"></span><span class="tag">L</span></div>
 <div class="hand-cursor" id="handCursorR" hidden><span class="halo"></span><span class="ring"></span><span class="tag">R</span></div>
@@ -2961,7 +3055,7 @@ const scanLegend  = document.getElementById('scanLegend');
 const handCursors = [document.getElementById('handCursorL'), document.getElementById('handCursorR')];
 
 let scanning = false, scanStarting = false, handLandmarker = null;
-const nuovoStatoMano = () => ({ prev: null, pinchWas: false, pinchOnModel: false, sizeSmooth: null, xSmooth: null, ySmooth: null, swipeRefX: null, swipeRefT: 0 });
+const nuovoStatoMano = () => ({ prev: null, pinchWas: false, pinchOnModel: false, sizeSmooth: null, xSmooth: null, ySmooth: null, swipeRefX: null, swipeRefT: 0, vDa: null });
 let handState = [nuovoStatoMano(), nuovoStatoMano()];
 /* gesti "di sistema": un raffreddamento comune evita che un solo
    movimento scateni più cambi di sezione o più aperture dell'indice */
@@ -3009,7 +3103,7 @@ function mostraLegenda(forza){
   scanLegend.classList.remove('hide');
   try{ localStorage.setItem('et_scan_legend_v1', '1'); }catch(e){}
   clearTimeout(legendT);
-  legendT = setTimeout(() => scanLegend.classList.add('hide'), 9000);
+  legendT = setTimeout(() => scanLegend.classList.add('hide'), 16000);   /* è un tutorial: il tempo di leggerlo */
 }
 document.getElementById('scanLegendClose').addEventListener('click', () => scanLegend.classList.add('hide'));
 
@@ -3302,14 +3396,35 @@ function trackHand(lm, i){
   /* pugno chiuso = trascina la nuvola (solo quando la nuvola è in vista) */
   const tips = [8, 12, 16, 20];
   const fist = !pinch && tips.every(t => lmDist(lm[t], lm[9]) < size * 1.05);
-  if (fist && st.prev && !dialogAperto() && currentViewName() === 'archivio'){
+  /* "scrivimi": indice e medio alzati, anulare e mignolo chiusi. La
+     distanza dal polso dice se un dito è steso o piegato. Si riconosce
+     prima del trascinamento, così mentre lo fai la nuvola resta ferma. */
+  const steso   = t => lmDist(lm[t], lm[0]) > size * 1.6;
+  const piegato = t => lmDist(lm[t], lm[0]) < size * 1.3;
+  const dueDita = !pinch && steso(8) && steso(12) && piegato(16) && piegato(20);
+
+  if (fist && !dueDita && st.prev && !dialogAperto() && currentViewName() === 'archivio'){
     camX += (x - st.prev.x) * 1.4;
     camY += (y - st.prev.y) * 1.4;
   }
 
-  /* swipe orizzontale a mano aperta = cambia sezione del sito */
   const now = performance.now();
-  if (!pinch && !fist){
+
+  /* tenuto fermo per un attimo = si apre il modulo dei contatti */
+  if (dueDita && !dialogAperto()){
+    if (st.vDa === null) st.vDa = now;
+    else if (now - st.vDa > 700 && now - lastGestureAt > GESTURE_COOLDOWN){
+      lastGestureAt = now;
+      st.vDa = null;
+      if (typeof showView === 'function') showView('contatti');
+      if (typeof window.prefillCollab === 'function') window.prefillCollab();
+    }
+  } else {
+    st.vDa = null;
+  }
+
+  /* swipe orizzontale a mano aperta = cambia sezione del sito */
+  if (!pinch && !fist && !dueDita){
     if (st.swipeRefX === null){ st.swipeRefX = x; st.swipeRefT = now; }
     else if (now - st.swipeRefT > 260){
       st.swipeRefX = x; st.swipeRefT = now;   /* finestra scaduta: si ricomincia a misurare */
