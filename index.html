@@ -1320,6 +1320,12 @@
     display:flex; flex-direction:column; align-items:center;
     gap:1.4rem;
   }
+  /* che cos'è il sito: una frase, con la spiegazione tra parentesi in grassetto */
+  #intro .intro-about{
+    max-width:34rem; padding:0 1.5rem;
+    font-size:13px; line-height:1.5; text-align:center; color:var(--ink);
+  }
+  #intro .intro-about b{ font-weight:600; }
   /* la seconda riga: stesso carattere della prima, in grigio — come
      "/ archivio" accanto al nome */
   #intro .intro-sub{
@@ -1333,6 +1339,20 @@
     transition:opacity .4s ease;
   }
   #intro .intro-gesti .sl-box{ max-height:none; }
+  /* PROTOTIPO "specchio": la mano di chi guarda, stampata in caratteri.
+     I nomi dei gesti sono spenti; quello che stai facendo si accende in
+     negativo, quelli già fatti restano accesi. */
+  #intro .intro-specchio{
+    display:block; width:min(36rem, calc(100vw - 3rem)); height:13rem;
+    margin:-0.4rem 0 -0.6rem;
+  }
+  #intro.no-cam .intro-specchio{ display:none; }
+  #intro:not(.no-cam) .intro-gesti .sl-gesto{ opacity:0.35; transition:opacity .35s ease; }
+  #intro:not(.no-cam) .intro-gesti .sl-gesto.fatto{ opacity:1; }
+  #intro .intro-gesti .sl-gesto b{ padding:0 0.25em; transition:background .15s ease, color .15s ease; }
+  #intro .intro-gesti .sl-gesto.ora b{ background:var(--ink); color:var(--paper); }
+  @media (max-height:600px){ #intro .intro-specchio{ height:8rem; } }
+  @media (max-height:420px){ #intro .intro-specchio{ height:5.5rem; margin:-0.3rem 0; } }
   /* senza camera i gesti non si possono usare: restano, attenuati */
   #intro.no-cam .intro-gesti{ opacity:0.5; }
   @media (max-height:600px){
@@ -1600,7 +1620,8 @@ const I18N = {
     lbSource:'fonte ↗', copyLink:'copia link', copied:'copiato ✓', fromProject:'dal progetto', photo:'foto',
     arButton:'vedi nella tua stanza', modelHint:'trascina per ruotare · pizzica per avvicinare', modelError:'modello non disponibile',
     /* MODIFICA: la seconda riga della pagina d'ingresso (con e senza camera) */
-    introSub:'oppure clicca per entrare · nessuna immagine viene mostrata o salvata',
+    introAbout:'Vorrei costruire un archivio collettivo <b>(riferimenti raccolti insieme, da usare come ispirazione per progettare e da condividere)</b>',
+    introSub:'nessuna immagine viene mostrata o salvata',
     introSubNoCam:'la camera non è attiva: i gesti si accendono dopo, dalla mano in basso',
     /* MODIFICA: l'infografica dei gesti (i tre riquadri) e il suo promemoria */
     scanTitle:'Muovi il sito con le mani',
@@ -1677,7 +1698,8 @@ const I18N = {
     lbWhy:"why it's here ↓", lbWhyOpen:"why it's here ↑", lbWhyLabel:"why it's here",
     lbSource:'source ↗', copyLink:'copy link', copied:'copied ✓', fromProject:'from the project', photo:'photo',
     arButton:'view in your room', modelHint:'drag to rotate · pinch to zoom', modelError:'model not available',
-    introSub:'or click to enter · no image is ever shown or saved',
+    introAbout:'I would like to build a collective archive <b>(references gathered together, to use as inspiration for design and to share)</b>',
+    introSub:'no image is ever shown or saved',
     introSubNoCam:'the camera is off: turn gestures on later, from the hand below',
     scanTitle:'Move the site with your hands',
     scanLine1:'The camera reads your gestures and turns them into commands.',
@@ -1756,11 +1778,14 @@ function t(key){
   <div class="intro-in">
   <canvas class="intro-canvas" id="introCanvas" aria-hidden="true"></canvas>
   <span class="intro-title" id="introTitle" hidden>edoardo tavoni / archivio</span>
+  <!-- MODIFICA: che cos'è il sito, con la spiegazione tra parentesi in grassetto
+       (chiave introAbout nel dizionario I18N) -->
+  <p class="intro-about" id="introAbout" data-i18n-html="introAbout">Vorrei costruire un archivio collettivo <b>(riferimenti raccolti insieme, da usare come ispirazione per progettare e da condividere)</b></p>
   <!-- MODIFICA: la scritta dell'ingresso (resta uguale in IT e EN) -->
   <p class="intro-text" id="introText">show your hands to the camera</p>
   <!-- MODIFICA: la seconda riga (chiavi introSub / introSubNoCam nel dizionario
        I18N). Cambia da sola se la camera non c'è: vedi introSenzaCamera. -->
-  <p class="intro-sub" id="introSub" data-i18n="introSub">oppure clicca per entrare · nessuna immagine viene mostrata o salvata</p>
+  <p class="intro-sub" id="introSub" data-i18n="introSub">nessuna immagine viene mostrata o salvata</p>
 
   <!-- I GESTI: tre fotografie di una mano e il nome del gesto.
        MODIFICA: le fotografie sono tre file nella cartella images/gesti/
@@ -1772,17 +1797,18 @@ function t(key){
        il nome. Se un file manca, quel riquadro sparisce e resta la scritta.
        I testi stanno nel dizionario I18N (chiavi scan…). Gli stessi tre
        vengono ricopiati nel promemoria che apre la mano ✋ in basso. -->
+  <!-- PROTOTIPO "specchio": qui compare la mano di chi guarda, tracciata dalla
+       camera e stampata in caratteri. Nessuna immagine della camera viene
+       mostrata: solo la forma della mano, ricostruita dai suoi punti. -->
+  <canvas class="intro-specchio" id="introSpecchio" aria-hidden="true"></canvas>
   <div class="sl-gesti intro-gesti" id="introGesti">
-    <div class="sl-gesto">
-      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/sposta.jpg" aria-hidden="true"></canvas></div>
+    <div class="sl-gesto" data-gesto="sposta">
       <p><b data-i18n="scanMove">sposta</b> <span data-i18n="scanMoveHow">muovi la mano di lato</span></p>
     </div>
-    <div class="sl-gesto">
-      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/clicca.jpg" aria-hidden="true"></canvas></div>
+    <div class="sl-gesto" data-gesto="clicca">
       <p><b data-i18n="scanPinch">clicca</b> <span data-i18n="scanPinchHow">unisci pollice e indice</span></p>
     </div>
-    <div class="sl-gesto">
-      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/scrivimi.jpg" aria-hidden="true"></canvas></div>
+    <div class="sl-gesto" data-gesto="scrivimi">
       <p><b data-i18n="scanWrite">scrivimi</b> <span data-i18n="scanWriteHow">indice e medio alzati</span></p>
     </div>
   </div>
@@ -3366,7 +3392,14 @@ function introSenzaCamera(){
   if (introSub){ introSub.dataset.i18n = 'introSubNoCam'; introSub.textContent = t('introSubNoCam'); }
 }
 function introEnter(){
-  if (!scanning && !scanStarting && cameraPossibile()) startScan();
+  /* con la camera il sito parte solo dopo i tre gesti (vedi specchioIntro):
+     il clic serve soltanto ad accendere la camera, se non è già accesa.
+     Senza camera (negata, assente, non disponibile) si entra con il clic,
+     altrimenti nessuno potrebbe entrare. */
+  if (cameraPossibile() && !intro.classList.contains('no-cam')){
+    if (!scanning && !scanStarting) startScan();
+    return;
+  }
   dismissIntro();
 }
 /* sul telefono un lieve movimento del dito annulla il 'click':
@@ -3599,9 +3632,101 @@ function trackHand(lm, i){
 }
 
 let bothDistPrev = null;
+/* ---- PROTOTIPO: lo "specchio" della pagina d'ingresso ----
+   Finché l'ingresso è aperto, le mani non comandano il sito: si vedono.
+   La forma della mano viene ricostruita dai suoi 21 punti (nessuna
+   immagine della camera) e stampata in caratteri, con l'alfabeto e la
+   cella della scritta del nome. Sotto, il nome del gesto che stai
+   facendo si accende. Fatti tutti e tre, si entra; il clic entra sempre. */
+const introSpecchio = document.getElementById('introSpecchio');
+const specchioCtx   = introSpecchio ? introSpecchio.getContext('2d') : null;
+const specchioOff   = document.createElement('canvas');
+const SPECCHIO_RAMPA = "@#%*+=-:. ";
+const SPECCHIO_DITA  = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]];
+const specchioStato  = { refX: null, refT: 0, spostaFino: 0, fatti: {}, chiude: null };
+const introAperta = () => !!intro && !intro.classList.contains('hide');
+
+function specchioIntro(list){
+  const r = introSpecchio ? introSpecchio.getBoundingClientRect() : null;
+  /* senza tela (o tela nascosta) vale la regola di prima: la prima mano fa entrare */
+  if (!specchioCtx || !r || r.width < 8){ if (list.length) dismissIntro(); return; }
+
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
+  if (introSpecchio.width !== W || introSpecchio.height !== H){ introSpecchio.width = W; introSpecchio.height = H; }
+  const cella = Math.max(4, Math.round(5 * dpr));
+  const gw = Math.ceil(W / cella), gh = Math.ceil(H / cella);
+
+  /* la sagoma, piccola quanto la griglia: un valore per cella */
+  specchioOff.width = gw; specchioOff.height = gh;
+  const o = specchioOff.getContext('2d', { willReadFrequently: true });
+  o.fillStyle = '#fff'; o.fillRect(0, 0, gw, gh);
+  const px = p => gw / 2 + (0.5 - p.x) * gh * (4 / 3);   /* specchiata, come uno specchio */
+  const py = p => p.y * gh;
+  o.lineCap = 'round'; o.lineJoin = 'round';
+  list.slice(0, 2).forEach(lm => {
+    const misura = Math.hypot(px(lm[0]) - px(lm[9]), py(lm[0]) - py(lm[9]));
+    const traccia = punti => { o.beginPath(); punti.forEach((k, n) => n ? o.lineTo(px(lm[k]), py(lm[k])) : o.moveTo(px(lm[k]), py(lm[k]))); };
+    o.fillStyle = o.strokeStyle = '#4a4a4a'; o.lineWidth = misura * 0.18;      /* il palmo, più chiaro */
+    traccia([0, 1, 5, 9, 13, 17]); o.closePath(); o.fill(); o.stroke();
+    o.strokeStyle = '#0a0a0a'; o.lineWidth = misura * 0.2;                      /* le dita, piene */
+    SPECCHIO_DITA.forEach(d => { traccia(d); o.stroke(); });
+  });
+  const dati = o.getImageData(0, 0, gw, gh).data;
+
+  specchioCtx.clearRect(0, 0, W, H);
+  specchioCtx.fillStyle = '#0a0a0a';
+  specchioCtx.font = cella + 'px "Courier New", monospace';
+  specchioCtx.textAlign = 'center'; specchioCtx.textBaseline = 'middle';
+  for (let y = 0; y < gh; y++){
+    for (let x = 0; x < gw; x++){
+      const lum = dati[(y * gw + x) * 4];
+      if (lum > 240) continue;
+      const ch = SPECCHIO_RAMPA[Math.min(SPECCHIO_RAMPA.length - 1, Math.floor(lum / 255 * SPECCHIO_RAMPA.length))];
+      if (ch !== ' ') specchioCtx.fillText(ch, x * cella + cella / 2, y * cella + cella / 2);
+    }
+  }
+
+  /* quale gesto stai facendo (gli stessi criteri che poi comandano il sito) */
+  const ora = { sposta: false, clicca: false, scrivimi: false };
+  const now = performance.now();
+  const lm = list[0];
+  if (lm){
+    const size = lmDist(lm[0], lm[9]);
+    const pinch = lmDist(lm[4], lm[8]) < size * 0.45;
+    const steso   = k => lmDist(lm[k], lm[0]) > size * 1.6;
+    const piegato = k => lmDist(lm[k], lm[0]) < size * 1.3;
+    const due = !pinch && steso(8) && steso(12) && piegato(16) && piegato(20);
+    ora.clicca = pinch; ora.scrivimi = due;
+    if (!pinch && !due){
+      const x = lm[9].x;
+      if (specchioStato.refX === null || now - specchioStato.refT > 500){ specchioStato.refX = x; specchioStato.refT = now; }
+      else if (Math.abs(x - specchioStato.refX) > 0.16){ specchioStato.spostaFino = now + 500; specchioStato.refX = x; specchioStato.refT = now; }
+    } else {
+      specchioStato.refX = null;
+    }
+    if (now < specchioStato.spostaFino) ora.sposta = true;
+  } else {
+    specchioStato.refX = null;
+  }
+  intro.querySelectorAll('#introGesti .sl-gesto').forEach(g => {
+    const k = g.dataset.gesto;
+    g.classList.toggle('ora', !!ora[k]);
+    if (ora[k]){ g.classList.add('fatto'); specchioStato.fatti[k] = true; }
+  });
+  if (specchioStato.fatti.sposta && specchioStato.fatti.clicca && specchioStato.fatti.scrivimi && !specchioStato.chiude){
+    specchioStato.chiude = setTimeout(() => {
+      /* si entra a mani "pulite": un pizzico ancora chiuso non deve cliccare nulla */
+      handState.forEach(s => { s.pinchWas = true; });
+      lastGestureAt = performance.now();
+      dismissIntro();
+    }, 1000);
+  }
+}
+
 function onHands(list){
   list = list || [];
-  if (list.length) dismissIntro();
+  if (introAperta()){ specchioIntro(list); return; }
 
   for (let i = 0; i < 2; i++){
     if (!list[i]){
