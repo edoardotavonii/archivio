@@ -204,6 +204,26 @@
   #propSend:disabled{ opacity:0.35; cursor:not-allowed; }
   #propMsg{ font-size:11px; color:var(--ink); min-height:1em; }
 
+  /* "le tue schede": a chi ha aggiunto qualcosa il sito dice, quando torna,
+     com'è andata. Lo ricorda il suo browser: nessun contatto richiesto. */
+  .mie-schede{
+    position:fixed; left:1.5rem; bottom:3.4rem; z-index:20;
+    display:flex; flex-direction:column; gap:0.4rem;
+    max-width:min(30rem, calc(100vw - 3rem));
+  }
+  .mie-schede[hidden]{ display:none; }
+  .mia-scheda{
+    display:flex; align-items:baseline; gap:0.7rem;
+    background:var(--paper); border:1px solid var(--line); border-left:2px solid var(--faint);
+    padding:0.5rem 0.7rem; font-size:12px; line-height:1.4; color:var(--faint);
+  }
+  .mia-scheda.si{ border-color:var(--ink); border-left-color:var(--ink); color:var(--ink); }
+  .mia-scheda b{ color:var(--ink); font-weight:600; }
+  .mia-scheda .testo{ flex:1; min-width:0; }
+  .mia-scheda button{ flex:none; font-family:var(--mono); font-size:11px; letter-spacing:0.06em; color:var(--faint); }
+  .mia-scheda button:hover{ color:var(--ink); }
+  .mia-scheda .apri{ color:var(--ink); border-bottom:1px solid var(--ink); }
+
   /* "revisiona": la coda di ciò che i visitatori hanno aggiunto (solo tua) */
   #revBtn{
     font-family:var(--mono); font-weight:600; letter-spacing:0.08em; font-size:11px;
@@ -1542,7 +1562,9 @@ const I18N = {
     propNote:"Quello che aggiungi non compare subito: lo guardo io prima che entri nell'archivio. Manda solo immagini che puoi condividere e indica la fonte.",
     propNeedImg:"Scegli prima un'immagine.", propNeedTitle:'Dalle un titolo.',
     propReady:'Immagine pronta.', propBadImg:"Non sono riuscito a leggere l'immagine. Prova con un JPEG o un PNG.",
-    propSending:'invio…', propSentWait:'Ricevuta, grazie. La guardo e, se entra, la trovi qui.',
+    propSending:'invio…', propSentWait:"Grazie, è arrivata! La guardo io prima che entri nell'archivio. Ripassa tra un po': questa pagina si ricorda di te e ti dirà com'è andata.",
+    mieWait:'è in attesa: la sto guardando', mieSoon:"è stata accolta: compare nell'archivio tra pochi minuti",
+    mieIn:"è entrata nell'archivio", mieOut:"non è entrata nell'archivio", mieOpen:'aprila →', mieClose:'Togli questo avviso',
     propErr:'Non è andata. Riprova tra poco.', propOff:'Il modulo è pronto ma non è ancora collegato: per ora non invia nulla.',
     propErrBig:"L'immagine è troppo pesante.", propErrMany:'Troppi invii di fila: riprova tra qualche minuto.',
     langBtn:'EN'
@@ -1609,7 +1631,9 @@ const I18N = {
     propNote:"What you add doesn't appear right away: I look at it before it enters the archive. Only send images you can share, and name the source.",
     propNeedImg:'Choose an image first.', propNeedTitle:'Give it a title.',
     propReady:'Image ready.', propBadImg:"I couldn't read the image. Try a JPEG or a PNG.",
-    propSending:'sending…', propSentWait:"Got it, thank you. I'll look at it and, if it gets in, you'll find it here.",
+    propSending:'sending…', propSentWait:"Thank you, it's here! I look at it before it enters the archive. Come back in a while: this page remembers you and will tell you how it went.",
+    mieWait:"is waiting: I'm looking at it", mieSoon:'was accepted: it appears in the archive in a few minutes',
+    mieIn:'is in the archive', mieOut:"didn't make it into the archive", mieOpen:'open it →', mieClose:'Dismiss this notice',
     propErr:"That didn't work. Try again in a moment.", propOff:'The form is ready but not connected yet: nothing is sent for now.',
     propErrBig:'The image is too heavy.', propErrMany:'Too many in a row: try again in a few minutes.',
     langBtn:'IT'
@@ -1746,6 +1770,9 @@ function t(key){
   <span class="edit-only" data-i18n="emptyBodyEdit">Aggiungi note in Obsidian e lancia sincronizza-archivio.bat, oppure usa ADD.</span>
   <span class="visitor-only" data-i18n="emptyBody">Torna presto — o scrivimi dai contatti.</span>
 </div>
+
+<!-- a chi ha aggiunto una scheda: com'è andata (lo riempie lo script "PROPONI") -->
+<div class="mie-schede" id="mieSchede" role="status" aria-live="polite" hidden></div>
 
 <p class="hint" id="hint" data-i18n="hint">trascina per spostarti — rotella o pizzico per entrare — clicca per aprire</p>
 
@@ -4235,6 +4262,67 @@ const PROPONI_ENDPOINT = 'https://proponi.edoardotavoni.workers.dev/';
 
   const ERRORI = { grande:'propErrBig', troppi:'propErrMany', immagine:'propBadImg', titolo:'propNeedTitle' };
 
+  /* ---- "le tue schede": com'è andata a ciò che hai aggiunto ----
+     Il browser di chi aggiunge ricorda lo scontrino della scheda (il nome
+     del file, niente di personale). Quando torna, il sito guarda se è
+     nell'archivio; se non c'è ancora, chiede al ricevitore se è in attesa,
+     accolta o rifiutata. Restano al massimo 5 avvisi, per 60 giorni. */
+  const MIE_KEY = 'et_mie_schede_v1', box = $('mieSchede');
+  const statiNoti = {};
+  function leggiMie(){
+    try{
+      const v = JSON.parse(localStorage.getItem(MIE_KEY) || '[]');
+      return Array.isArray(v) ? v.filter(s => s && /^proposta-\d{8}-[0-9a-f]{6}\.(jpg|png)$/.test(s.file) && Date.now() - s.quando < 60 * 864e5) : [];
+    }catch(e){ return []; }
+  }
+  function salvaMie(v){ try{ localStorage.setItem(MIE_KEY, JSON.stringify(v.slice(-5))); }catch(e){} }
+  function ricorda(s){ salvaMie(leggiMie().concat([s])); mostraMie(); }
+  function dimentica(file){ salvaMie(leggiMie().filter(s => s.file !== file)); mostraMie(); }
+  function posto(file){   /* dov'è nell'archivio (-1 = non c'è) */
+    const nome = file.replace(/\.\w+$/, '');
+    return (typeof allItems === 'function' ? allItems() : []).findIndex(it => String(it.src || '').indexOf(nome) >= 0);
+  }
+  async function chiedi(file){
+    if (!PROPONI_ENDPOINT) return 'attesa';
+    try{
+      const r = await fetch(PROPONI_ENDPOINT + '?azione=stato&file=' + encodeURIComponent(file));
+      const d = await r.json();
+      return (r.ok && d.ok) ? d.stato : 'attesa';
+    }catch(e){ return 'attesa'; }
+  }
+  function riga(s, stato){
+    const el = document.createElement('div');
+    el.className = 'mia-scheda' + (stato === 'dentro' || stato === 'approvata' ? ' si' : '');
+    const testo = document.createElement('span'); testo.className = 'testo';
+    const b = document.createElement('b'); b.textContent = '«' + s.titolo + '»';
+    testo.appendChild(document.createTextNode(stato === 'dentro' || stato === 'approvata' ? '✓ ' : ''));
+    testo.appendChild(b);
+    testo.appendChild(document.createTextNode(' ' + t({ dentro:'mieIn', approvata:'mieSoon', assente:'mieOut' }[stato] || 'mieWait')));
+    el.appendChild(testo);
+    if (stato === 'dentro'){
+      const apri = document.createElement('button'); apri.type = 'button'; apri.className = 'apri'; apri.textContent = t('mieOpen');
+      apri.addEventListener('click', () => { const i = posto(s.file); if (i >= 0 && typeof openItem === 'function') openItem(i); });
+      el.appendChild(apri);
+    }
+    const via = document.createElement('button'); via.type = 'button'; via.textContent = '✕';
+    via.setAttribute('aria-label', t('mieClose'));
+    via.addEventListener('click', () => dimentica(s.file));
+    el.appendChild(via);
+    return el;
+  }
+  async function mostraMie(){
+    const mie = leggiMie();
+    box.textContent = '';
+    box.hidden = !mie.length;
+    for (const s of mie){
+      let stato = posto(s.file) >= 0 ? 'dentro' : statiNoti[s.file];
+      if (!stato){ stato = await chiedi(s.file); if (stato !== 'attesa') statiNoti[s.file] = stato; }
+      box.appendChild(riga(s, stato));
+    }
+  }
+  window.renderMieSchede = mostraMie;   /* anche al cambio lingua */
+  mostraMie();
+
   pan.addEventListener('submit', async e => {
     e.preventDefault();
     if (!pronta){ out.textContent = t('propNeedImg'); zona.focus(); return; }
@@ -4260,6 +4348,7 @@ const PROPONI_ENDPOINT = 'https://proponi.edoardotavoni.workers.dev/';
       try{ esito = await r.json(); }catch(err){}
       if (!r.ok || !esito.ok){ out.textContent = t(ERRORI[esito.errore] || 'propErr'); return; }
 
+      if (esito.file) ricorda({ file: esito.file, titolo: titolo, quando: Date.now() });
       pronta = ''; ante.hidden = true; ante.removeAttribute('src');
       zona.classList.remove('has-img');
       ['propInTitle', 'propInAuthor', 'propInSource', 'propInWhy'].forEach(id => { $(id).value = ''; });
@@ -4445,7 +4534,7 @@ function applyLang(){
   document.querySelectorAll('.tile .label .kind, .index-row .kind').forEach(el => { el.textContent = t('kindRefShort'); });
   document.querySelectorAll('.ar-btn').forEach(el => { el.textContent = t('arButton'); });
   document.querySelectorAll('.model-hint').forEach(el => { el.textContent = t('modelHint'); });
-  ['replayReel', 'renderAboutInfo', 'renderContactAvail', 'renderLavori'].forEach(f => {
+  ['replayReel', 'renderAboutInfo', 'renderContactAvail', 'renderLavori', 'renderMieSchede'].forEach(f => {
     if (typeof window[f] === 'function') window[f]();
   });
   if (typeof indexOpen !== 'undefined' && indexOpen && typeof buildIndex === 'function') buildIndex();
