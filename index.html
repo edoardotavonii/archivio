@@ -1635,7 +1635,6 @@ const I18N = {
     collabHead:'Conosciamoci meglio', collabAbout:'a proposito di',
     collabNameLabel:'il tuo nome', collabEmailLabel:'la tua email',
     collabTypeLabel:'cosa hai per la testa?', collabOpt:'(facoltativo)',
-    collabTypePh:'es. una collaborazione, uno stage, un progetto su commissione…',
     collabQ1Label:'Qual è il progetto creativo a cui tieni di più, e perché?', collabQ1Hint:'(facoltativo — puoi anche lasciare un link o descriverlo in breve)',
     collabQ2Label:'Descrivi una situazione in cui hai dovuto risolvere un problema creativo complesso. Cosa hai fatto?',
     collabSend:'invia', collabSubject:'Collaborazione',
@@ -1712,7 +1711,6 @@ const I18N = {
     collabHead:"Let's get to know each other", collabAbout:'about',
     collabNameLabel:'your name', collabEmailLabel:'your email',
     collabTypeLabel:"what's on your mind?", collabOpt:'(optional)',
-    collabTypePh:'e.g. a collaboration, an internship, a commissioned project…',
     collabQ1Label:'Which creative project are you most proud of, and why?', collabQ1Hint:'(optional — feel free to link it or describe it briefly)',
     collabQ2Label:'Describe a time you had to solve a complex creative problem. What did you do?',
     collabSend:'send', collabSubject:'Collaboration',
@@ -4264,7 +4262,7 @@ function scriviDecodificabile(el, testo, durata){
       </div>
       <div class="field">
         <label for="collabProposal" data-i18n="collabTypeLabel">cosa hai per la testa?</label>
-        <textarea id="collabProposal" name="proposta" data-i18n-placeholder="collabTypePh" placeholder="es. una collaborazione, uno stage, un progetto su commissione…"></textarea>
+        <textarea id="collabProposal" name="proposta"></textarea>
         <!-- vale come proposta anche da sola; spuntata, compare (: -->
         <label class="cw-check">
           <input type="checkbox" id="collabDaiquiri" name="daiquiri" value="sì">
