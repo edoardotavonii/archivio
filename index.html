@@ -1128,14 +1128,11 @@
     padding:1.6rem 1.5rem 1.8rem;
     counter-reset:voce;
   }
-  /* il titolo e "invia" stanno insieme, in alto, e restano in vista mentre
-     scorri le domande: scrivi quello che ti va e invii quando vuoi */
-  .cw-head{
-    position:sticky; top:0; z-index:1;
-    display:flex; flex-direction:column; gap:0.7rem;
-    margin:-1.6rem -1.5rem 0; padding:1.6rem 1.5rem 0.7rem;
-    background:var(--paper); border-bottom:1px solid var(--line);
-  }
+  .cw-head{ display:flex; flex-direction:column; gap:0.8rem; }
+  .collab-form .field > button[type="submit"]{ margin-top:0.9rem; }
+  /* le scritte dei contatti si decodificano come quelle dell'about: i
+     caratteri devono poter andare a capo come prima (l'email è lunga) */
+  .contatti-hero .dec-word{ display:inline; white-space:normal; }
   .cw-fields{ display:flex; flex-direction:column; gap:1.9rem; }
   .collab-form h3{ font-size:clamp(22px, 3.4vw, 30px); font-weight:600; letter-spacing:-0.03em; line-height:1.08; }
   .collab-form .cw-topic{
@@ -1206,7 +1203,6 @@
   @media (max-width:560px){
     .cw-bar{ padding:0.7rem 1rem; }
     .collab-form{ padding:1.2rem 1rem 1.4rem; }
-    .cw-head{ margin:-1.2rem -1rem 0; padding:1.2rem 1rem 0.6rem; }
     .collab-form .two{ flex-direction:column; gap:1.9rem; }
   }
 
@@ -4245,9 +4241,6 @@ function scriviDecodificabile(el, testo, durata){
         <h3 data-i18n="collabHead">Conosciamoci meglio</h3>
         <!-- compare solo arrivando da un progetto o dall'occhio -->
         <p class="cw-topic" id="collabTopicLine" hidden><span data-i18n="collabAbout">a proposito di</span> <b id="collabTopic"></b></p>
-        <!-- "invia" sta qui, sotto il titolo, e resta in vista mentre si scorre -->
-        <button type="submit" id="collabSend" data-i18n="collabSend">invia</button>
-        <p class="collab-msg" id="collabMsgOut" role="status" aria-live="polite"></p>
       </div>
       <div class="cw-fields">
       <div class="two">
@@ -4269,6 +4262,9 @@ function scriviDecodificabile(el, testo, durata){
           <span>daiquiri?</span>
           <span class="cw-smile" aria-hidden="true">(:</span>
         </label>
+        <!-- "invia" sta qui, sotto "daiquiri?" -->
+        <button type="submit" id="collabSend" data-i18n="collabSend">invia</button>
+        <p class="collab-msg" id="collabMsgOut" role="status" aria-live="polite"></p>
       </div>
       <div class="field">
         <label class="q" for="collabProject"><span data-i18n="collabQ1Label">Qual è il progetto creativo a cui tieni di più, e perché?</span> <span class="note" data-i18n="collabQ1Hint">(facoltativo — puoi anche lasciare un link o descriverlo in breve)</span></label>
@@ -4410,6 +4406,37 @@ const CONTACT_EMAIL = 'edoardotavoni@gmail.com';
       send.disabled = false;
     }
   });
+})();
+
+/* ================= SCRITTE CHE SI DECODIFICANO =================
+   Lo stesso effetto delle scritte dell'about (glifi colorati che si
+   mescolano e si fermano), sulle scritte dei contatti e del modulo:
+   quando la pagina o la finestra si aprono, e al passaggio del cursore
+   (sul telefono: al tocco). Usa scriviDecodificabile e decodifica,
+   le stesse funzioni dell'about. */
+(function(){
+  if (typeof scriviDecodificabile !== 'function') return;
+  const SCRITTE = '#view-contatti .c-big, #collabToggle, #collabForm h3, #collabSend';
+  const gruppi = new Map();
+  function prepara(){
+    gruppi.clear();
+    document.querySelectorAll(SCRITTE).forEach(el => {
+      /* il testo vero: dal dizionario se la scritta ha una lingua, altrimenti quello scritto nella pagina */
+      const testo = el.dataset.i18n ? t(el.dataset.i18n) : (el.dataset.testo || (el.dataset.testo = el.textContent.trim()));
+      scriviDecodificabile(el, testo, 420);
+      gruppi.set(el, [...el.querySelectorAll('.dec-ch')].map(s => ({ span: s, target: s.textContent })));
+    });
+  }
+  function accendi(dentro){
+    gruppi.forEach((items, el) => { if (dentro.contains(el)) decodifica(items, 700); });
+  }
+  prepara();
+  window.renderDecScritte = prepara;   /* al cambio lingua le scritte si riscrivono */
+  const vista = document.getElementById('view-contatti'), win = document.getElementById('collabWin');
+  if (vista) new MutationObserver(() => { if (!vista.hidden) accendi(vista); })
+    .observe(vista, { attributes:true, attributeFilter:['hidden'] });
+  if (win) new MutationObserver(() => { if (win.open) accendi(win); })
+    .observe(win, { attributes:true, attributeFilter:['open'] });
 })();
 </script>
 
@@ -4789,7 +4816,7 @@ function applyLang(){
   document.querySelectorAll('.tile .label .kind, .index-row .kind').forEach(el => { el.textContent = t('kindRefShort'); });
   document.querySelectorAll('.ar-btn').forEach(el => { el.textContent = t('arButton'); });
   document.querySelectorAll('.model-hint').forEach(el => { el.textContent = t('modelHint'); });
-  ['replayReel', 'renderAboutInfo', 'renderContactAvail', 'renderLavori', 'renderMieSchede'].forEach(f => {
+  ['replayReel', 'renderAboutInfo', 'renderContactAvail', 'renderLavori', 'renderMieSchede', 'renderDecScritte'].forEach(f => {
     if (typeof window[f] === 'function') window[f]();
   });
   if (typeof indexOpen !== 'undefined' && indexOpen && typeof buildIndex === 'function') buildIndex();
