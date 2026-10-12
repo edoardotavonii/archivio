@@ -314,9 +314,12 @@
   .hand-cursor.pinch .halo{ animation:none; border-style:solid; border-color:var(--ink); }
   @keyframes hand-spin{ to{ transform:rotate(360deg); } }
 
-  /* legenda dei gesti: compare la prima volta che attivi le mani */
-  /* È un'infografica: titolo, due righe, tre riquadri con la mano
-     disegnata e il nome del gesto (sposta · clicca · scrivimi). */
+  /* I GESTI (sposta · clicca · scrivimi): tre fotografie e i loro nomi.
+     Stanno nella pagina d'ingresso e, uguali, nel promemoria qui sotto.
+     Un solo carattere, quello del nome: il nome del gesto in nero pieno,
+     la descrizione in grigio dopo la barra — come "edoardo tavoni /
+     archivio". Le fotografie arrivano stampate in caratteri, come la
+     scritta del nome all'ingresso (vedi stampaGesto più sotto). */
   .scan-legend{
     position:fixed; left:50%; bottom:5.6rem; z-index:15;
     transform:translateX(-50%);
@@ -333,28 +336,24 @@
   }
   .scan-legend > button:hover{ color:var(--ink); }
   .scan-legend h2{
-    font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+    font-size:13px; font-weight:600;
     padding:0 2rem 0.45rem 0; border-bottom:1px solid var(--ink);
   }
-  .scan-legend .sl-text{ margin-top:0.55rem; font-size:12px; line-height:1.5; }
+  .scan-legend .sl-text{ margin-top:0.55rem; line-height:1.5; }
   .scan-legend .sl-text + .sl-text{ margin-top:0.1rem; color:var(--faint); }
   .sl-gesti{ display:flex; gap:0.6rem; margin-top:0.9rem; }
   .sl-gesto{ flex:1; min-width:0; display:flex; flex-direction:column; align-items:center; gap:0.5rem; text-align:center; }
-  .sl-gesto .sl-box{
-    width:100%; aspect-ratio:1 / 1; max-height:7.5rem;
-    display:flex; align-items:center; justify-content:center;
-    border:1px solid var(--ink);
-  }
-  .sl-gesto svg{
-    height:72%; width:auto;
-    fill:var(--paper); stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round;
-  }
-  .sl-gesto svg .aria{ fill:none; }
-  .sl-gesto b{ font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; }
-  .sl-gesto span{ font-family:var(--mono); font-size:10px; letter-spacing:0.02em; line-height:1.5; color:var(--faint); }
+  .sl-gesto .sl-box{ width:100%; aspect-ratio:1 / 1; max-height:7.5rem; }
+  .sl-gesto .sl-foto{ display:block; width:100%; height:100%; }
+  /* la fotografia non c'è (ancora): il riquadro sparisce, resta la scritta */
+  .sl-gesto.senza-foto .sl-box{ display:none; }
+  .sl-gesto p{ line-height:1.4; }
+  .sl-gesto b{ font-weight:600; }
+  .sl-gesto span{ color:var(--faint); }
+  .sl-gesto span::before{ content:"/ "; }
   .scan-legend .sl-more{
     margin-top:0.8rem; padding-top:0.6rem; border-top:1px solid var(--line);
-    font-family:var(--mono); font-size:10px; letter-spacing:0.03em; line-height:1.7; color:var(--faint);
+    font-size:12px; line-height:1.6; color:var(--faint);
   }
   .scan-legend .sl-more b{ font-weight:600; color:var(--ink); }
   @media (max-width:520px){
@@ -1317,19 +1316,21 @@
     display:flex; flex-direction:column; align-items:center;
     gap:1.4rem;
   }
-  /* la seconda riga: fa coppia con la scritta sopra */
+  /* la seconda riga: stesso carattere della prima, in grigio — come
+     "/ archivio" accanto al nome */
   #intro .intro-sub{
-    margin-top:-0.9rem;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.04em; line-height:1.6;
+    margin-top:-1.1rem;
+    font-size:13px; line-height:1.5;
     color:var(--faint); text-align:center; padding:0 1.5rem;
   }
   #intro .intro-gesti{
-    width:min(30rem, calc(100vw - 3rem)); margin-top:0.5rem;
+    width:min(36rem, calc(100vw - 3rem)); margin-top:0.5rem;
+    gap:1.2rem;
     transition:opacity .4s ease;
   }
   #intro .intro-gesti .sl-box{ max-height:none; }
   /* senza camera i gesti non si possono usare: restano, attenuati */
-  #intro.no-cam .intro-gesti{ opacity:0.35; }
+  #intro.no-cam .intro-gesti{ opacity:0.5; }
   @media (max-height:600px){
     #intro .intro-in{ gap:1rem; }
     #intro .intro-gesti .sl-box{ max-height:5.5rem; }
@@ -1601,9 +1602,9 @@ const I18N = {
     scanTitle:'Muovi il sito con le mani',
     scanLine1:'La camera legge i tuoi gesti e li trasforma in comandi.',
     scanLine2:'Nessuna immagine viene mostrata o salvata.',
-    scanMove:'sposta', scanMoveHow:'muovi la mano di lato: ti sposti nel sito',
-    scanPinch:'clicca', scanPinchHow:'unisci pollice e indice su ciò che vuoi aprire',
-    scanWrite:'scrivimi', scanWriteHow:'indice e medio alzati, fermi un attimo: si apre il modulo',
+    scanMove:'sposta', scanMoveHow:'muovi la mano di lato',
+    scanPinch:'clicca', scanPinchHow:'unisci pollice e indice',
+    scanWrite:'scrivimi', scanWriteHow:'indice e medio alzati',
     scanMore:'<b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice',
     scanNoCamHttps:'camera non disponibile: apri il sito da https o localhost',
     scanAsk:'consenti la camera…', scanLoading:'carico il modello delle mani…', scanShow:'mostra le mani alla camera',
@@ -1678,9 +1679,9 @@ const I18N = {
     scanTitle:'Move the site with your hands',
     scanLine1:'The camera reads your gestures and turns them into commands.',
     scanLine2:'No image is ever shown or saved.',
-    scanMove:'move', scanMoveHow:'move your hand sideways: you move through the site',
-    scanPinch:'click', scanPinchHow:'join thumb and index over what you want to open',
-    scanWrite:'write to me', scanWriteHow:'index and middle up, hold a moment: the form opens',
+    scanMove:'move', scanMoveHow:'slide your hand sideways',
+    scanPinch:'click', scanPinchHow:'join thumb and index',
+    scanWrite:'write to me', scanWriteHow:'index and middle up',
     scanMore:'<b>fist</b> drag the cloud · <b>hand forward/back</b> zoom in and out · <b>two pinches</b> index',
     scanNoCamHttps:'camera unavailable: open the site over https or localhost',
     scanAsk:'allow the camera…', scanLoading:'loading the hand model…', scanShow:'show your hands to the camera',
@@ -1759,53 +1760,28 @@ function t(key){
        I18N). Cambia da sola se la camera non c'è: vedi introSenzaCamera. -->
   <p class="intro-sub" id="introSub" data-i18n="introSub">oppure clicca per entrare · nessuna immagine viene mostrata o salvata</p>
 
-  <!-- L'INFOGRAFICA DEI GESTI: tre riquadri con la mano e il nome del gesto.
-       I testi stanno nel dizionario I18N (chiavi scan…). Gli stessi riquadri
+  <!-- I GESTI: tre fotografie di una mano e il nome del gesto.
+       MODIFICA: le fotografie sono tre file nella cartella images/gesti/
+         sposta.jpg    mano aperta
+         clicca.jpg    pollice e indice che si toccano
+         scrivimi.jpg  indice e medio alzati
+       Per cambiarle basta sostituire i file (stesso nome). Meglio quadrate,
+       mano ben staccata dallo sfondo: il sito le stampa in caratteri, come
+       il nome. Se un file manca, quel riquadro sparisce e resta la scritta.
+       I testi stanno nel dizionario I18N (chiavi scan…). Gli stessi tre
        vengono ricopiati nel promemoria che apre la mano ✋ in basso. -->
   <div class="sl-gesti intro-gesti" id="introGesti">
     <div class="sl-gesto">
-      <div class="sl-box">
-        <!-- mano aperta, con la freccia: scorri di lato -->
-        <svg viewBox="0 0 64 70" aria-hidden="true">
-          <rect x="19" y="9" width="6.5" height="28" rx="3.25"/>
-          <rect x="26.5" y="5" width="6.5" height="32" rx="3.25"/>
-          <rect x="34" y="8" width="6.5" height="29" rx="3.25"/>
-          <rect x="41.5" y="14" width="6.5" height="24" rx="3.25"/>
-          <rect x="7.5" y="29" width="6.5" height="20" rx="3.25" transform="rotate(-38 10.75 39)"/>
-          <rect x="17" y="31" width="33" height="23" rx="9"/>
-          <path class="aria" d="M18 64h28M18 64l4.5-3.5M18 64l4.5 3.5M46 64l-4.5-3.5M46 64l-4.5 3.5"/>
-        </svg>
-      </div>
-      <b data-i18n="scanMove">sposta</b>
-      <span data-i18n="scanMoveHow">muovi la mano di lato: ti sposti nel sito</span>
+      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/sposta.jpg" aria-hidden="true"></canvas></div>
+      <p><b data-i18n="scanMove">sposta</b> <span data-i18n="scanMoveHow">muovi la mano di lato</span></p>
     </div>
     <div class="sl-gesto">
-      <div class="sl-box">
-        <!-- pollice e indice che si toccano -->
-        <svg viewBox="0 0 64 70" aria-hidden="true">
-          <rect x="30" y="7" width="6.5" height="32" rx="3.25"/>
-          <rect x="37.5" y="10" width="6.5" height="29" rx="3.25"/>
-          <rect x="45" y="16" width="6.5" height="24" rx="3.25"/>
-          <rect x="22" y="33" width="31" height="24" rx="9"/>
-          <circle cx="19" cy="31" r="8.5"/>
-          <circle class="aria" cx="19" cy="31" r="3"/>
-        </svg>
-      </div>
-      <b data-i18n="scanPinch">clicca</b>
-      <span data-i18n="scanPinchHow">unisci pollice e indice su ciò che vuoi aprire</span>
+      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/clicca.jpg" aria-hidden="true"></canvas></div>
+      <p><b data-i18n="scanPinch">clicca</b> <span data-i18n="scanPinchHow">unisci pollice e indice</span></p>
     </div>
     <div class="sl-gesto">
-      <div class="sl-box">
-        <!-- indice e medio alzati -->
-        <svg viewBox="0 0 64 70" aria-hidden="true">
-          <rect x="21" y="5" width="6.5" height="34" rx="3.25" transform="rotate(-11 24.25 39)"/>
-          <rect x="34" y="5" width="6.5" height="34" rx="3.25" transform="rotate(11 37.25 39)"/>
-          <rect x="17" y="33" width="31" height="24" rx="9"/>
-          <path class="aria" d="M36 39.5v7M42 40.5v6.5M19.5 49c5 1.5 9.5 0 13-4"/>
-        </svg>
-      </div>
-      <b data-i18n="scanWrite">scrivimi</b>
-      <span data-i18n="scanWriteHow">indice e medio alzati, fermi un attimo: si apre il modulo</span>
+      <div class="sl-box"><canvas class="sl-foto" data-foto="images/gesti/scrivimi.jpg" aria-hidden="true"></canvas></div>
+      <p><b data-i18n="scanWrite">scrivimi</b> <span data-i18n="scanWriteHow">indice e medio alzati</span></p>
     </div>
   </div>
   </div>
@@ -3155,6 +3131,100 @@ async function caricaManoModello(){
   const da = document.getElementById('introGesti'), a = document.getElementById('scanLegendGesti');
   if (da && a) a.innerHTML = da.innerHTML;
 })();
+
+/* ---- le fotografie dei gesti, stampate in caratteri ----
+   Sono fotografie vere (images/gesti/…), ma arrivano sulla pagina come
+   il nome all'ingresso: una stampa in caratteri. Stesso alfabeto, stessa
+   cella, inchiostro su carta — così il nome e le immagini sono la stessa
+   scrittura. Il contrasto viene tirato da solo, perché la mano si legga
+   anche in una foto poco contrastata. Se una foto manca, il suo riquadro
+   sparisce e resta la scritta. */
+const GESTI_RAMPA = "@#%*+=-:. ";
+const fotoGesti = {};
+function caricaFotoGesto(src){
+  if (!fotoGesti[src]){
+    fotoGesti[src] = new Promise(ok => {
+      const im = new Image();
+      im.onload = () => ok(im.naturalWidth ? im : null);
+      im.onerror = () => ok(null);
+      im.src = src;
+    });
+  }
+  return fotoGesti[src];
+}
+async function stampaGesto(cv, animata){
+  const giro = (cv.__giro = (cv.__giro || 0) + 1);   /* una stampa nuova ferma quella in corso */
+  const gesto = cv.closest('.sl-gesto');
+  const im = await caricaFotoGesto(cv.dataset.foto);
+  if (giro !== cv.__giro) return;
+  if (!im){ if (gesto) gesto.classList.add('senza-foto'); return; }
+  const r = cv.getBoundingClientRect();
+  if (r.width < 8 || r.height < 8) return;
+
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
+  const cella = Math.max(4, Math.round(5 * dpr));   /* la cella della scritta del nome */
+  const gw = Math.ceil(W / cella), gh = Math.ceil(H / cella);
+  let dati;
+  try{
+    /* un valore per cella; la foto riempie il riquadro, ritagliata al centro */
+    const tmp = document.createElement('canvas');
+    tmp.width = gw; tmp.height = gh;
+    const t = tmp.getContext('2d');
+    t.imageSmoothingEnabled = true; t.imageSmoothingQuality = 'high';
+    t.fillStyle = '#fff'; t.fillRect(0, 0, gw, gh);
+    const k = Math.max(gw / im.naturalWidth, gh / im.naturalHeight);
+    const w = im.naturalWidth * k, h = im.naturalHeight * k;
+    t.drawImage(im, (gw - w) / 2, (gh - h) / 2, w, h);
+    dati = t.getImageData(0, 0, gw, gh).data;
+  }catch(err){ if (gesto) gesto.classList.add('senza-foto'); return; }
+
+  const lum = new Float32Array(gw * gh);
+  let min = 255, max = 0;
+  for (let i = 0; i < lum.length; i++){
+    const l = 0.299 * dati[i * 4] + 0.587 * dati[i * 4 + 1] + 0.114 * dati[i * 4 + 2];
+    lum[i] = l; if (l < min) min = l; if (l > max) max = l;
+  }
+  const campo = Math.max(1, max - min);
+  const celle = [];
+  for (let y = 0; y < gh; y++){
+    for (let x = 0; x < gw; x++){
+      const v = (lum[y * gw + x] - min) / campo;
+      const ch = GESTI_RAMPA[Math.min(GESTI_RAMPA.length - 1, Math.floor(v * GESTI_RAMPA.length))];
+      if (ch !== ' ') celle.push({ x, y, ch });
+    }
+  }
+
+  cv.width = W; cv.height = H;
+  const c = cv.getContext('2d');
+  c.fillStyle = '#0a0a0a';
+  c.font = cella + 'px "Courier New", monospace';
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  const disegna = cell => c.fillText(cell.ch, cell.x * cella + cella / 2, cell.y * cella + cella / 2);
+  if (!animata || reduceMotion){ celle.forEach(disegna); return; }
+
+  /* si sviluppa come il nome: cella per cella, in ordine casuale */
+  for (let i = celle.length - 1; i > 0; i--){
+    const j = (Math.random() * (i + 1)) | 0;
+    [celle[i], celle[j]] = [celle[j], celle[i]];
+  }
+  const t0 = performance.now(), DURATA = 1100;
+  let fatte = 0;
+  (function passo(){
+    if (giro !== cv.__giro) return;
+    const k = Math.min(1, (performance.now() - t0) / DURATA);
+    const fin = Math.round(celle.length * (1 - Math.pow(1 - k, 3)));
+    while (fatte < fin) disegna(celle[fatte++]);
+    if (k < 1) requestAnimationFrame(passo);
+  })();
+}
+function stampaGesti(animata){
+  document.querySelectorAll('canvas.sl-foto').forEach(cv => stampaGesto(cv, animata));
+}
+stampaGesti(true);
+/* se la finestra cambia misura, le stampe si rifanno alla misura nuova */
+let gestiResizeT = null;
+addEventListener('resize', () => { clearTimeout(gestiResizeT); gestiResizeT = setTimeout(() => stampaGesti(false), 220); });
 let legendT = null;
 function mostraLegenda(){
   if (!scanLegend) return;
