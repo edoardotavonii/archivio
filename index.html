@@ -1128,7 +1128,14 @@
     padding:1.6rem 1.5rem 1.8rem;
     counter-reset:voce;
   }
-  .cw-head{ display:flex; flex-direction:column; gap:0.8rem; }
+  /* il titolo e "invia" stanno insieme, in alto, e restano in vista mentre
+     scorri le domande: scrivi quello che ti va e invii quando vuoi */
+  .cw-head{
+    position:sticky; top:0; z-index:1;
+    display:flex; flex-direction:column; gap:0.7rem;
+    margin:-1.6rem -1.5rem 0; padding:1.6rem 1.5rem 0.7rem;
+    background:var(--paper); border-bottom:1px solid var(--line);
+  }
   .cw-fields{ display:flex; flex-direction:column; gap:1.9rem; }
   .collab-form h3{ font-size:clamp(22px, 3.4vw, 30px); font-weight:600; letter-spacing:-0.03em; line-height:1.08; }
   .collab-form .cw-topic{
@@ -1185,7 +1192,7 @@
   /* "invia" non è un bottone pieno: è una parola grande, come i link dei contatti */
   .collab-form button[type="submit"]{
     align-self:flex-start;
-    font-size:clamp(24px, 3.6vw, 32px); font-weight:600; letter-spacing:-0.03em; line-height:1.05;
+    font-size:clamp(22px, 3.4vw, 30px); font-weight:600; letter-spacing:-0.03em; line-height:1.08;
     color:var(--ink); border-bottom:2px solid transparent;
     transition:border-color .15s ease;
   }
@@ -1194,11 +1201,12 @@
   .collab-form button[type="submit"]:focus-visible{ border-bottom-color:var(--ink); }
   .collab-form button[type="submit"]:disabled{ opacity:0.4; cursor:wait; }
   .collab-form .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-  .collab-msg{ font-family:var(--mono); font-size:11px; letter-spacing:0.04em; color:var(--faint); min-height:1em; margin-top:-1.2rem; }
+  .collab-msg{ font-family:var(--mono); font-size:11px; letter-spacing:0.04em; line-height:1.5; color:var(--faint); min-height:1.5em; margin-top:-0.3rem; }
   .collab-msg.ok{ color:var(--ink); }
   @media (max-width:560px){
     .cw-bar{ padding:0.7rem 1rem; }
     .collab-form{ padding:1.2rem 1rem 1.4rem; }
+    .cw-head{ margin:-1.2rem -1rem 0; padding:1.2rem 1rem 0.6rem; }
     .collab-form .two{ flex-direction:column; gap:1.9rem; }
   }
 
@@ -1624,15 +1632,15 @@ const I18N = {
     aiAvail:'disponibilità', aiLooking:'cerco', aiTools:'strumenti', aiBase:'base', aiDocs:'documenti', aiCv:'cv', aiPortfolio:'portfolio pdf',
     contattiEmailLabel:'email', contattiInstaLabel:'instagram', copyEmail:'copia',
     collabLabel:'collabora', collabToggle:'proponi una collaborazione →',
-    collabHead:'Compila il modulo per proporre una collaborazione', collabAbout:'a proposito di',
+    collabHead:'Conosciamoci meglio', collabAbout:'a proposito di',
     collabNameLabel:'il tuo nome', collabEmailLabel:'la tua email',
-    collabTypeLabel:'che cosa proponi?', collabReq:'(obbligatorio)',
+    collabTypeLabel:'cosa hai per la testa?', collabOpt:'(facoltativo)',
     collabTypePh:'es. una collaborazione, uno stage, un progetto su commissione…',
-    collabQ1Label:'Qual è il progetto creativo a cui tieni di più, e perché?', collabQ1Hint:'(Puoi anche lasciare un link o descriverlo in breve)',
+    collabQ1Label:'Qual è il progetto creativo a cui tieni di più, e perché?', collabQ1Hint:'(facoltativo — puoi anche lasciare un link o descriverlo in breve)',
     collabQ2Label:'Descrivi una situazione in cui hai dovuto risolvere un problema creativo complesso. Cosa hai fatto?',
     collabSend:'invia', collabSubject:'Collaborazione',
     collabMailto:'Si apre il tuo programma di posta con il messaggio pronto. Se non si apre nulla, scrivimi a',
-    collabNeedMsg:'Scrivi almeno in breve che cosa proponi prima di inviare.',
+    collabNeedMsg:'Scrivimi almeno due righe prima di inviare.',
     collabBadEmail:"L'indirizzo email non sembra corretto.",
     collabNeedEmail:'Lascia la tua email, così posso risponderti.',
     collabSending:'invio…', collabSent:'Ricevuto, grazie. Ti rispondo presto.',
@@ -1701,15 +1709,15 @@ const I18N = {
     aiAvail:'availability', aiLooking:'looking for', aiTools:'tools', aiBase:'based in', aiDocs:'documents', aiCv:'cv', aiPortfolio:'portfolio pdf',
     contattiEmailLabel:'email', contattiInstaLabel:'instagram', copyEmail:'copy',
     collabLabel:'collaborate', collabToggle:'propose a collaboration →',
-    collabHead:'Fill in the form to propose a collaboration', collabAbout:'about',
+    collabHead:"Let's get to know each other", collabAbout:'about',
     collabNameLabel:'your name', collabEmailLabel:'your email',
-    collabTypeLabel:'what are you proposing?', collabReq:'(required)',
+    collabTypeLabel:"what's on your mind?", collabOpt:'(optional)',
     collabTypePh:'e.g. a collaboration, an internship, a commissioned project…',
-    collabQ1Label:'Which creative project are you most proud of, and why?', collabQ1Hint:'(Feel free to link it or describe it briefly)',
+    collabQ1Label:'Which creative project are you most proud of, and why?', collabQ1Hint:'(optional — feel free to link it or describe it briefly)',
     collabQ2Label:'Describe a time you had to solve a complex creative problem. What did you do?',
     collabSend:'send', collabSubject:'Collaboration',
     collabMailto:'Your mail app opens with the message ready. If nothing opens, write to me at',
-    collabNeedMsg:"Tell me at least briefly what you're proposing before sending.",
+    collabNeedMsg:'Write me at least a couple of lines before sending.',
     collabBadEmail:"That email address doesn't look right.",
     collabNeedEmail:'Leave your email so I can reply.',
     collabSending:'sending…', collabSent:"Got it, thank you. I'll get back to you soon.",
@@ -4236,9 +4244,12 @@ function scriviDecodificabile(el, testo, durata){
   <div class="cw-body">
     <form class="collab-form" id="collabForm" novalidate>
       <div class="cw-head">
-        <h3 data-i18n="collabHead">Compila il modulo per proporre una collaborazione</h3>
+        <h3 data-i18n="collabHead">Conosciamoci meglio</h3>
         <!-- compare solo arrivando da un progetto o dall'occhio -->
         <p class="cw-topic" id="collabTopicLine" hidden><span data-i18n="collabAbout">a proposito di</span> <b id="collabTopic"></b></p>
+        <!-- "invia" sta qui, sotto il titolo, e resta in vista mentre si scorre -->
+        <button type="submit" id="collabSend" data-i18n="collabSend">invia</button>
+        <p class="collab-msg" id="collabMsgOut" role="status" aria-live="polite"></p>
       </div>
       <div class="cw-fields">
       <div class="two">
@@ -4252,7 +4263,7 @@ function scriviDecodificabile(el, testo, durata){
         </div>
       </div>
       <div class="field">
-        <label for="collabProposal"><span data-i18n="collabTypeLabel">che cosa proponi?</span> <span data-i18n="collabReq">(obbligatorio)</span></label>
+        <label for="collabProposal" data-i18n="collabTypeLabel">cosa hai per la testa?</label>
         <textarea id="collabProposal" name="proposta" data-i18n-placeholder="collabTypePh" placeholder="es. una collaborazione, uno stage, un progetto su commissione…"></textarea>
         <!-- vale come proposta anche da sola; spuntata, compare (: -->
         <label class="cw-check">
@@ -4262,17 +4273,15 @@ function scriviDecodificabile(el, testo, durata){
         </label>
       </div>
       <div class="field">
-        <label class="q" for="collabProject"><span data-i18n="collabQ1Label">Qual è il progetto creativo a cui tieni di più, e perché?</span> <span class="note" data-i18n="collabQ1Hint">(Puoi anche lasciare un link o descriverlo in breve)</span></label>
+        <label class="q" for="collabProject"><span data-i18n="collabQ1Label">Qual è il progetto creativo a cui tieni di più, e perché?</span> <span class="note" data-i18n="collabQ1Hint">(facoltativo — puoi anche lasciare un link o descriverlo in breve)</span></label>
         <textarea id="collabProject" name="progetto"></textarea>
       </div>
       <div class="field">
-        <label class="q" for="collabProblem" data-i18n="collabQ2Label">Descrivi una situazione in cui hai dovuto risolvere un problema creativo complesso. Cosa hai fatto?</label>
+        <label class="q" for="collabProblem"><span data-i18n="collabQ2Label">Descrivi una situazione in cui hai dovuto risolvere un problema creativo complesso. Cosa hai fatto?</span> <span class="note" data-i18n="collabOpt">(facoltativo)</span></label>
         <textarea id="collabProblem" name="problema"></textarea>
       </div>
       <!-- trappola per i bot: invisibile alle persone, se è compilata il messaggio si scarta -->
       <div class="hp" aria-hidden="true"><label>non compilare <input type="text" name="_gotcha" id="collabHp" tabindex="-1" autocomplete="off"></label></div>
-      <button type="submit" id="collabSend" data-i18n="collabSend">invia</button>
-      <p class="collab-msg" id="collabMsgOut" role="status" aria-live="polite"></p>
       </div>
     </form>
   </div>
@@ -4377,7 +4386,8 @@ const CONTACT_EMAIL = 'edoardotavoni@gmail.com';
       progetto: $('collabProject').value.trim(),
       problema: $('collabProblem').value.trim()
     };
-    if (!dati.proposta && !dati.daiquiri){ out.textContent = t('collabNeedMsg'); $('collabProposal').focus(); return; }
+    /* nessuna casella è obbligatoria, ma un messaggio del tutto vuoto non parte */
+    if (!dati.proposta && !dati.daiquiri && !dati.progetto && !dati.problema){ out.textContent = t('collabNeedMsg'); $('collabProposal').focus(); return; }
     if (dati.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dati.email)){ out.textContent = t('collabBadEmail'); $('collabEmail').focus(); return; }
 
     if (!FORM_ENDPOINT){ viaMail(dati); return; }
