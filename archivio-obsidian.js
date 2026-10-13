@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-12 21:52.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-13 17:23.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-12T21:52";
+window.ARCHIVE_SYNC = "2026-10-13T17:23";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -668,6 +668,31 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "The Ned Doha non è un progetto ex novo: è il riuso del Ministero dell\u0027Interno del Qatar, un edificio brutalista degli anni \u002770 firmato dall\u0027architetto libanese William Sednaoui, tra i più significativi e tra i più antichi della Doha moderna. David Chipperfield Architects non lo nasconde sotto un involucro nuovo: mantiene a vista il soffitto a cassettoni in cemento nelle camere, aggiunge un solo piano in sommità, e avvolge l\u0027edificio con un podio di 260 metri rivestito in travertino chiaro — un gesto che rafforza, non nega, l\u0027orizzontalità originaria.",
         "source":  "https://davidchipperfield.com/projects/the-ned, più Wallpaper* e Identity.ae (vedi Fonte)"
+    },
+    {
+        "id":  "inspo-institut-monde-arabe-facciata",
+        "src":  "images/obsidian/inspo-institut-monde-arabe-facciata.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-institut-monde-arabe-facciata.jpg",
+        "title":  "Institut du Monde Arabe — Jean Nouvel",
+        "year":  "1987",
+        "description":  "Institut du Monde Arabe, la facciata sud a diaframmi fotoelettrici motorizzati — Jean Nouvel con Architecture-Studio, Parigi.",
+        "medium":  "facciata dinamica, alluminio, motori, cellule fotoelettriche",
+        "domain":  [
+                       "architettura",
+                       "product-design"
+                   ],
+        "tags":  [
+                     "facciata-dinamica",
+                     "moucharabieh",
+                     "diaframma-ottico",
+                     "sensori",
+                     "alluminio",
+                     "parigi"
+                 ],
+        "addedAt":  "2026-10-12",
+        "kind":  "riferimento",
+        "note":  "La facciata sud dell\u0027Institut du Monde Arabe (Jean Nouvel con Architecture-Studio, Parigi, 1987) non è un rivestimento decorativo: è uno strumento ottico a tutti gli effetti. 240 pannelli metallici motorizzati, ciascuno a sua volta composto da una griglia di diaframmi più piccoli — esattamente il meccanismo di un obiettivo fotografico, lamelle che scorrono attorno a un centro comune — si aprono e si chiudono in risposta a cellule fotoelettriche che misurano la luce esterna, regolando quanta luce raggiunge le sale dietro di loro.",
+        "source":  "https://www.imarabe.org/en/node/528, più Architecture-Studio e ArchDaily (vedi Fonte)"
     }
 ];
 window.PROJECTS_OBSIDIAN = [];

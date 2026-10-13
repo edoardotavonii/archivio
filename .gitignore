@@ -11,3 +11,9 @@ desktop.ini
 Thumbs.db
 .DS_Store
 LEGGIMI.txt
+
+# File di lavoro (Blender, render): non vanno online
+*.blend
+*.blend1
+/Render_Mixing_Tin1.png
+/Untitled.png
