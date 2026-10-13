@@ -1643,7 +1643,7 @@ const I18N = {
     scanAsk:'consenti la camera…', scanLoading:'carico il modello delle mani…', scanShow:'mostra le mani alla camera',
     scanDenied:'permesso camera negato: abilitalo nelle impostazioni del browser',
     scanNoCam:'nessuna camera disponibile', scanOffline:'serve una connessione internet per il modello',
-    scanNoHands:'nessuna mano in vista', scanBoth:'indice', scanClick:'clic', scanDrag:'trascino…',
+    scanNoHands:'nessuna mano in vista', scanFar:'avvicina la mano', scanBoth:'indice', scanClick:'clic', scanDrag:'trascino…',
     scanTwo:'traccio 2 mani', scanOne:'traccio 1 mano',
     lavoriTitle:'lavori',
     lavoriSub:"Progetti di interior e product design: il brief, il processo, il risultato — e, quando c'è, il modello 3D da girare tra le mani o da mettere nella tua stanza.",
@@ -1720,7 +1720,7 @@ const I18N = {
     scanAsk:'allow the camera…', scanLoading:'loading the hand model…', scanShow:'show your hands to the camera',
     scanDenied:'camera permission denied: enable it in your browser settings',
     scanNoCam:'no camera available', scanOffline:'the model needs an internet connection',
-    scanNoHands:'no hands in view', scanBoth:'index', scanClick:'click', scanDrag:'dragging…',
+    scanNoHands:'no hands in view', scanFar:'bring your hand closer', scanBoth:'index', scanClick:'click', scanDrag:'dragging…',
     scanTwo:'tracking 2 hands', scanOne:'tracking 1 hand',
     lavoriTitle:'work',
     lavoriSub:'Interior and product design projects: the brief, the process, the result — and, when there is one, the 3D model to turn in your hands or place in your room.',
@@ -3830,9 +3830,40 @@ function scorriConLaMano(x, y, dy){
   }
 }
 
+/* ---- soglia di distanza ----
+   Il modello riconosce una mano anche a diversi metri: chi passa sullo
+   sfondo comanderebbe il sito. Il campione di misura è la mano stessa:
+   polso → nocca del medio (circa 9–10 cm in un adulto), espresso come
+   frazione dell'altezza dell'inquadratura (la x è corretta per il formato,
+   così la misura non cambia se la mano è dritta o di traverso).
+   Con una webcam comune: ~0.21 a 50 cm, ~0.11 a 1 m, ~0.07 a 1,5 m.
+   Una mano entra sopra MANO_VICINA e resta finché non scende sotto
+   MANO_LONTANA (due soglie: sul confine non sfarfalla).
+   Per tarare: apri il sito con ?taratura e leggi il numero accanto allo
+   stato, tenendo la mano alla distanza massima che vuoi far valere. */
+const MANO_VICINA  = 0.170;   /* ≈ 60 cm */
+const MANO_LONTANA = 0.150;   /* ≈ 70 cm: oltre, il sito non risponde */
+const TARATURA = /[?&]taratura\b/.test(location.search);
+let maniVicine = [false, false];
+function manoMisura(lm){
+  const formato = (scanVideo.videoWidth && scanVideo.videoHeight) ? scanVideo.videoWidth / scanVideo.videoHeight : 4 / 3;
+  return Math.hypot((lm[0].x - lm[9].x) * formato, lm[0].y - lm[9].y);
+}
+
 function onHands(list){
   list = list || [];
-  if (introAperta()){ specchioIntro(list); return; }
+  const misure = list.slice(0, 2).map(manoMisura);
+  maniVicine = [0, 1].map(i => misure[i] !== undefined && misure[i] >= (maniVicine[i] ? MANO_LONTANA : MANO_VICINA));
+  const troppoLontane = list.length > 0 && !maniVicine.some(Boolean);
+  list = list.filter((lm, i) => maniVicine[i]);
+  if (TARATURA) window.__manoMisure = misure;
+  const taratura = () => { if (TARATURA && misure.length) scanStatus.textContent += ' · ' + misure.map(m => m.toFixed(3)).join(' / '); };
+
+  if (introAperta()){
+    specchioIntro(list);
+    if (TARATURA){ scanStatus.textContent = t(troppoLontane ? 'scanFar' : 'scanShow'); taratura(); }
+    return;
+  }
 
   for (let i = 0; i < 2; i++){
     if (!list[i]){
@@ -3848,7 +3879,8 @@ function onHands(list){
   }
 
   if (!list.length){
-    scanStatus.textContent = t('scanNoHands');
+    scanStatus.textContent = t(troppoLontane ? 'scanFar' : 'scanNoHands');
+    taratura();
     mouseX = null; mouseY = null; bothDistPrev = null;
     return;
   }
@@ -3876,6 +3908,7 @@ function onHands(list){
   scanStatus.textContent = list.length > 1
     ? (bothPinch ? t('scanBoth') : anyPinch ? t('scanClick') : anyFist ? t('scanDrag') : t('scanTwo'))
     : (anyPinch ? t('scanClick') : anyFist ? t('scanDrag') : t('scanOne'));
+  taratura();
 }
 
 /* Niente più ricostruzione (né rimescolamento) a ogni resize: era la
