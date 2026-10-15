@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-13 17:23.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-15 11:16.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-13T17:23";
+window.ARCHIVE_SYNC = "2026-10-15T11:16";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -693,6 +693,197 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "La facciata sud dell\u0027Institut du Monde Arabe (Jean Nouvel con Architecture-Studio, Parigi, 1987) non è un rivestimento decorativo: è uno strumento ottico a tutti gli effetti. 240 pannelli metallici motorizzati, ciascuno a sua volta composto da una griglia di diaframmi più piccoli — esattamente il meccanismo di un obiettivo fotografico, lamelle che scorrono attorno a un centro comune — si aprono e si chiudono in risposta a cellule fotoelettriche che misurano la luce esterna, regolando quanta luce raggiunge le sale dietro di loro.",
         "source":  "https://www.imarabe.org/en/node/528, più Architecture-Studio e ArchDaily (vedi Fonte)"
+    },
+    {
+        "id":  "inspo-tommy-solovyov-feathered-mask",
+        "src":  "images/obsidian/inspo-tommy-solovyov-feathered-mask.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-tommy-solovyov-feathered-mask.jpg",
+        "title":  "Feathered Mask — Tommy Solovyov",
+        "description":  "Copricapo-maschera in piume nere vere, cucite e ricamate a mano, che \"ricorda l\u0027incarnazione di un corvo\" (descrizione originale dell\u0027editoriale). Fermo immagine da un reel ripubblicato da PAP Magazine; il testo coreano sovrimpresso appartiene al repost, non all\u0027opera. Foto/video: Tommy Solovyov, via @papfashion_/@pap_magazine.",
+        "domain":  [
+                       "moda"
+                   ],
+        "tags":  [
+                     "tommy-solovyov",
+                     "piume",
+                     "maschera",
+                     "headpiece",
+                     "wearable-art",
+                     "artigianato"
+                 ],
+        "addedAt":  "2026-10-13",
+        "kind":  "riferimento",
+        "note":  "Non è un accessorio decorato con piume: è una maschera costruita interamente in piume vere, di provenienza etica, assemblate a ricamo e perlinatura nell\u0027arco di mesi — la stessa logica materiale di un capo d\u0027alta sartoria applicata a un oggetto che sul corpo funziona come travestimento, non come ornamento. La copertura è parziale e precisa: piume dense su fronte, occhi e naso, mento e bocca lasciati scoperti — esattamente la fascia che nella tradizione della maschera veneziana (la bauta, la colombina) permette di restare \"in incognito\" pur continuando a mangiare, bere, parlare a un ballo.",
+        "source":  "https://www.pap-magazine.com/en/article/tommy-solovyov-handcrafted-headpieces-art-fashion (repost editoriale di un post/reel Instagram originale di Tommy Solovyov)"
+    },
+    {
+        "id":  "inspo-balenciaga-fw26-scenografia",
+        "src":  "images/obsidian/inspo-balenciaga-fw26-scenografia.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-balenciaga-fw26-scenografia.jpg",
+        "title":  "Scenografia FW26 — Balenciaga × Sam Levinson",
+        "description":  "Tre look dalla sfilata Balenciaga Fall/Winter 2026 (ready-to-wear), Champs-Élysées — l\u0027ambiente buio e gli accenni di luce sullo sfondo fanno parte della stessa scenografia. Foto: Hypebae.",
+        "domain":  [
+                       "moda",
+                       "editoriale",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "balenciaga",
+                     "pierpaolo-piccioli",
+                     "sam-levinson",
+                     "clair-obscur",
+                     "scenografia",
+                     "video-installazione",
+                     "euphoria"
+                 ],
+        "addedAt":  "2026-10-13",
+        "kind":  "riferimento",
+        "note":  "Pierpaolo Piccioli ha costruito la sfilata attorno a un\u0027idea tecnica precisa prima che scenica: il \"clair-obscur\", il contrasto luce/ombra della pittura rinascimentale, preso come principio strutturale e non come semplice mood. Per realizzarlo ha chiamato non uno scenografo di moda ma Sam Levinson, il regista di Euphoria — una scelta di competenza fuori settore che è già parte del contenuto progettuale.",
+        "source":  "https://www.thezoereport.com/fashion/balenciagas-fall-winter-2026-show-review, più Hypebae, The Glass Magazine e Vogue Singapore (vedi Fonte)"
+    },
+    {
+        "id":  "inspo-casa-falk-stromboli-lgb",
+        "src":  "images/obsidian/inspo-casa-falk-stromboli-lgb.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-casa-falk-stromboli-lgb.jpg",
+        "title":  "Sotto al vulcano, Casa Falk — LGB Architetti",
+        "description":  "Casa Falk a Piscità, Stromboli, vicino alla Sciara del fuoco — LGB Architetti.",
+        "medium":  "architettura, fotografia",
+        "domain":  [
+                       "architettura",
+                       "fotografia"
+                   ],
+        "tags":  [
+                     "stromboli",
+                     "isole-eolie",
+                     "vulcano",
+                     "casa-bianca",
+                     "paesaggio",
+                     "mediterraneo"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Un cubo bianco con una sola apertura stretta, appoggiato sul crinale nero di Stromboli, che si stacca contro un cielo enorme e mosso. Il terreno vulcanico e il muro a secco restano in ombra e diventano quasi un\u0027unica massa scura; la casa è l\u0027unico punto di luce. Il volume più elementare possibile basta a dare la scala a tutto il paesaggio intorno.\n\nLa casa si trova a Piscità, l\u0027estremità dell\u0027isola vicino alla Sciara del fuoco, e prende il nome dal suo ultimo proprietario, l\u0027artista svizzero Hans Falk (1918–2002).",
+        "source":  "https://divisare.com/authors/30872-lgb-architetti"
+    },
+    {
+        "id":  "inspo-weather-project-eliasson",
+        "src":  "images/obsidian/inspo-weather-project-eliasson.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-weather-project-eliasson.jpg",
+        "title":  "The Weather Project — Olafur Eliasson",
+        "year":  "2003",
+        "description":  "The Weather Project, Turbine Hall della Tate Modern, Londra (2003–2004) — Olafur Eliasson.",
+        "medium":  "installazione",
+        "domain":  [
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "olafur-eliasson",
+                     "installazione",
+                     "luce",
+                     "sole",
+                     "tate-modern",
+                     "percezione",
+                     "nebbia"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Un sole artificiale dentro un edificio. In fondo alla Turbine Hall della Tate Modern Eliasson monta un semicerchio fatto di centinaia di lampade a luce monofrequenza; il soffitto è rivestito di specchi, che raddoppiano il semicerchio in un disco intero e raddoppiano anche la sala. Una nebbia sottile, prodotta da macchine, rende la luce quasi solida. Il risultato è un tramonto permanente, giallo-arancio, in cui i colori scompaiono e le persone diventano sagome nere.",
+        "source":  "https://www.tate.org.uk/whats-on/tate-modern/unilever-series/unilever-series-olafur-eliasson-weather-project"
+    },
+    {
+        "id":  "inspo-shanghai-grand-opera-snohetta",
+        "src":  "images/obsidian/inspo-shanghai-grand-opera-snohetta.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-shanghai-grand-opera-snohetta.jpg",
+        "title":  "Shanghai Grand Opera House — Snøhetta",
+        "year":  "2026",
+        "description":  "Shanghai Grand Opera House, Houtan, Shanghai — Snøhetta con ECADI (completata 2026).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura"
+                   ],
+        "tags":  [
+                     "snohetta",
+                     "teatro",
+                     "opera",
+                     "shanghai",
+                     "copertura-praticabile",
+                     "spazio-pubblico",
+                     "spirale"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Il tetto non chiude l\u0027edificio, lo apre. È un\u0027unica superficie bianca a spirale che si srotola come un ventaglio che si apre, e diventa una grande scalinata pubblica che sale fino a una terrazza panoramica, accessibile a chiunque 24 ore su 24. Chi non va a teatro può comunque camminare sull\u0027opera, sedersi sui gradoni con le sedute in legno e guardare il fiume Huangpu.",
+        "source":  "https://yankodesign.com/2026/07/06/snohettas-shanghai-grand-opera-house-is-the-most-dramatic-building-of-2026"
+    },
+    {
+        "id":  "inspo-leonardo-salvator-mundi",
+        "src":  "images/obsidian/inspo-leonardo-salvator-mundi.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-leonardo-salvator-mundi.jpg",
+        "title":  "Salvator Mundi — Leonardo da Vinci",
+        "year":  "c. 1500",
+        "description":  "Salvator Mundi, olio su tavola di noce, attribuito a Leonardo da Vinci (c. 1500).",
+        "medium":  "olio su tavola",
+        "domain":  [
+                       "arte"
+                   ],
+        "tags":  [
+                     "leonardo",
+                     "rinascimento",
+                     "pittura",
+                     "ritratto",
+                     "attribuzione",
+                     "mercato-dell-arte"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Cristo frontale su fondo nero, la mano destra benedicente e nella sinistra una sfera di cristallo trasparente. Il volto è sfumato fino quasi a dissolversi, mentre i riccioli e la stola ricamata sono nitidissimi: due livelli di definizione nello stesso quadro.\n\nÈ anche un caso in sé: venduto da Christie\u0027s nel 2017 per circa 450 milioni di dollari, il dipinto più costoso mai battuto all\u0027asta, con un\u0027attribuzione a Leonardo ancora discussa e restauri pesanti. L\u0027oggetto diventa inseparabile dalla sua storia di mercato."
+    },
+    {
+        "id":  "inspo-delacroix-donne-di-algeri",
+        "src":  "images/obsidian/inspo-delacroix-donne-di-algeri.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-delacroix-donne-di-algeri.jpg",
+        "title":  "Donne di Algeri nei loro appartamenti — Eugène Delacroix",
+        "year":  "1834",
+        "description":  "Femmes d\u0027Alger dans leur appartement, 1834, olio su tela — Eugène Delacroix, Musée du Louvre.",
+        "medium":  "olio su tela",
+        "domain":  [
+                       "arte",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "delacroix",
+                     "romanticismo",
+                     "orientalismo",
+                     "pittura",
+                     "interni",
+                     "colore"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Un interno chiuso, in penombra, costruito quasi tutto con superfici decorate: piastrelle, tappeti, tessuti, le ante rosse dell\u0027armadio a muro, lo specchio dorato. Il colore non descrive solo le figure ma l\u0027intero ambiente: è un quadro d\u0027interni prima ancora che di persone.\n\nNasce dal viaggio di Delacroix in Nord Africa del 1832 ed è uno dei quadri simbolo dell\u0027orientalismo: uno sguardo europeo su uno spazio femminile e privato, ricostruito in studio, oggi da leggere anche criticamente. Picasso ne ha fatto una serie di quindici variazioni negli anni \u002750."
+    },
+    {
+        "id":  "inspo-rothko-periodo-surrealista",
+        "src":  "images/obsidian/inspo-rothko-periodo-surrealista.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-rothko-periodo-surrealista.jpg",
+        "title":  "Rothko, periodo surrealista",
+        "year":  "anni \u002740 (da verificare)",
+        "description":  "Mark Rothko, dipinto del periodo surrealista (titolo e anno da verificare).",
+        "medium":  "olio su tela",
+        "domain":  [
+                       "arte"
+                   ],
+        "tags":  [
+                     "rothko",
+                     "surrealismo",
+                     "pittura",
+                     "espressionismo-astratto",
+                     "anni-40"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Prima dei campi di colore per cui è famoso, Rothko dipinge così: forme biomorfiche, spirali, segni sottili che fluttuano su un fondo ocra diviso da una fascia grigia in basso. Si vede già la struttura dei quadri successivi, fasce orizzontali di colore che reggono la composizione, ma ancora abitata da figure che sembrano organismi, ossa o reperti."
     }
 ];
 window.PROJECTS_OBSIDIAN = [];
