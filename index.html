@@ -3146,7 +3146,40 @@ function changeView(dir){
   if (typeof showView === 'function') showView(next);
 }
 
+/* Il modello gira in mani-worker.js, in un filo a parte: sulla pagina
+   ogni analisi (~17 ms) si mangiava un fotogramma della nuvola e il
+   sito scattava. La pagina manda i fotogrammi e riceve solo i punti
+   delle mani. Se il worker non parte (browser vecchio, file mancante),
+   si ripiega sul caricamento di prima, sulla pagina.
+   handLandmarker diventa { worker } oppure { locale }. */
+let maniInVolo = false;   /* un fotogramma alla volta: il worker non si ingolfa */
+function caricaManoNelWorker(){
+  return new Promise((ok, no) => {
+    let w;
+    try { w = new Worker('mani-worker.js'); } catch(err){ no(err); return; }
+    w.onerror = ev => { w.terminate(); no(new Error('load worker: ' + (ev.message || ''))); };
+    w.onmessage = ev => {
+      const m = ev.data;
+      if (m.tipo === 'errore'){ w.terminate(); no(new Error('load worker: ' + m.messaggio)); return; }
+      if (m.tipo !== 'pronto') return;
+      w.onerror = () => { maniInVolo = false; };
+      w.onmessage = ev2 => {
+        if (ev2.data.tipo !== 'mani') return;
+        maniInVolo = false;
+        if (scanning) onHands(ev2.data.landmarks);
+      };
+      ok({ worker: w, delegato: m.delegato });
+    };
+    w.postMessage({ tipo: 'carica', base: TASKS_VISION, modello: HAND_MODEL });
+  });
+}
 async function caricaManoModello(){
+  if (typeof Worker === 'function' && typeof createImageBitmap === 'function' && typeof OffscreenCanvas === 'function'){
+    try { return await caricaManoNelWorker(); } catch(err){ /* si ripiega sulla pagina */ }
+  }
+  return { locale: await caricaManoSullaPagina() };
+}
+async function caricaManoSullaPagina(){
   const mod = await import(TASKS_VISION + '/vision_bundle.mjs');
   const fileset = await mod.FilesetResolver.forVisionTasks(TASKS_VISION + '/wasm');
   const opzioni = delegate => ({
@@ -3310,20 +3343,30 @@ async function startScan(){
     const _st = document.getElementById('scanToggle');
     if (_st) _st.setAttribute('aria-pressed', 'true');
 
-    /* il modello è sincrono: un fotogramma nuovo del video → un'analisi.
-       Su mobile (puntatore "coarse") ~15 analisi al secondo: a piena
-       frequenza il telefono scalda e rallenta. */
+    /* un fotogramma nuovo del video → un'analisi, ma solo quando la
+       precedente è tornata dal worker (se una si perde, dopo un secondo
+       si riparte). Su mobile (puntatore "coarse") ~15 analisi al
+       secondo: a piena frequenza il telefono scalda e rallenta. */
     let lastVideoTime = -1, lastSend = 0;
     const MIN_GAP = COARSE_PTR ? 66 : 0;
+    maniInVolo = false;
     (function pump(){
       if (!scanning) return;
       const now = performance.now();
-      if (scanVideo.readyState >= 2 && scanVideo.currentTime !== lastVideoTime && (now - lastSend) >= MIN_GAP){
+      if (maniInVolo && now - lastSend > 1000) maniInVolo = false;
+      if (!maniInVolo && scanVideo.readyState >= 2 && scanVideo.currentTime !== lastVideoTime && (now - lastSend) >= MIN_GAP){
         lastVideoTime = scanVideo.currentTime; lastSend = now;
-        try{
-          const res = handLandmarker.detectForVideo(scanVideo, now);
-          onHands(res && res.landmarks);
-        }catch(err){}
+        if (handLandmarker.worker){
+          maniInVolo = true;
+          createImageBitmap(scanVideo).then(
+            bmp => handLandmarker.worker.postMessage({ tipo: 'analizza', fotogramma: bmp, t: now }, [bmp]),
+            () => { maniInVolo = false; });
+        } else {
+          try{
+            const res = handLandmarker.locale.detectForVideo(scanVideo, now);
+            onHands(res && res.landmarks);
+          }catch(err){}
+        }
       }
       requestAnimationFrame(pump);
     })();
@@ -3521,6 +3564,35 @@ function sopra(el, x, y){
   return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
 }
 
+/* ---- tra un'analisi e l'altra ----
+   La camera dà ~24 analisi al secondo, lo schermo disegna a 60: se
+   cursore e trascinamento saltassero alla nuova posizione a ogni
+   analisi, si muoverebbero a gradini. Qui scivolano verso di essa a
+   ogni fotogramma (inseguimento misurato sul tempo, come in frame()).
+   I gesti (pizzico, pugno…) restano sulla posizione vera dell'analisi. */
+const cursoriVisti = [{ x: null, y: null, tx: 0, ty: 0 }, { x: null, y: null, tx: 0, ty: 0 }];
+let panManoX = 0, panManoY = 0;   /* trascinamento della nuvola ancora da applicare */
+let fluidoPrima = performance.now();
+(function maniFluide(now){
+  const dt = Math.min((now - fluidoPrima) / 16.7, 3);
+  fluidoPrima = now;
+  const k = reduceMotion ? 1 : 1 - Math.pow(0.5, dt);
+  cursoriVisti.forEach((c, i) => {
+    if (handCursors[i].hidden){ c.x = null; return; }   /* ricompare dove si trova, senza scivolare */
+    if (c.x === null) return;
+    c.x += (c.tx - c.x) * k;
+    c.y += (c.ty - c.y) * k;
+    handCursors[i].style.transform = `translate(${c.x - 14}px, ${c.y - 14}px)`;
+  });
+  if (panManoX || panManoY){
+    let dx = panManoX * k, dy = panManoY * k;
+    if (Math.abs(panManoX - dx) < 0.05 && Math.abs(panManoY - dy) < 0.05){ dx = panManoX; dy = panManoY; }
+    camX += dx; camY += dy;
+    panManoX -= dx; panManoY -= dy;
+  }
+  requestAnimationFrame(maniFluide);
+})(performance.now());
+
 function trackHand(lm, i){
   const cursor = handCursors[i];
   const st = handState[i];
@@ -3544,7 +3616,12 @@ function trackHand(lm, i){
 
   cursor.hidden = false;
   cursor.style.opacity = 1;
-  cursor.style.transform = `translate(${x - 14}px, ${y - 14}px)`;
+  const visto = cursoriVisti[i];
+  visto.tx = x; visto.ty = y;
+  if (visto.x === null){
+    visto.x = x; visto.y = y;
+    cursor.style.transform = `translate(${x - 14}px, ${y - 14}px)`;
+  }
 
   /* pizzico pollice–indice = clic (di quella mano) */
   const pinch = lmDist(lm[4], lm[8]) < size * 0.45;
@@ -3582,8 +3659,8 @@ function trackHand(lm, i){
   if (fist && !dueDita && st.prev){
     const nellaNuvola = !dialogAperto() && currentViewName() === 'archivio' && !(typeof indexOpen !== 'undefined' && indexOpen);
     if (nellaNuvola){
-      camX += (x - st.prev.x) * 1.4;
-      camY += (y - st.prev.y) * 1.4;
+      panManoX += (x - st.prev.x) * 1.4;   /* applicato a fotogrammi, in maniFluide */
+      panManoY += (y - st.prev.y) * 1.4;
     } else {
       scorriConLaMano(x, y, y - st.prev.y);   /* nelle altre pagine: scorri */
     }
