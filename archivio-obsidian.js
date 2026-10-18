@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-15 11:16.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-18 12:27.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-15T11:16";
+window.ARCHIVE_SYNC = "2026-10-18T12:27";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -884,6 +884,76 @@ window.ARCHIVE_OBSIDIAN = [
         "addedAt":  "2026-10-15",
         "kind":  "riferimento",
         "note":  "Prima dei campi di colore per cui è famoso, Rothko dipinge così: forme biomorfiche, spirali, segni sottili che fluttuano su un fondo ocra diviso da una fascia grigia in basso. Si vede già la struttura dei quadri successivi, fasce orizzontali di colore che reggono la composizione, ma ancora abitata da figure che sembrano organismi, ossa o reperti."
+    },
+    {
+        "id":  "inspo-numen-tube-innsbruck",
+        "src":  "images/obsidian/inspo-numen-tube-innsbruck.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-numen-tube-innsbruck.jpg",
+        "title":  "Tube — Numen/For Use, Innsbruck",
+        "year":  "2015",
+        "description":  "Tube, Numen/For Use, Aut Architektur und Tirol, Innsbruck, 2015. Foto: Numen/For Use, via Dezeen.",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "tensostruttura",
+                     "rete",
+                     "intreccio",
+                     "installazione",
+                     "parassita"
+                 ],
+        "addedAt":  "2026-10-17",
+        "kind":  "riferimento",
+        "note":  "Tube non ha una forma propria: è una rete di sicurezza nera cucita a formare un tubo chiuso, sospeso a decine di fili elastici ancorati alle pareti, ai pilastri e ai soffitti dell\u0027ex birrificio Adambräu di Innsbruck. Non c\u0027è un disegno a priori della geometria — il tubo assume la forma che gli impone lo spazio che attraversa, si strozza per passare da una sala all\u0027altra, si biforca, si avvolge attorno ai pilastri strutturali esistenti.",
+        "source":  "https://www.dezeen.com/2015/09/01/numen-for-use-tube-net-installation-giant-convulsing-centipede-innsbruck/"
+    },
+    {
+        "id":  "inspo-numen-tape-chatham",
+        "src":  "images/obsidian/inspo-numen-tape-chatham.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-numen-tape-chatham.jpg",
+        "title":  "Tape Chatham — Numen/For Use",
+        "year":  "2023",
+        "description":  "Tape Chatham, Numen/For Use, Historic Dockyard Chatham, Regno Unito, 2023. Foto: Numen/For Use, via designboom.",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "nastro-adesivo",
+                     "membrana",
+                     "tensostruttura",
+                     "riuso-adattivo",
+                     "patrimonio-industriale"
+                 ],
+        "addedAt":  "2026-10-17",
+        "kind":  "riferimento",
+        "note":  "Tape Chatham non riveste un edificio esistente: ci cresce dentro. Nel capannone storico del Chatham Historic Dockyard — una grande copertura lignea tradizionale, puntoni e travature a vista — Numen/For Use tende superfici traslucide tra i pilastri e le avvolge attorno alla struttura del tetto, fino a formare un volume sospeso, un interno parallelo che convive con l\u0027architettura originale senza sostituirla né nasconderla. La tecnica, comune a tutta la serie Tape del collettivo (già vista a Parigi sui pilastri in cemento del Palais de Tokyo, o a Des Moines lungo i percorsi dell\u0027edificio I.M.",
+        "source":  "https://www.designboom.com/art/numen-for-use-strange-spaces-sculpted-tape-tensioned-nets-installations/, più Levitt Bernstein per la tappa di Chatham (vedi Fonte)"
+    },
+    {
+        "id":  "inspo-numen-string-prototype",
+        "src":  "images/obsidian/inspo-numen-string-prototype.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-numen-string-prototype.jpg",
+        "title":  "String Prototype — Numen/For Use",
+        "year":  "2014",
+        "description":  "String Prototype, Numen/For Use, test vicino a Vienna, dicembre 2013. Foto: Numen/For Use, via Dezeen.",
+        "domain":  [
+                       "architettura",
+                       "interior-design",
+                       "product-design"
+                   ],
+        "tags":  [
+                     "pneumatica",
+                     "corde",
+                     "tensostruttura",
+                     "prototipo",
+                     "percezione"
+                 ],
+        "addedAt":  "2026-10-17",
+        "kind":  "riferimento",
+        "note":  "String Prototype rovescia una tecnica normalmente invisibile: le griglie di corde usate per tenere in forma i grandi gonfiabili — di solito nascoste dentro l\u0027involucro, mai pensate per essere viste o abitate — qui diventano l\u0027opera stessa. Un cubo gonfiabile bianco contiene una fitta rete tridimensionale di corde sottili, ancorate ai lati opposti dello spazio: quando il cubo si gonfia, la pressione dell\u0027aria mette in tensione le corde fino a renderle rigide abbastanza da sostenere il peso di una persona che vi si arrampica; quando si sgonfia, tutto si allenta e collassa.",
+        "source":  "https://www.dezeen.com/2014/02/07/string-prototype-numen-for-use-inflatable-installation-ropes/"
     }
 ];
 window.PROJECTS_OBSIDIAN = [];
