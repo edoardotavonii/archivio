@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-18 12:27.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-20 14:28.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-18T12:27";
+window.ARCHIVE_SYNC = "2026-10-20T14:28";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -415,26 +415,6 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "\"Martian Relics\" è una collezione di cinque oggetti domestici (un piatto, uno specchio, una finestra, un vaso, un filtro dell\u0027acqua) che immagina la vita quotidiana su Marte, non come esercizio estetico fantascientifico ma come critica alla premessa che rende la fuga su Marte immaginabile: che la Terra sia sacrificabile. Last Offering, il vaso, è modellato su una lapide a croce doppia — la forma stessa dichiara che si tratta di un altare.",
         "source":  "https://rochbiel.com/editions#martianrelics"
-    },
-    {
-        "id":  "inspo-stoneisland-ice-jacket",
-        "src":  "images/obsidian/inspo-stoneisland-ice-jacket.jpg",
-        "thumb":  "images/obsidian/thumbs/inspo-stoneisland-ice-jacket.jpg",
-        "title":  "Ice Jacket — Stone Island, tessuto termosensibile",
-        "description":  "Ice Jacket, Stone Island — capo in tessuto termosensibile, archivio \"Prototype Research Series\" (principio introdotto nel 1989, qui in versione Poly Strata AW24). Foto: courtesy Stone Island.",
-        "domain":  [
-                       "moda"
-                   ],
-        "tags":  [
-                     "stone-island",
-                     "termocromia",
-                     "tessuto-reattivo",
-                     "poly-strata"
-                 ],
-        "addedAt":  "2026-09-30",
-        "kind":  "riferimento",
-        "note":  "Il capo cambia colore, dal rosa a un bianco sporco, semplicemente spostandosi da un ambiente caldo a uno freddo — e nella zona di transizione tra le due temperature, le due tonalità si mescolano in macchie che ricordano una scansione termografica. Non è un effetto stampato o applicato in superficie: nasce da pigmenti termocromici micro-incapsulati infusi in un doppio strato di poliuretano che riveste un nylon ripstop.",
-        "source":  "https://www.stoneisland.com/en-us/archive-thermosensitive-pieces.html (versione AW24 Poly Strata: designboom)"
     },
     {
         "id":  "inspo-stoneisland-nylon-metal",
@@ -954,6 +934,159 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "String Prototype rovescia una tecnica normalmente invisibile: le griglie di corde usate per tenere in forma i grandi gonfiabili — di solito nascoste dentro l\u0027involucro, mai pensate per essere viste o abitate — qui diventano l\u0027opera stessa. Un cubo gonfiabile bianco contiene una fitta rete tridimensionale di corde sottili, ancorate ai lati opposti dello spazio: quando il cubo si gonfia, la pressione dell\u0027aria mette in tensione le corde fino a renderle rigide abbastanza da sostenere il peso di una persona che vi si arrampica; quando si sgonfia, tutto si allenta e collassa.",
         "source":  "https://www.dezeen.com/2014/02/07/string-prototype-numen-for-use-inflatable-installation-ropes/"
+    },
+    {
+        "id":  "inspo-yoshioka-rainbow-church",
+        "src":  "images/obsidian/inspo-yoshioka-rainbow-church.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-yoshioka-rainbow-church.jpg",
+        "title":  "Rainbow Church — Tokujin Yoshioka",
+        "year":  "2010",
+        "description":  "Rainbow Church, finestra di 500 prismi di cristallo alta circa 9 metri — Tokujin Yoshioka, mostra \"Spectrum\", Seoul 2010.",
+        "medium":  "installazione, cristallo",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "tokujin-yoshioka",
+                     "luce",
+                     "prisma",
+                     "cristallo",
+                     "arcobaleno",
+                     "installazione",
+                     "matisse"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "Una vetrata senza colore. Al posto dei vetri colorati, una parete alta circa 9 metri fatta di 500 prismi di cristallo trasparente: è la luce stessa, attraversandoli, a scomporsi e a riempire lo spazio di arcobaleni che si spostano con il sole. Yoshioka parte dalla Chapelle du Rosaire di Matisse a Vence, dove la luce della Provenza filtrata dalle vetrate colora la stanza, e ne toglie il pigmento: rimane solo il fenomeno ottico.\n\nÈ il progetto in scala ridotta di un\u0027idea che Yoshioka insegue da anni: un\u0027architettura in cui la luce si percepisce con tutto il corpo.",
+        "source":  "https://www.dezeen.com/2010/05/07/rainbow-church-by-tokujin-yoshioka-2/"
+    },
+    {
+        "id":  "inspo-nave-ib002-incense-burner",
+        "src":  "images/obsidian/inspo-nave-ib002-incense-burner.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-nave-ib002-incense-burner.jpg",
+        "title":  "IB002-04 Incense Burner — Nave Objetos",
+        "description":  "IB002-04, bruciatore d\u0027incenso in acciaio inox con sfera forata — Nave Objetos.",
+        "medium":  "oggetto, acciaio inossidabile",
+        "domain":  [
+                       "product-design"
+                   ],
+        "tags":  [
+                     "nave-objetos",
+                     "incenso",
+                     "acciaio-inox",
+                     "sfera-forata",
+                     "rituale",
+                     "oggetto-domestico"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "Un piccolo oggetto rituale in acciaio inox (15 × 15 × 10 cm): l\u0027incenso brucia dentro una sfera forata, e il fumo esce piano attraverso i fori invece che in un\u0027unica colonna. La base nasconde un vano con coperchio dove riporre l\u0027incenso. Il fumo diventa il vero materiale dell\u0027oggetto: la sfera è solo il filtro che gli dà forma.",
+        "source":  "https://www.naveobjetos.com/ib002-04-incense-burner"
+    },
+    {
+        "id":  "inspo-mammafotogramma-woodskin",
+        "src":  "images/obsidian/inspo-mammafotogramma-woodskin.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-mammafotogramma-woodskin.jpg",
+        "title":  "Woodskin — MammaFotogramma",
+        "year":  "2013",
+        "description":  "Woodskin, legno reso flessibile da un sandwich di legno e tessuto a rete — MammaFotogramma, Milano 2013.",
+        "medium":  "materiale composito, legno e tessuto",
+        "domain":  [
+                       "product-design",
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "mammafotogramma",
+                     "legno",
+                     "materiale-flessibile",
+                     "cnc",
+                     "triangoli",
+                     "rivestimento",
+                     "brevetto"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "Il legno che si piega come un tessuto. Woodskin è un sandwich brevettato di legno e tessuto a rete ad alte prestazioni: la tavola rigida viene tagliata a controllo numerico in una trama di piccoli triangoli, e la rete sotto li tiene insieme. Ogni triangolo resta rigido, ma l\u0027insieme diventa flessibile e può seguire curve, avvolgere superfici, diventare rivestimento, arredo o pelle di uno spazio. La flessibilità non è nel materiale, è nella geometria del taglio.",
+        "source":  "https://divisare.com/projects/232334-mammafotogramma-woodskin"
+    },
+    {
+        "id":  "inspo-kabel-office-party",
+        "src":  "images/obsidian/inspo-kabel-office-party.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-kabel-office-party.jpg",
+        "title":  "Office Party — Chris Kabel",
+        "year":  "2015",
+        "description":  "Office Party, festone trasparente colorato che si infila sui neon da ufficio — Chris Kabel, 2015.",
+        "medium":  "lampada, intervento su neon esistenti",
+        "domain":  [
+                       "product-design",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "chris-kabel",
+                     "lampada",
+                     "neon",
+                     "ufficio",
+                     "festone",
+                     "colore",
+                     "ironia"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "Un festone trasparente e colorato che scorre sopra i tubi al neon già presenti in un ufficio e trasforma la loro luce fredda in un mix di colori da festa. Nasce dalla sensazione strana delle feste aziendali, dove dopo un paio di drink le preoccupazioni del lavoro svaniscono ma la luce resta quella dura dei neon. Kabel non progetta una lampada nuova: cambia il significato di quella che c\u0027è già. L\u0027installazione permanente originale è al Portikus di Francoforte.",
+        "source":  "https://divisare.com/projects/315251-chris-kabel-labadie-van-tour-office-party"
+    },
+    {
+        "id":  "inspo-kabel-blue-sky-lamp",
+        "src":  "images/obsidian/inspo-kabel-blue-sky-lamp.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-kabel-blue-sky-lamp.jpg",
+        "title":  "Blue Sky Lamp — Chris Kabel",
+        "year":  "2014",
+        "description":  "Blue Sky Lamp, lampada in resina che ricrea la luce del cielo — Chris Kabel, Rotterdam 2014.",
+        "medium":  "lampada, resina e LED",
+        "domain":  [
+                       "product-design"
+                   ],
+        "tags":  [
+                     "chris-kabel",
+                     "lampada",
+                     "luce",
+                     "cielo",
+                     "resina",
+                     "led",
+                     "diffusione"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "Un pezzo di cielo appeso al soffitto, ottenuto con la stessa fisica del cielo vero. Un grande disco sospeso di resina: particelle speciali al suo interno diffondono la luce fredda del LED, così il disco si colora di un azzurro che sfuma nel bianco, mentre la sorgente resta visibile come un piccolo sole caldo. È lo stesso effetto per cui il cielo è blu e il sole appare giallo-arancio. Guardandolo da sotto si ha davvero l\u0027impressione di alzare gli occhi verso il cielo. Kabel l\u0027ha pensata per la Winter Anti Depression Show al MARRES di Maastricht: una cura per i mesi senza luce.",
+        "source":  "https://divisare.com/projects/315427-chris-kabel-blue-sky-lamp"
+    },
+    {
+        "id":  "inspo-stoneisland-fakemink-campagna",
+        "src":  "images/obsidian/inspo-stoneisland-fakemink-campagna.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-stoneisland-fakemink-campagna.jpg",
+        "title":  "Community as a Form of Research — Stone Island × fakemink",
+        "year":  "2026",
+        "description":  "Stone Island FW26, progetto \"Community as a Form of Research\" — fakemink in giacca di nylon resinato e termopressato.",
+        "medium":  "campagna fotografica",
+        "domain":  [
+                       "moda",
+                       "fotografia"
+                   ],
+        "tags":  [
+                     "stone-island",
+                     "fakemink",
+                     "campagna",
+                     "fw26",
+                     "nylon-resinato",
+                     "hans-ulrich-obrist",
+                     "ricerca-sui-materiali"
+                 ],
+        "addedAt":  "2026-10-20",
+        "kind":  "riferimento",
+        "note":  "La giacca sembra bagnata o laccata: un nylon testurizzato trattato con resina e termopressato, che diventa lucido e si piega in grinze rigide, come carta stagnola. Il colore arancio-rosso pieno, dalla giacca ai cargo sbiaditi, rende la figura un unico blocco cromatico; la posa, le mani giunte davanti al volto, toglie il viso e lascia parlare il materiale.",
+        "source":  "https://culted.com/fashion/fakemink-skepta-and-more-front-stone-islands-latest-campa/"
     }
 ];
 window.PROJECTS_OBSIDIAN = [];
