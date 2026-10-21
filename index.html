@@ -5103,7 +5103,23 @@ applyLang();
     lasciaTraccia();
     if (lastFocus && typeof lastFocus.focus === 'function'){ try{ lastFocus.focus({ preventScroll:true }); }catch(e){} }
   }
-  window.openEgg = openEgg;   /* utile per provarlo dalla console */
+  window.openEgg = openEgg;   /* l'occhio resta: si apre dalla console */
+
+  /* IL REGALO: chi trova il codice viene… rickrollato.
+     Si apre la pagina YouTube in una scheda nuova (il gesto — tasto,
+     tocco o pressione — è dell'utente, quindi il browser non la blocca);
+     se il browser la blocca comunque, ci si va nella stessa scheda.
+     MODIFICA: per tornare all'occhio, sostituisci rickroll() con openEgg()
+     nelle tre porte qui sotto. */
+  var RICKROLL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+  function rickroll(){
+    var w = null;
+    /* niente 'noopener' tra le opzioni: con quello window.open restituisce
+       sempre null e il sito scapperebbe anche dalla scheda corrente */
+    try{ w = window.open(RICKROLL, '_blank'); }catch(e){}
+    if (w){ try{ w.opener = null; }catch(e){} }
+    else location.href = RICKROLL;
+  }
 
   function scrivendo(){
     var a = document.activeElement;
@@ -5130,7 +5146,7 @@ applyLang();
     if (buffer.length > KONAMI.length) buffer.shift();
     if (buffer.length === KONAMI.length && buffer.every(function(k, i){ return k === KONAMI[i]; })){
       buffer = [];
-      openEgg();
+      rickroll();
     }
   });
 
@@ -5152,7 +5168,7 @@ applyLang();
     if (touchBuffer.length > KONAMI_TOUCH.length) touchBuffer.shift();
     if (touchBuffer.length === KONAMI_TOUCH.length && touchBuffer.every(function(k, i){ return k === KONAMI_TOUCH[i]; })){
       touchBuffer = [];
-      openEgg();
+      rickroll();
     }
   }, true);
 
@@ -5163,7 +5179,7 @@ applyLang();
     if (!sig || !overlay.hidden) return;
     pressAt = { x: e.clientX, y: e.clientY };
     clearTimeout(pressT);
-    pressT = setTimeout(function(){ pressT = null; openEgg(); }, 1200);
+    pressT = setTimeout(function(){ pressT = null; rickroll(); }, 1200);
   });
   function annullaPressione(e){
     if (!pressT) return;
