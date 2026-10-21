@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-21 12:11.
+/* Generato da sincronizza-archivio.ps1 il 2026-10-21 12:19.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-21T12:11";
+window.ARCHIVE_SYNC = "2026-10-21T12:19";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -1087,46 +1087,6 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "La giacca sembra bagnata o laccata: un nylon testurizzato trattato con resina e termopressato, che diventa lucido e si piega in grinze rigide, come carta stagnola. Il colore arancio-rosso pieno, dalla giacca ai cargo sbiaditi, rende la figura un unico blocco cromatico; la posa, le mani giunte davanti al volto, toglie il viso e lascia parlare il materiale.",
         "source":  "https://culted.com/fashion/fakemink-skepta-and-more-front-stone-islands-latest-campa/"
-    },
-    {
-        "id":  "forma-nuvola-copertina",
-        "src":  "images/obsidian/forma-nuvola-copertina.png",
-        "thumb":  "images/obsidian/thumbs/forma-nuvola-copertina.jpg",
-        "title":  "Forma",
-        "year":  "2026",
-        "domain":  [
-                       "product-design"
-                   ],
-        "tags":  [
-                     "ergonomia",
-                     "coltello",
-                     "algoritmo",
-                     "nuvola-di-punti"
-                 ],
-        "addedAt":  "2026-10-21",
-        "kind":  "progetto",
-        "project":  "forma"
     }
 ];
-window.PROJECTS_OBSIDIAN = [
-    {
-        "id":  "forma",
-        "title":  "Forma",
-        "year":  "2026",
-        "context":  "Ergonomia — progetto d\u0027esame",
-        "tools":  [
-                      "Python",
-                      "Blender"
-                  ],
-        "description":  "Forma è un manico da coltello generato dalla mano di chi lo usa. Una scansione con lo smartphone misura la mano; un algoritmo traduce le misure in un manico che riempie la presa dove la mano spinge e si ritira dove non tocca.\n\nLa nuvola di punti qui sopra descrive il manico per la mano P50 (50° percentile), anello per anello come una scansione. I colori sono il contatto con la mano: rosso dove la pressione è massima (23 % della superficie), blu dove la mano non tocca (37 %).",
-        "cover":  "images/obsidian/forma-nuvola-copertina.png",
-        "coverThumb":  "images/obsidian/thumbs/forma-nuvola-copertina.jpg",
-        "images":  [
-                       {
-                           "src":  "images/obsidian/forma-nuvola-copertina.png",
-                           "thumb":  "images/obsidian/thumbs/forma-nuvola-copertina.jpg"
-                       }
-                   ],
-        "model":  "models/forma_nuvola_sito.glb"
-    }
-];
+window.PROJECTS_OBSIDIAN = [];
