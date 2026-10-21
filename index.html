@@ -1301,6 +1301,10 @@
     #intro .intro-sub, #intro .intro-gesti{ animation:introSu .9s ease .5s backwards; }
   }
   @keyframes introSu{ from{ opacity:0; transform:translateY(6px); } }
+  /* il nome in alto a sinistra, nell'intro e nell'about (che non hanno testata):
+     stessa posizione e stesso peso del nome nelle testate */
+  .intro-mark, .about-mark{ position:fixed; top:1.55rem; left:1.5rem; z-index:6; }
+  .about-mark{ color:#fff; }
   #intro .intro-title{
     font-size:clamp(20px, 3vw, 34px);
     letter-spacing:0.1em;
@@ -1317,14 +1321,14 @@
     padding:0 1.5rem;
   }
 
-  /* la firma è anche la porta segreta dell'occhio (pressione lunga):
+  /* il nome è anche la porta segreta dell'occhio (pressione lunga):
      niente selezione del testo né menu del telefono */
-  .signature{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  .wordmark{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
 
 /* ---- easter egg: codice Konami → l'Occhio (WebGL) ----
    L'unico punto a colori del sito, un'eccezione voluta. Si apre con
    ↑↑↓↓←→←→BA da tastiera, con la stessa sequenza di swipe + due tocchi
-   sul telefono, o tenendo premuta la firma. Nessuna libreria esterna. */
+   sul telefono, o tenendo premuto il nome in alto. Nessuna libreria esterna. */
   .egg-overlay{
     position:fixed; inset:0;
     background:var(--ink);
@@ -1697,11 +1701,9 @@ function t(key){
 </script>
 
 <div id="intro" aria-label="Introduzione" role="button" tabindex="0">
-  <!-- il wordmark si "sviluppa" in caratteri, come una stampa;
-       lo span sotto è la riserva se il canvas non è disponibile -->
+  <!-- il nome: piccolo, in alto a sinistra, come in tutte le pagine -->
+  <div class="wordmark intro-mark">edoardo tavoni</div>
   <div class="intro-in">
-  <canvas class="intro-canvas" id="introCanvas" aria-hidden="true"></canvas>
-  <span class="intro-title" id="introTitle" hidden>edoardo tavoni / archivio</span>
   <!-- MODIFICA: la scritta dell'ingresso (resta uguale in IT e EN) -->
   <p class="intro-text" id="introText">show your hands to the camera</p>
   <!-- MODIFICA: la seconda riga (chiavi introSub / introSubNoCam nel dizionario
@@ -1833,7 +1835,6 @@ function t(key){
 </div>
 
 <footer>
-  <span class="signature">EdoardoTavoni_P_A</span>
   <button id="indexToggle" aria-pressed="false" data-i18n="indexToggleClosed"
           title="Passa tra la nuvola e l'indice">≡ indice</button>
   <button id="scanToggle" aria-pressed="false" aria-label="Attiva o disattiva il controllo con le mani"
@@ -3118,85 +3119,6 @@ document.addEventListener('keydown', e => {
 /* chi apre un link diretto (#lavori/…, #archivio/3) non passa dall'intro */
 if (/^#(archivio\/|lavori|about|contatti)/.test(location.hash)) dismissIntro();
 
-/* ---- il wordmark si sviluppa ----
-   Stesso linguaggio dello sviluppo nel lightbox: il nome appare
-   come stampa in caratteri, cella per cella, in ordine casuale.
-   Con prefers-reduced-motion compare già sviluppato; se il canvas
-   non è disponibile, torna il semplice testo.                   */
-(function introSviluppo(){
-  const cv = document.getElementById('introCanvas');
-  const riserva = document.getElementById('introTitle');
-  const mostraRiserva = () => { if (riserva) riserva.hidden = false; if (cv) cv.hidden = true; };
-  if (!cv || !cv.getContext){ mostraRiserva(); return; }
-  try{
-    const testo = 'edoardo tavoni / archivio';
-    const dpr = Math.min(devicePixelRatio || 1, 2);
-    const fpx = Math.max(22, Math.min(innerWidth * 0.045, 42));
-    const W = Math.round(Math.min(innerWidth * 0.92, 900) * dpr);
-    const H = Math.round(fpx * 2.4 * dpr);
-
-    /* il testo pieno, fuori scena, solo per campionare le celle */
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const o = off.getContext('2d');
-    o.font = '600 ' + (fpx * dpr) + 'px ' + getComputedStyle(document.body).fontFamily;
-    o.textAlign = 'center'; o.textBaseline = 'middle';
-    o.fillText(testo, W / 2, H / 2);
-
-    const cella = Math.max(4, Math.round(5 * dpr));
-    const gw = Math.ceil(W / cella), gh = Math.ceil(H / cella);
-    const tmp = document.createElement('canvas');
-    tmp.width = gw; tmp.height = gh;
-    const t = tmp.getContext('2d');
-    t.drawImage(off, 0, 0, gw, gh);
-    const dati = t.getImageData(0, 0, gw, gh).data;
-
-    /* le celle dove passa il tratto, mescolate */
-    const RAMPA = "@#%*+=-:. ";
-    const celle = [];
-    for (let y = 0; y < gh; y++){
-      for (let x = 0; x < gw; x++){
-        const a = dati[(y * gw + x) * 4 + 3];
-        if (a > 40) celle.push({ x, y, a });
-      }
-    }
-    if (!celle.length){ mostraRiserva(); return; }
-    for (let i = celle.length - 1; i > 0; i--){
-      const j = (Math.random() * (i + 1)) | 0;
-      [celle[i], celle[j]] = [celle[j], celle[i]];
-    }
-
-    cv.width = W; cv.height = H;
-    cv.style.width = (W / dpr) + 'px';
-    cv.style.height = (H / dpr) + 'px';
-    const c = cv.getContext('2d');
-    c.fillStyle = '#0a0a0a';
-    c.font = cella + 'px ' + SITE_FONT;
-    c.textAlign = 'center'; c.textBaseline = 'middle';
-    const disegna = (cell) => {
-      const idx = Math.min(RAMPA.length - 1, Math.floor((255 - cell.a) / 255 * RAMPA.length));
-      const ch = RAMPA[idx];
-      if (ch !== ' ') c.fillText(ch, cell.x * cella + cella / 2, cell.y * cella + cella / 2);
-    };
-
-    if (reduceMotion){ celle.forEach(disegna); return; }
-    const DURATA = 900;
-    const t0 = performance.now();
-    let fatte = 0;
-    (function passo(){
-      const k = Math.min(1, (performance.now() - t0) / DURATA);
-      const e = 1 - Math.pow(1 - k, 3);
-      const target = Math.round(celle.length * e);
-      while (fatte < target) disegna(celle[fatte++]);
-      if (k < 1 && !intro.classList.contains('hide')){
-        requestAnimationFrame(passo);
-      } else {
-        while (fatte < celle.length) disegna(celle[fatte++]);
-      }
-    })();
-  }catch(err){ mostraRiserva(); }
-})();
-
 const lmDist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 const dialogAperto = () => document.querySelector('dialog[open]');
 
@@ -3695,8 +3617,10 @@ frame();
   <a class="ai-cta" href="#contatti" id="aiCta" onclick="showView('contatti');return false;" data-i18n="aboutCta">scrivimi per una collaborazione →</a>
 </section>
 
+<!-- il nome sta solo in alto a sinistra, come nelle altre pagine -->
+<div class="wordmark about-mark">edoardo tavoni</div>
+
 <footer class="about-foot">
-  <span class="signature">EdoardoTavoni_P_A</span>
   <div class="footer-links">
     <a href="mailto:edoardotavoni@gmail.com">EMAIL</a>
     <a href="https://instagram.com/edoardotavonii" target="_blank" rel="noopener">INSTAGRAM</a>
@@ -4039,7 +3963,6 @@ function scriviDecodificabile(el, testo, durata){
 </dialog>
 
 <footer>
-  <span class="signature">EdoardoTavoni_P_A</span>
   <span data-i18n="viewLabelLavori">lavori</span>
 </footer>
 
@@ -4203,7 +4126,6 @@ function scriviDecodificabile(el, testo, durata){
 </main>
 
 <footer>
-  <span class="signature">EdoardoTavoni_P_A</span>
   <span data-i18n="viewLabelContatti">contatti</span>
 </footer>
 
@@ -4871,7 +4793,7 @@ applyLang();
      Tre porte:
        tastiera   ↑ ↑ ↓ ↓ ← → ← → B A
        telefono   la stessa sequenza a swipe sulla nuvola, poi due tocchi
-       ovunque    tenere premuta la firma "EdoardoTavoni_P_A" (1,2 s)
+       ovunque    tenere premuto il nome "edoardo tavoni" in alto (1,2 s)
 
      Dopo qualche secondo l'occhio "parla": invita a scrivere con
      oggetto ↑↑↓↓←→←→BA. Chi lo trova è curioso — proprio il tipo di
@@ -5234,10 +5156,10 @@ applyLang();
     }
   }, true);
 
-  /* ---- porta 3: tenere premuta la firma ---- */
+  /* ---- porta 3: tenere premuto il nome in alto ---- */
   var pressT = null, pressAt = null;
   document.addEventListener('pointerdown', function(e){
-    var sig = e.target.closest && e.target.closest('.signature');
+    var sig = e.target.closest && e.target.closest('.wordmark');
     if (!sig || !overlay.hidden) return;
     pressAt = { x: e.clientX, y: e.clientY };
     clearTimeout(pressT);
@@ -5249,7 +5171,7 @@ applyLang();
     clearTimeout(pressT); pressT = null;
   }
   ['pointerup', 'pointercancel', 'pointermove'].forEach(function(ev){ document.addEventListener(ev, annullaPressione); });
-  document.addEventListener('contextmenu', function(e){ if (e.target.closest && e.target.closest('.signature')) e.preventDefault(); });
+  document.addEventListener('contextmenu', function(e){ if (e.target.closest && e.target.closest('.wordmark')) e.preventDefault(); });
 
   closeBtn.addEventListener('click', closeEgg);
   overlay.addEventListener('click', function(e){ if (e.target === overlay) closeEgg(); });
