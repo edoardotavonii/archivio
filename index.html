@@ -68,9 +68,10 @@
     --ink:   #0a0a0a;   /* nero            */
     --faint: #9b9b9b;   /* grigio          */
     --line:  #e3e3e3;   /* filo sottile    */
-    /* monospace di sistema: per numerazioni, date, etichette —
-       rima con l'alfabeto ASCII del ritratto e dello sviluppo */
-    --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, "Courier New", monospace;
+    /* UN SOLO CARATTERE in tutto il sito (MODIFICA qui per cambiarlo).
+       --mono resta come nome storico: punta allo stesso carattere. */
+    --font: Helvetica, "Helvetica Neue", Arial, sans-serif;
+    --mono: var(--font);
   }
 
   /* la selezione è inchiostro pieno, come un evidenziatore al negativo */
@@ -109,8 +110,7 @@
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,
-                 system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family:var(--font);
     font-size:13px;
     line-height:1.55;
     letter-spacing:0.01em;
@@ -832,7 +832,7 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* sotto il reel: una sola porta, verso i contatti */
+  /* sotto il reel: chi sei per chi vuole lavorare con te */
   .about-cue{
     position:absolute; left:50%; bottom:4.4rem; transform:translateX(-50%);
     z-index:3;
@@ -840,6 +840,38 @@
     color:#9b9b9b; border-bottom:1px solid transparent;
   }
   .about-cue:hover{ color:#fff; border-bottom-color:#fff; }
+  .about-info{
+    max-width:44rem;
+    margin:0 auto;
+    padding:3rem 1.5rem 8rem;
+    display:flex; flex-direction:column; gap:1.6rem;
+  }
+  .about-info .ai-lead{
+    font-family:var(--font);
+    font-size:clamp(20px, 3.2vw, 30px); font-weight:600; letter-spacing:-0.01em; line-height:1.2;
+  }
+  .about-info dl{ display:flex; flex-direction:column; border-top:1px solid #2a2a2a; }
+  .about-info .ai-row{
+    display:flex; gap:1.2rem; align-items:baseline;
+    padding:0.75rem 0; border-bottom:1px solid #2a2a2a;
+  }
+  .about-info dt{
+    min-width:9.5rem;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#9b9b9b;
+  }
+  .about-info dd{ font-size:14px; line-height:1.55; }
+  .about-info dd a{ border-bottom:1px solid #fff; }
+  .about-info dd a:hover{ color:#9b9b9b; border-bottom-color:#9b9b9b; }
+  .about-info .ai-cta{
+    align-self:flex-start;
+    font-family:var(--font);
+    font-size:clamp(22px, 4.5vw, 44px); font-weight:600; letter-spacing:-0.02em; line-height:1.05;
+    border-bottom:3px solid #fff !important;
+  }
+  .about-info .ai-cta:hover{ color:#9b9b9b; border-bottom-color:#9b9b9b !important; }
+  @media (max-width:560px){
+    .about-info .ai-row{ flex-direction:column; gap:0.2rem; }
+  }
   #view-about a{ color:inherit; text-decoration:none; }
 
   #view-about .about-close{
@@ -861,7 +893,7 @@
     position:relative; z-index:2;
     display:flex; flex-direction:column; align-items:center;
     text-align:center;
-    font-family:Helvetica,"Helvetica Neue",Arial,sans-serif;
+    font-family:var(--font);
     font-weight:600; line-height:1.14; letter-spacing:-0.01em;
     font-size:clamp(21px, 6.4vw, 40px);
   }
@@ -907,7 +939,7 @@
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:Helvetica,"Helvetica Neue",Arial,sans-serif;
+    font-family:var(--font);
     font-size:13px;
     line-height:1.55;
     letter-spacing:0.01em;
@@ -1361,6 +1393,11 @@ function safeUrl(u){
 </script>
 
 <script>
+/* il carattere unico del sito (--font nel CSS), anche per i disegni in
+   caratteri sul canvas: lo sviluppo delle foto, il nome, lo specchio */
+const SITE_FONT = (getComputedStyle(document.documentElement).getPropertyValue('--font') || '').trim()
+  || 'Helvetica, "Helvetica Neue", Arial, sans-serif';
+
 /* ================= MODALITÀ MODIFICA =================
    I visitatori non vedono "revisiona": è uno strumento tuo.
    Apri il sito con ?edit per attivarlo (resta attiva in questo
@@ -1534,7 +1571,7 @@ const I18N = {
     projRole:'ruolo', projContext:'contesto', projYear:'anno', projTools:'strumenti', projMaterials:'materiali', projPlace:'luogo',
     projProcess:'processo', projCta:'parliamone di questo progetto →',
     aboutClose:'Chiudi ✕', viewLabelAbout:'about',
-    aboutWrite:'scrivimi →',
+    aboutCue:'↓ cosa faccio, cosa cerco', aboutCta:'scrivimi per una collaborazione →',
     aiAvail:'disponibilità', aiLooking:'cerco', aiTools:'strumenti', aiBase:'base', aiDocs:'documenti', aiCv:'cv', aiPortfolio:'portfolio pdf',
     contattiEmailLabel:'email', contattiInstaLabel:'instagram', copyEmail:'copia',
     collabLabel:'collabora', collabToggle:'proponi una collaborazione →',
@@ -1609,7 +1646,7 @@ const I18N = {
     projRole:'role', projContext:'context', projYear:'year', projTools:'tools', projMaterials:'materials', projPlace:'place',
     projProcess:'process', projCta:"let's talk about this project →",
     aboutClose:'Close ✕', viewLabelAbout:'about',
-    aboutWrite:'write to me →',
+    aboutCue:"↓ what I do, what I'm looking for", aboutCta:'write to me about a collaboration →',
     aiAvail:'availability', aiLooking:'looking for', aiTools:'tools', aiBase:'based in', aiDocs:'documents', aiCv:'cv', aiPortfolio:'portfolio pdf',
     contattiEmailLabel:'email', contattiInstaLabel:'instagram', copyEmail:'copy',
     collabLabel:'collaborate', collabToggle:'propose a collaboration →',
@@ -2637,7 +2674,7 @@ function avviaSviluppo(sorgente, cornice){
     lbrCtx.fillStyle = '#ffffff';
     lbrCtx.fillRect(0, 0, W, H);
     lbrCtx.fillStyle = '#0a0a0a';
-    lbrCtx.font = cella + 'px "Courier New", monospace';
+    lbrCtx.font = cella + 'px ' + SITE_FONT;
     lbrCtx.textAlign = 'center';
     lbrCtx.textBaseline = 'middle';
     for (let y = 0; y < gh; y++){
@@ -2877,7 +2914,7 @@ async function stampaGesto(cv, animata){
   cv.width = W; cv.height = H;
   const c = cv.getContext('2d');
   c.fillStyle = '#0a0a0a';
-  c.font = cella + 'px "Courier New", monospace';
+  c.font = cella + 'px ' + SITE_FONT;
   c.textAlign = 'center'; c.textBaseline = 'middle';
   const disegna = cell => c.fillText(cell.ch, cell.x * cella + cella / 2, cell.y * cella + cella / 2);
   if (!animata || reduceMotion){ celle.forEach(disegna); return; }
@@ -3134,7 +3171,7 @@ if (/^#(archivio\/|lavori|about|contatti)/.test(location.hash)) dismissIntro();
     cv.style.height = (H / dpr) + 'px';
     const c = cv.getContext('2d');
     c.fillStyle = '#0a0a0a';
-    c.font = cella + 'px "Courier New", monospace';
+    c.font = cella + 'px ' + SITE_FONT;
     c.textAlign = 'center'; c.textBaseline = 'middle';
     const disegna = (cell) => {
       const idx = Math.min(RAMPA.length - 1, Math.floor((255 - cell.a) / 255 * RAMPA.length));
@@ -3404,7 +3441,7 @@ function disegnaSpecchio(list){
 
   specchioCtx.clearRect(0, 0, W, H);
   specchioCtx.fillStyle = '#0a0a0a';
-  specchioCtx.font = cella + 'px "Courier New", monospace';
+  specchioCtx.font = cella + 'px ' + SITE_FONT;
   specchioCtx.textAlign = 'center'; specchioCtx.textBaseline = 'middle';
   for (let y = 0; y < gh; y++){
     for (let x = 0; x < gw; x++){
@@ -3647,9 +3684,16 @@ frame();
 
 <main class="reel-about">
   <div class="reel-lines" id="reelLines" role="img" aria-label="Chi sono"></div>
-  <!-- l'about dice chi sei con l'animazione; sotto, solo una porta -->
-  <a class="about-cue" href="#contatti" id="aboutCue" onclick="showView('contatti');return false;" data-i18n="aboutWrite">scrivimi →</a>
+  <a class="about-cue" href="#aboutInfo" id="aboutCue" data-i18n="aboutCue">↓ cosa faccio, cosa cerco</a>
 </main>
+
+<!-- chi sei per chi vuole lavorare con te: si compila da ABOUT_INFO
+     (cerca "MODIFICA: CHI SEI" più sotto). Le righe vuote non compaiono. -->
+<section class="about-info" id="aboutInfo" aria-label="Informazioni">
+  <p class="ai-lead" id="aiLead"></p>
+  <dl id="aiList"></dl>
+  <a class="ai-cta" href="#contatti" id="aiCta" onclick="showView('contatti');return false;" data-i18n="aboutCta">scrivimi per una collaborazione →</a>
+</section>
 
 <footer class="about-foot">
   <span class="signature">EdoardoTavoni_P_A</span>
@@ -3692,6 +3736,31 @@ const REEL_LINES_EN = [
   "Archive of fragments",
   "Open to collabs"
 ];
+
+/* ==================================================================
+   MODIFICA: CHI SEI — per chi vuole lavorare con te
+   ==================================================================
+   Compaiono sotto il reel, scorrendo. Lascia "" (o []) per non
+   mostrare una riga: niente segnaposto in pubblico.
+     disponibilita → es. "Stage e collaborazioni da febbraio 2027"
+     cerco         → es. "Studi di interior, allestimenti, prototipi"
+     strumenti     → es. ["Rhino", "Blender", "KeyShot", "fotogrammetria"]
+     cv, portfolio → percorso di un PDF accanto a index.html,
+                     es. "files/cv-edoardo-tavoni.pdf"
+   ================================================================== */
+const ABOUT_INFO = {
+  lead: {
+    it: "Studio Interior & Product Design allo IAAD di Bologna. Raccolgo frammenti — materiali, oggetti, spazi — e li trasformo in progetti.",
+    en: "I study Interior & Product Design at IAAD Bologna. I collect fragments — materials, objects, spaces — and turn them into projects."
+  },
+  disponibilita: { it: "", en: "" },
+  cerco:         { it: "", en: "" },
+  strumenti: [],
+  base: { it: "Bologna, IT — anche da remoto", en: "Bologna, IT — remote too" },
+  cv: "",
+  portfolio: ""
+};
+
 
 /* ---- da qui in giu' non serve toccare nulla ---- */
 
@@ -3762,6 +3831,52 @@ function scriviDecodificabile(el, testo, durata){
     el.appendChild(w);
   });
 }
+
+(function aboutInfo(){
+  const lead = document.getElementById('aiLead');
+  const list = document.getElementById('aiList');
+  if (!lead || !list) return;
+  const L = () => (typeof LANG !== 'undefined' && LANG === 'en') ? 'en' : 'it';
+  const val = v => (v && typeof v === 'object' && !Array.isArray(v)) ? (v[L()] || v.it || '') : v;
+  function render(){
+    const testoLead = val(ABOUT_INFO.lead) || '';
+    scriviDecodificabile(lead, testoLead, 420);
+    lead.hidden = !testoLead;
+    const righe = [
+      ['aiAvail', val(ABOUT_INFO.disponibilita)],
+      ['aiLooking', val(ABOUT_INFO.cerco)],
+      ['aiTools', (ABOUT_INFO.strumenti || []).join(' · ')],
+      ['aiBase', val(ABOUT_INFO.base)]
+    ];
+    list.innerHTML = '';
+    righe.forEach(([k, v]) => {
+      if (!v) return;
+      const r = document.createElement('div'); r.className = 'ai-row';
+      r.innerHTML = `<dt>${escHtml(t(k))}</dt><dd>${escHtml(v)}</dd>`;
+      list.appendChild(r);
+    });
+    const docs = [['aiCv', ABOUT_INFO.cv], ['aiPortfolio', ABOUT_INFO.portfolio]].filter(d => d[1]);
+    if (docs.length){
+      const r = document.createElement('div'); r.className = 'ai-row';
+      r.innerHTML = `<dt>${escHtml(t('aiDocs'))}</dt><dd>` +
+        docs.map(([k, p]) => {
+          /* un percorso semplice ("files/cv.pdf") diventa "./files/cv.pdf" per safeUrl */
+          const href = /^(https?:|\/|\.\/)/i.test(p) ? p : './' + p;
+          return `<a href="${escHtml(safeUrl(href))}" download>${escHtml(t(k))} ↓</a>`;
+        }).join(' &nbsp; ') +
+        `</dd>`;
+      list.appendChild(r);
+    }
+    list.hidden = !list.children.length;
+  }
+  window.renderAboutInfo = render;
+  render();
+  const cue = document.getElementById('aboutCue');
+  if (cue) cue.addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('aboutInfo').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+})();
 
 (function(){
   const host  = document.getElementById('reelLines');
@@ -4668,7 +4783,7 @@ function applyLang(){
   document.querySelectorAll('.tile .label .kind, .index-row .kind').forEach(el => { el.textContent = t('kindRefShort'); });
   document.querySelectorAll('.ar-btn').forEach(el => { el.textContent = t('arButton'); });
   document.querySelectorAll('.model-hint').forEach(el => { el.textContent = t('modelHint'); });
-  ['replayReel', 'renderLavori', 'renderMieSchede', 'renderDecScritte'].forEach(f => {
+  ['replayReel', 'renderAboutInfo', 'renderLavori', 'renderMieSchede', 'renderDecScritte'].forEach(f => {
     if (typeof window[f] === 'function') window[f]();
   });
   if (typeof indexOpen !== 'undefined' && indexOpen && typeof buildIndex === 'function') buildIndex();
