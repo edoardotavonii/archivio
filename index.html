@@ -1321,49 +1321,10 @@
     padding:0 1.5rem;
   }
 
-  /* il nome è anche la porta segreta dell'occhio (pressione lunga):
+  /* il nome è anche la porta segreta del rickroll (pressione lunga):
      niente selezione del testo né menu del telefono */
   .wordmark{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
 
-/* ---- easter egg: codice Konami → l'Occhio (WebGL) ----
-   L'unico punto a colori del sito, un'eccezione voluta. Si apre con
-   ↑↑↓↓←→←→BA da tastiera, con la stessa sequenza di swipe + due tocchi
-   sul telefono, o tenendo premuto il nome in alto. Nessuna libreria esterna. */
-  .egg-overlay{
-    position:fixed; inset:0;
-    background:var(--ink);
-    z-index:300;
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
-  }
-  .egg-overlay[hidden]{ display:none; }
-  .egg-overlay canvas{ display:block; width:100%; height:100%; }
-  .egg-status{
-    position:fixed; top:1.3rem; left:0; right:0;
-    text-align:center; pointer-events:none;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.14em;
-    text-transform:uppercase; color:rgba(255,255,255,0.55);
-  }
-  .egg-close{
-    position:fixed; top:1.2rem; right:1.5rem;
-    font-family:var(--mono); font-weight:600; font-size:11px;
-    letter-spacing:0.1em; text-transform:uppercase;
-    color:rgba(255,255,255,0.55); background:none;
-    border:1px solid rgba(255,255,255,0.3); padding:0.35rem 0.7rem;
-    transition:border-color .15s ease, color .15s ease;
-  }
-  .egg-close:hover{ border-color:#fff; color:#fff; }
-  /* dopo qualche secondo l'occhio "parla": un invito, in sordina */
-  .egg-msg{
-    position:fixed; left:0; right:0; bottom:2.6rem;
-    text-align:center;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
-    opacity:0; transition:opacity 1.6s ease;
-    pointer-events:none;
-  }
-  .egg-msg.show{ opacity:1; pointer-events:auto; }
-  .egg-msg a{ color:#FF6F37; text-decoration:none; border-bottom:1px solid rgba(255,111,55,0.45); }
-  .egg-msg a:hover, .egg-msg a:focus-visible{ border-bottom-color:#FF6F37; }
 
 </style>
 </head>
@@ -1591,7 +1552,6 @@ const I18N = {
     collabNeedEmail:'Lascia la tua email, così posso risponderti.',
     collabSending:'invio…', collabSent:'Ricevuto, grazie. Ti rispondo presto.',
     viewLabelContatti:'contatti',
-    eggSaw:'mi hai visto.', eggWrite:'scrivimi con oggetto ↑↑↓↓←→←→BA →', eggNoGl:'webgl non disponibile su questo browser', eggClose:'chiudi ✕',
     propBtn:'+ aggiungi', propTitle:"AGGIUNGI ALL'ARCHIVIO",
     propDrop:"trascina un'immagine qui oppure clicca per scegliere un file",
     propPhTitle:'Titolo', propPhAuthor:'Autore / studio', propPhSource:'Link alla fonte (https://…)',
@@ -1666,7 +1626,6 @@ const I18N = {
     collabNeedEmail:'Leave your email so I can reply.',
     collabSending:'sending…', collabSent:"Got it, thank you. I'll get back to you soon.",
     viewLabelContatti:'contact',
-    eggSaw:'you saw me.', eggWrite:'write to me with subject ↑↑↓↓←→←→BA →', eggNoGl:'webgl is not available in this browser', eggClose:'close ✕',
     propBtn:'+ add', propTitle:'ADD TO THE ARCHIVE',
     propDrop:'drag an image here or click to choose a file',
     propPhTitle:'Title', propPhAuthor:'Author / studio', propPhSource:'Link to the source (https://…)',
@@ -3044,7 +3003,6 @@ function stopScan(){
   if (scanLegend) scanLegend.classList.add('hide');
   handCursors.forEach(c => { c.hidden = true; c.classList.remove('pinch'); });
   mouseX = null; mouseY = null;
-  window.__lastHand = null;
   handState = [nuovoStatoMano(), nuovoStatoMano()];
   bothPinchWas = false;
   const _st = document.getElementById('scanToggle');
@@ -3311,8 +3269,6 @@ function trackHand(lm, i){
 
   /* l'attrazione delle immagini segue l'ultima mano attiva */
   mouseX = x; mouseY = y;
-  /* …e anche l'occhio dell'easter egg */
-  window.__lastHand = { x, y, pinch, t: now };
 
   return { pinch, fist, x, y };
 }
@@ -4139,7 +4095,7 @@ function scriviDecodificabile(el, testo, durata){
     <form class="collab-form" id="collabForm" novalidate>
       <div class="cw-head">
         <h3 data-i18n="collabHead">Conosciamoci meglio</h3>
-        <!-- compare solo arrivando da un progetto o dall'occhio -->
+        <!-- compare solo arrivando da un progetto -->
         <p class="cw-topic" id="collabTopicLine" hidden><span data-i18n="collabAbout">a proposito di</span> <b id="collabTopic"></b></p>
       </div>
       <div class="cw-fields">
@@ -4229,7 +4185,7 @@ const CONTACT_EMAIL = 'edoardotavoni@gmail.com';
   new MutationObserver(() => { if (vista.hidden) apri(false); })
     .observe(vista, { attributes:true, attributeFilter:['hidden'] });
 
-  /* da un progetto ("parliamone →") o dall'occhio: finestra aperta e già impostata */
+  /* da un progetto ("parliamone →"): finestra aperta e già impostata */
   window.prefillCollab = function(arg){
     if (arg) setArgomento(arg);
     out.textContent = ''; out.classList.remove('ok');
@@ -4784,343 +4740,40 @@ applyLang();
 <!-- ==================================================================
      EASTER EGG — CODICE KONAMI (↑ ↑ ↓ ↓ ← → ← → B A)
      ==================================================================
-     Nascosto: nessun indizio in pagina. Si apre l'Occhio: uno shader
-     WebGL (fiamme, iride, pupilla a fessura) che segue il cursore — o
-     la mano, se il controllo con le mani è attivo — e sbatte le
-     palpebre. WebGL puro, nessuna libreria, nessun permesso.
-     È l'unico punto a colori del sito: un'eccezione voluta.
+     Nascosto: nessun indizio in pagina. Chi trova il codice viene
+     rickrollato: si apre "Never Gonna Give You Up" su YouTube.
 
      Tre porte:
        tastiera   ↑ ↑ ↓ ↓ ← → ← → B A
        telefono   la stessa sequenza a swipe sulla nuvola, poi due tocchi
        ovunque    tenere premuto il nome "edoardo tavoni" in alto (1,2 s)
 
-     Dopo qualche secondo l'occhio "parla": invita a scrivere con
-     oggetto ↑↑↓↓←→←→BA. Chi lo trova è curioso — proprio il tipo di
-     persona con cui vuoi parlare — e dall'oggetto sai da dove arriva.
-     Chiuso l'occhio, la favicon resta arancione per la visita: una
-     traccia che il visitatore si porta via.
-
-     Parametri: EYE_CONFIG qui sotto. Per disattivarlo: elimina questo
-     blocco e lo script subito sotto.
+     MODIFICA: il video è in RICKROLL qui sotto.
+     Per disattivarlo: elimina questo blocco.
      ================================================================== -->
-<div id="eggOverlay" class="egg-overlay" role="dialog" aria-modal="true" aria-label="L'Occhio" hidden>
-  <canvas id="eggCanvas" aria-hidden="true"></canvas>
-  <span id="eggStatus" class="egg-status"></span>
-  <button type="button" class="egg-close" id="eggClose" data-i18n="eggClose">chiudi ✕</button>
-  <p class="egg-msg" id="eggMsg"></p>
-</div>
 <script>
 (function(){
-  var REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  /* ---- parametri dell'occhio ---- */
-  var EYE_CONFIG = {
-    eyeColor:        '#FF6F37',
-    intensity:       1.5,
-    pupilSize:       0.6,
-    irisWidth:       0.25,
-    glowIntensity:   0.35,
-    scale:           0.8,
-    noiseScale:      1.0,
-    pupilFollow:     1.0,
-    flameSpeed:      REDUCE ? 0.25 : 1.0,   /* con reduced-motion le fiamme quasi ferme */
-    backgroundColor: '#0a0a0a',   /* l'inchiostro del sito, al posto del nero puro */
-    msgDelay:        4200          /* ms prima che l'occhio "parli" */
-  };
-
-  var KONAMI       = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
-  var KONAMI_TOUCH = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','Tap','Tap'];
-  var buffer = [], touchBuffer = [];
-
-  var overlay  = document.getElementById('eggOverlay');
-  var canvas   = document.getElementById('eggCanvas');
-  var status   = document.getElementById('eggStatus');
-  var closeBtn = document.getElementById('eggClose');
-  var msg      = document.getElementById('eggMsg');
-  if (!overlay || !canvas || !status || !closeBtn) return; /* markup mancante: niente easter egg */
-
-  function hexToVec3(hex){
-    var h = hex.replace('#', '');
-    return [parseInt(h.slice(0,2),16)/255, parseInt(h.slice(2,4),16)/255, parseInt(h.slice(4,6),16)/255];
-  }
-
-  /* texture di rumore frattale, generata una volta sola e poi riusata */
-  var noiseCache = null;
-  function generateNoise(size){
-    if (noiseCache) return noiseCache;
-    var data = new Uint8Array(size * size * 4);
-    function hash(x, y, s){
-      var n = x * 374761393 + y * 668265263 + s * 1274126177;
-      n = Math.imul(n ^ (n >>> 13), 1274126177);
-      return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
-    }
-    function noise(px, py, freq, seed){
-      var fx = (px / size) * freq, fy = (py / size) * freq;
-      var ix = Math.floor(fx), iy = Math.floor(fy);
-      var tx = fx - ix, ty = fy - iy, w = freq | 0;
-      var x0 = ((ix % w) + w) % w, x1 = (((ix + 1) % w) + w) % w;
-      var y0 = ((iy % w) + w) % w, y1 = (((iy + 1) % w) + w) % w;
-      return hash(x0,y0,seed)*(1-tx)*(1-ty) + hash(x1,y0,seed)*tx*(1-ty)
-           + hash(x0,y1,seed)*(1-tx)*ty     + hash(x1,y1,seed)*tx*ty;
-    }
-    for (var y = 0; y < size; y++){
-      for (var x = 0; x < size; x++){
-        var v = 0, amp = 0.4, total = 0;
-        for (var o = 0; o < 8; o++){
-          v += amp * noise(x, y, 32 * (1 << o), o * 31);
-          total += amp; amp *= 0.65;
-        }
-        v = (v / total - 0.5) * 2.2 + 0.5;
-        var val = Math.round(Math.max(0, Math.min(1, v)) * 255);
-        var i = (y * size + x) * 4;
-        data[i] = data[i+1] = data[i+2] = val; data[i+3] = 255;
-      }
-    }
-    return (noiseCache = data);
-  }
-
-  var VERT = 'attribute vec2 position;\nvoid main(){ gl_Position = vec4(position, 0.0, 1.0); }';
-
-  var FRAG = [
-    'precision highp float;',
-    'uniform float uTime; uniform vec3 uResolution; uniform sampler2D uNoiseTexture;',
-    'uniform float uPupilSize; uniform float uIrisWidth; uniform float uGlowIntensity;',
-    'uniform float uIntensity; uniform float uScale; uniform float uNoiseScale;',
-    'uniform vec2 uMouse; uniform float uPupilFollow; uniform float uFlameSpeed;',
-    'uniform vec3 uEyeColor; uniform vec3 uBgColor; uniform float uBlink; uniform float uDilate;',
-    'void main(){',
-    '  vec2 uv = (gl_FragCoord.xy * 2.0 - uResolution.xy) / uResolution.y;',
-    '  uv /= uScale;',
-    '  float ft = uTime * uFlameSpeed;',
-    '  vec2 polarUv = vec2(length(uv) * 2.0, (2.0 * atan(uv.x, uv.y)) / 6.28 * 0.3);',
-    '  vec4 noiseA = texture2D(uNoiseTexture, polarUv * vec2(0.2, 7.0) * uNoiseScale + vec2(-ft * 0.1, 0.0));',
-    '  vec4 noiseB = texture2D(uNoiseTexture, polarUv * vec2(0.3, 4.0) * uNoiseScale + vec2(-ft * 0.2, 0.0));',
-    '  vec4 noiseC = texture2D(uNoiseTexture, polarUv * vec2(0.1, 5.0) * uNoiseScale + vec2(-ft * 0.1, 0.0));',
-    '  float distanceMask = 1.0 - length(uv);',
-    '  float innerRing = clamp(-1.0 * ((distanceMask - 0.7) / uIrisWidth), 0.0, 1.0);',
-    '  innerRing = (innerRing * distanceMask - 0.2) / 0.28;',
-    '  innerRing += noiseA.r - 0.5; innerRing *= 1.3; innerRing = clamp(innerRing, 0.0, 1.0);',
-    '  float outerRing = clamp(-1.0 * ((distanceMask - 0.5) / 0.2), 0.0, 1.0);',
-    '  outerRing = (outerRing * distanceMask - 0.1) / 0.38;',
-    '  outerRing += noiseC.r - 0.5; outerRing *= 1.3; outerRing = clamp(outerRing, 0.0, 1.0);',
-    '  innerRing += outerRing;',
-    '  float innerEye = distanceMask - 0.1 * 2.0;',
-    '  innerEye *= noiseB.r * 2.0;',
-    '  vec2 pupilUv = uv - uMouse * uPupilFollow * 0.12;',
-    /* la pupilla si allarga un poco quando la mano si avvicina (uDilate) */
-    '  float pupil = 1.0 - length(pupilUv * vec2(9.0 - uDilate * 3.0, 2.3));',
-    '  pupil *= uPupilSize; pupil = clamp(pupil, 0.0, 1.0); pupil /= 0.35;',
-    '  float outerEyeGlow = 1.0 - length(uv * vec2(0.5, 1.5));',
-    '  outerEyeGlow = clamp(outerEyeGlow + 0.5, 0.0, 1.0);',
-    '  outerEyeGlow += noiseC.r - 0.5;',
-    '  float outerBgGlow = outerEyeGlow;',
-    '  outerEyeGlow = pow(outerEyeGlow, 2.0);',
-    '  outerEyeGlow += distanceMask;',
-    '  outerEyeGlow *= uGlowIntensity;',
-    '  outerEyeGlow = clamp(outerEyeGlow, 0.0, 1.0);',
-    '  outerEyeGlow *= pow(1.0 - distanceMask, 2.0) * 2.5;',
-    '  outerBgGlow += distanceMask;',
-    '  outerBgGlow = pow(max(outerBgGlow, 0.0), 0.5);',
-    '  outerBgGlow *= 0.15;',
-    '  vec3 eyeEnergy = uEyeColor * uIntensity * clamp(max(innerRing + innerEye, outerEyeGlow + outerBgGlow) - pupil, 0.0, 3.0);',
-    /* palpebra: una fessura orizzontale che si chiude (uBlink 0 → 1) */
-    '  float lidT = 2.0 * (1.0 - uBlink);',
-    '  float lid = 1.0 - smoothstep(lidT - 0.08, lidT, abs(uv.y));',
-    '  gl_FragColor = vec4(eyeEnergy * lid + uBgColor, 1.0);',
-    '}'
-  ].join('\n');
-
-  var gl = null, prog = null, buf = null, tex = null, U = {};
-  var raf = null, t0 = 0, msgT = null, lastFocus = null;
-  var mouse = { x:0, y:0, tx:0, ty:0 };
-  var blink = { t: -1, next: 0 }, dilate = 0, handPinchWas = false;
-
-  function compile(type, src){
-    var s = gl.createShader(type);
-    gl.shaderSource(s, src); gl.compileShader(s);
-    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
-    return s;
-  }
-
-  function initGL(){
-    if (gl && !gl.isContextLost()) return true;
-    gl = canvas.getContext('webgl', { alpha:false, antialias:false }) || canvas.getContext('experimental-webgl');
-    if (!gl) return false;
-    try{
-      prog = gl.createProgram();
-      gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
-      gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
-      gl.linkProgram(prog);
-      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
-    }catch(err){ gl = null; return false; }
-    gl.useProgram(prog);
-
-    /* un solo triangolo che copre tutto lo schermo */
-    buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
-    var loc = gl.getAttribLocation(prog, 'position');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-
-    tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 256, 256, 0, gl.RGBA, gl.UNSIGNED_BYTE, generateNoise(256));
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-
-    ['uTime','uResolution','uNoiseTexture','uPupilSize','uIrisWidth','uGlowIntensity','uIntensity',
-     'uScale','uNoiseScale','uMouse','uPupilFollow','uFlameSpeed','uEyeColor','uBgColor','uBlink','uDilate']
-      .forEach(function(n){ U[n] = gl.getUniformLocation(prog, n); });
-
-    var c = EYE_CONFIG;
-    gl.uniform1i(U.uNoiseTexture, 0);
-    gl.uniform1f(U.uPupilSize, c.pupilSize);
-    gl.uniform1f(U.uIrisWidth, c.irisWidth);
-    gl.uniform1f(U.uGlowIntensity, c.glowIntensity);
-    gl.uniform1f(U.uIntensity, c.intensity);
-    gl.uniform1f(U.uScale, c.scale);
-    gl.uniform1f(U.uNoiseScale, c.noiseScale);
-    gl.uniform1f(U.uPupilFollow, c.pupilFollow);
-    gl.uniform1f(U.uFlameSpeed, c.flameSpeed);
-    gl.uniform3fv(U.uEyeColor, hexToVec3(c.eyeColor));
-    gl.uniform3fv(U.uBgColor, hexToVec3(c.backgroundColor));
-    gl.uniform1f(U.uBlink, 0);
-    gl.uniform1f(U.uDilate, 0);
-    return true;
-  }
-
-  function fitCanvas(){
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width  = Math.round(innerWidth  * dpr);
-    canvas.height = Math.round(innerHeight * dpr);
-    if (gl){
-      gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.uniform3f(U.uResolution, canvas.width, canvas.height, canvas.width / canvas.height);
-    }
-  }
-
-  /* battito di palpebra: 0 → 1 → 0 in ~200 ms */
-  var BLINK_MS = 200;
-  function sbatti(now){ if (blink.t < 0) blink.t = now; }
-  function valoreBlink(now){
-    if (blink.t < 0){
-      if (!REDUCE && now > blink.next){ blink.t = now; }   /* battito spontaneo ogni tanto */
-      else return 0;
-    }
-    var k = (now - blink.t) / BLINK_MS;
-    if (k >= 1){ blink.t = -1; blink.next = now + 2600 + Math.random() * 4200; return 0; }
-    return Math.sin(k * Math.PI);
-  }
-
-  function draw(now){
-    raf = requestAnimationFrame(draw);
-    /* con le mani attive, l'occhio guarda la mano (dati recenti: < 300 ms) */
-    var h = window.__lastHand;
-    if (h && now - h.t < 300){
-      mouse.tx =  (h.x / innerWidth)  * 2 - 1;
-      mouse.ty = -((h.y / innerHeight) * 2 - 1);
-      if (h.pinch && !handPinchWas) sbatti(now);   /* pizzichi → sbatte le palpebre */
-      handPinchWas = h.pinch;
-      var hs = window.__lastHand;
-      dilate += (((hs && hs.pinch) ? 0.6 : 0.25) - dilate) * 0.05;
-    } else {
-      dilate += (0 - dilate) * 0.05;
-    }
-    mouse.x += (mouse.tx - mouse.x) * 0.05;
-    mouse.y += (mouse.ty - mouse.y) * 0.05;
-    gl.uniform2f(U.uMouse, mouse.x, mouse.y);
-    gl.uniform1f(U.uTime, (now - t0) * 0.001);
-    gl.uniform1f(U.uBlink, valoreBlink(now));
-    gl.uniform1f(U.uDilate, dilate);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-  }
-
-  /* la pupilla segue il cursore (o il dito), coordinate -1..1 */
-  function onMove(e){
-    mouse.tx =  (e.clientX / innerWidth)  * 2 - 1;
-    mouse.ty = -((e.clientY / innerHeight) * 2 - 1);
-  }
-  function onLeave(){ mouse.tx = 0; mouse.ty = 0; }
-  overlay.addEventListener('pointermove', onMove);
-  overlay.addEventListener('pointerleave', onLeave);
-  /* un clic/tocco sull'occhio: sbatte le palpebre */
-  canvas.addEventListener('pointerdown', function(){ sbatti(performance.now()); });
-
-  function mostraMessaggio(){
-    msg.innerHTML = '';
-    msg.appendChild(document.createTextNode(t('eggSaw') + ' '));
-    var a = document.createElement('a');
-    a.href = '#contatti';
-    a.textContent = t('eggWrite');
-    a.addEventListener('click', function(e){
-      e.preventDefault();
-      closeEgg();
-      if (typeof showView === 'function') showView('contatti');
-      if (typeof window.prefillCollab === 'function') window.prefillCollab('↑↑↓↓←→←→BA');
-    });
-    msg.appendChild(a);
-    msg.classList.add('show');
-  }
-
-  function openEgg(){
-    if (!overlay.hidden) return;
-    lastFocus = document.activeElement;
-    overlay.hidden = false;
-    status.textContent = '';
-    msg.classList.remove('show'); msg.innerHTML = '';
-    closeBtn.focus();
-    if (!initGL()){
-      status.textContent = t('eggNoGl');
-      return;
-    }
-    fitCanvas();
-    mouse.x = mouse.y = mouse.tx = mouse.ty = 0;
-    t0 = performance.now();
-    blink.t = -1; blink.next = t0 + 1800;
-    if (!raf) raf = requestAnimationFrame(draw);
-    clearTimeout(msgT);
-    msgT = setTimeout(mostraMessaggio, EYE_CONFIG.msgDelay);
-  }
-
-  /* la traccia: favicon arancione per il resto della visita */
-  var FAVICON_EYE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffffff'/%3E%3Crect x='7' y='7' width='18' height='18' fill='%23FF6F37'/%3E%3C/svg%3E";
-  function lasciaTraccia(){
-    var f = document.getElementById('favicon');
-    if (f) f.href = FAVICON_EYE;
-    try{ sessionStorage.setItem('et_egg_seen', '1'); }catch(e){}
-  }
-  try{ if (sessionStorage.getItem('et_egg_seen') === '1') lasciaTraccia(); }catch(e){}
-
-  function closeEgg(){
-    if (overlay.hidden) return;
-    overlay.hidden = true;
-    clearTimeout(msgT);
-    if (raf){ cancelAnimationFrame(raf); raf = null; }
-    lasciaTraccia();
-    if (lastFocus && typeof lastFocus.focus === 'function'){ try{ lastFocus.focus({ preventScroll:true }); }catch(e){} }
-  }
-  window.openEgg = openEgg;   /* l'occhio resta: si apre dalla console */
-
-  /* IL REGALO: chi trova il codice viene… rickrollato.
-     Si apre la pagina YouTube in una scheda nuova (il gesto — tasto,
-     tocco o pressione — è dell'utente, quindi il browser non la blocca);
-     se il browser la blocca comunque, ci si va nella stessa scheda.
-     MODIFICA: per tornare all'occhio, sostituisci rickroll() con openEgg()
-     nelle tre porte qui sotto. */
   var RICKROLL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
+  /* Si apre in una scheda nuova (il gesto — tasto, tocco o pressione — è
+     dell'utente, quindi il browser non la blocca); se il browser la blocca
+     comunque, ci si va nella stessa scheda. Niente 'noopener' tra le
+     opzioni: con quello window.open restituisce sempre null e il sito
+     scapperebbe anche dalla scheda corrente. */
   function rickroll(){
     var w = null;
-    /* niente 'noopener' tra le opzioni: con quello window.open restituisce
-       sempre null e il sito scapperebbe anche dalla scheda corrente */
     try{ w = window.open(RICKROLL, '_blank'); }catch(e){}
     if (w){ try{ w.opener = null; }catch(e){} }
     else location.href = RICKROLL;
   }
 
+  var KONAMI       = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','KeyB','KeyA'];
+  var KONAMI_TOUCH = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','Tap','Tap'];
+  var buffer = [], touchBuffer = [];
+
+  function combacia(buf, seq){
+    return buf.length === seq.length && buf.every(function(k, i){ return k === seq[i]; });
+  }
   function scrivendo(){
     var a = document.activeElement;
     if (!a) return false;
@@ -5130,34 +4783,20 @@ applyLang();
 
   /* ---- porta 1: tastiera ---- */
   document.addEventListener('keydown', function(e){
-    if (!overlay.hidden){
-      if (e.key === 'Escape') closeEgg();
-      /* il fuoco resta dentro l'occhio: Tab torna sempre su "chiudi" o sul link */
-      if (e.key === 'Tab'){
-        var dentro = [closeBtn].concat(Array.prototype.slice.call(msg.querySelectorAll('a')));
-        var i = dentro.indexOf(document.activeElement);
-        e.preventDefault();
-        dentro[(i + (e.shiftKey ? -1 : 1) + dentro.length) % dentro.length].focus();
-      }
-      return;
-    }
-    if (scrivendo()) return; /* non intercettare mentre si scrive */
+    if (scrivendo()) return;   /* non intercettare mentre si scrive */
     buffer.push(e.code);
     if (buffer.length > KONAMI.length) buffer.shift();
-    if (buffer.length === KONAMI.length && buffer.every(function(k, i){ return k === KONAMI[i]; })){
-      buffer = [];
-      rickroll();
-    }
+    if (combacia(buffer, KONAMI)){ buffer = []; rickroll(); }
   });
 
   /* ---- porta 2: telefono (swipe ↑↑↓↓←→←→ + due tocchi) ---- */
   var sw = null;
   document.addEventListener('pointerdown', function(e){
-    if (e.pointerType !== 'touch' || !overlay.hidden) return;
+    if (e.pointerType !== 'touch') return;
     sw = { x: e.clientX, y: e.clientY, t: performance.now() };
   }, true);
   document.addEventListener('pointerup', function(e){
-    if (e.pointerType !== 'touch' || !sw || !overlay.hidden) return;
+    if (e.pointerType !== 'touch' || !sw) return;
     var dx = e.clientX - sw.x, dy = e.clientY - sw.y, d = Math.hypot(dx, dy), dt = performance.now() - sw.t;
     sw = null;
     var code = null;
@@ -5166,17 +4805,13 @@ applyLang();
     if (!code) return;
     touchBuffer.push(code);
     if (touchBuffer.length > KONAMI_TOUCH.length) touchBuffer.shift();
-    if (touchBuffer.length === KONAMI_TOUCH.length && touchBuffer.every(function(k, i){ return k === KONAMI_TOUCH[i]; })){
-      touchBuffer = [];
-      rickroll();
-    }
+    if (combacia(touchBuffer, KONAMI_TOUCH)){ touchBuffer = []; rickroll(); }
   }, true);
 
   /* ---- porta 3: tenere premuto il nome in alto ---- */
   var pressT = null, pressAt = null;
   document.addEventListener('pointerdown', function(e){
-    var sig = e.target.closest && e.target.closest('.wordmark');
-    if (!sig || !overlay.hidden) return;
+    if (!(e.target.closest && e.target.closest('.wordmark'))) return;
     pressAt = { x: e.clientX, y: e.clientY };
     clearTimeout(pressT);
     pressT = setTimeout(function(){ pressT = null; rickroll(); }, 1200);
@@ -5188,11 +4823,6 @@ applyLang();
   }
   ['pointerup', 'pointercancel', 'pointermove'].forEach(function(ev){ document.addEventListener(ev, annullaPressione); });
   document.addEventListener('contextmenu', function(e){ if (e.target.closest && e.target.closest('.wordmark')) e.preventDefault(); });
-
-  closeBtn.addEventListener('click', closeEgg);
-  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeEgg(); });
-  addEventListener('resize', function(){ if (!overlay.hidden) fitCanvas(); });
-  canvas.addEventListener('webglcontextlost', function(e){ e.preventDefault(); closeEgg(); gl = null; });
 })();
 </script>
 
