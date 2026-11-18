@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>EdoardoTavoni_P_A — archivio</title>
+<title>edoardo tavoni — archivio</title>
 <meta name="description" content="Edoardo Tavoni — studente di Interior & Product Design (IAAD Bologna). Archivio di lavori, progetti e riferimenti. Aperto a collaborazioni.">
 
 <!-- favicon monocroma inline (nessun file esterno): un quadrato d'inchiostro -->
@@ -66,7 +66,7 @@
   :root{
     --paper: #ffffff;   /* bianco pieno    */
     --ink:   #0a0a0a;   /* nero            */
-    --faint: #9b9b9b;   /* grigio          */
+    --faint: #6b6b6b;   /* grigio: era #9b9b9b (2,8:1 sul bianco), ora circa 5,3:1 */
     --line:  #e3e3e3;   /* filo sottile    */
     /* UN SOLO CARATTERE in tutto il sito (MODIFICA qui per cambiarlo).
        --mono resta come nome storico: punta allo stesso carattere. */
@@ -149,18 +149,14 @@
 
 
   /* "proponi": per i visitatori, un pulsante leggero */
+  /* stesso registro delle voci del menu: testo semplice, niente riquadro */
   #propBtn{
-    font-family:var(--mono);
-    font-weight:600;
-    letter-spacing:0.08em;
-    font-size:11px;
-    padding:0.35rem 0.6rem;
-    border:1px solid var(--line);
-    background:var(--paper);
+    font-size:12px;
     color:var(--faint);
-    transition:border-color .15s ease, color .15s ease;
+    border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
   }
-  #propBtn:hover, #propBtn[aria-expanded="true"]{ border-color:var(--ink); color:var(--ink); }
+  #propBtn:hover, #propBtn[aria-expanded="true"]{ color:var(--ink); border-bottom-color:var(--ink); }
   #propPanel{ max-height:calc(100vh - 5.4rem); overflow-y:auto; }
   #propPanel .hp{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
   #propFile{ display:none; }
@@ -170,7 +166,7 @@
     color:var(--paper);
     padding:0.5rem;
     font-weight:600;
-    letter-spacing:0.08em;
+    letter-spacing:0.01em;
     font-size:12px;
   }
   #propSend:disabled{ opacity:0.35; cursor:not-allowed; }
@@ -192,13 +188,13 @@
   .mia-scheda.si{ border-color:var(--ink); border-left-color:var(--ink); color:var(--ink); }
   .mia-scheda b{ color:var(--ink); font-weight:600; }
   .mia-scheda .testo{ flex:1; min-width:0; }
-  .mia-scheda button{ flex:none; font-family:var(--mono); font-size:11px; letter-spacing:0.06em; color:var(--faint); }
+  .mia-scheda button{ flex:none; font-family:var(--mono); font-size:11px; letter-spacing:0.01em; color:var(--faint); }
   .mia-scheda button:hover{ color:var(--ink); }
   .mia-scheda .apri{ color:var(--ink); border-bottom:1px solid var(--ink); }
 
   /* "revisiona": la coda di ciò che i visitatori hanno aggiunto (solo tua) */
   #revBtn{
-    font-family:var(--mono); font-weight:600; letter-spacing:0.08em; font-size:11px;
+    font-family:var(--mono); font-weight:600; letter-spacing:0.01em; font-size:11px;
     padding:0.35rem 0.6rem; border:1px solid var(--line); background:var(--paper); color:var(--faint);
     transition:border-color .15s ease, color .15s ease;
   }
@@ -211,20 +207,20 @@
   .rev-login input:focus{ border-color:var(--ink); outline:none; }
   .rev-login button, .rev-card .rev-ok{
     border:1px solid var(--ink); background:var(--ink); color:var(--paper);
-    padding:0.45rem 0.8rem; font-weight:600; letter-spacing:0.08em; font-size:11px;
+    padding:0.45rem 0.8rem; font-weight:600; letter-spacing:0.01em; font-size:11px;
   }
   #revList{ display:flex; flex-direction:column; gap:1.2rem; }
   .rev-card{ display:flex; flex-direction:column; gap:0.45rem; padding-top:1rem; border-top:1px solid var(--ink); }
   .rev-card img{ width:100%; max-height:260px; object-fit:contain; background:#f4f4f4; border:1px solid var(--line); }
   .rev-card h3{ font-size:14px; font-weight:600; letter-spacing:-0.01em; line-height:1.25; }
-  .rev-card .rev-meta{ font-family:var(--mono); font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--faint); }
+  .rev-card .rev-meta{ font-family:var(--mono); font-size:10.5px; letter-spacing:0.01em; text-transform:none; color:var(--faint); }
   .rev-card .rev-why{ font-size:12px; line-height:1.5; white-space:pre-line; }
   .rev-card a{ font-size:11px; word-break:break-all; }
   .rev-card .rev-actions{ display:flex; gap:0.5rem; margin-top:0.2rem; }
   .rev-card .rev-actions button{ flex:1; }
   .rev-card .rev-no{
     border:1px solid var(--line); background:var(--paper); color:var(--ink);
-    padding:0.45rem 0.8rem; font-weight:600; letter-spacing:0.08em; font-size:11px;
+    padding:0.45rem 0.8rem; font-weight:600; letter-spacing:0.01em; font-size:11px;
   }
   .rev-card .rev-no:hover, .rev-card .rev-no.sure{ border-color:var(--ink); }
   .rev-card button:disabled{ opacity:0.35; cursor:wait; }
@@ -252,14 +248,45 @@
     padding:0.2rem 0.4rem;
     border:1px solid var(--line);
   }
+  /* "come": riapre la guida dei gesti (nell'indice) o il promemoria (altrove).
+     Sta accanto allo stato della camera, quindi c'è solo quando le mani sono accese. */
+  .scan-ui .scan-come{
+    pointer-events:auto; cursor:pointer;
+    font:inherit; font-size:10px; color:var(--ink);
+    background:var(--paper); border:1px solid var(--line);
+    padding:0.2rem 0.4rem; margin-right:0.3rem;
+    text-decoration:underline; text-underline-offset:2px;
+  }
+  /* LA GUIDA DEI GESTI dell'indice: un passo alla volta, in basso al centro, come il
+     "how" di lavori. Il passo va avanti solo quando il gesto lo fai davvero. */
+  .guida-gesti{
+    position:fixed; left:50%; bottom:5.5rem; transform:translateX(-50%);
+    width:min(calc(100vw - 2rem), 30rem); z-index:16;
+    text-align:center; background:var(--paper); border:1px solid var(--line);
+    padding:0.9rem 1rem 0.5rem; pointer-events:none;
+  }
+  .guida-gesti .gg-passo{ font-size:11px; color:var(--faint); }
+  .guida-gesti .gg-testo{ font-size:clamp(17px, 2vw, 22px); font-weight:600; letter-spacing:-0.02em; line-height:1.15; margin:0.3rem 0 0.25rem; }
+  .guida-gesti .gg-come{ font-size:13px; line-height:1.4; color:var(--ink); }
+  .guida-gesti button{
+    pointer-events:auto; cursor:pointer;
+    font:inherit; font-size:11px; color:var(--faint); background:none; border:0; padding:6px 4px;
+    text-decoration:underline; text-underline-offset:3px;
+  }
+  /* la guida della voce sta dentro la scheda, in alto: in basso c'è la didascalia */
+  .guida-voce{ bottom:auto; top:4.2rem; z-index:40; }
+  /* la mano fantasma della guida: tratteggiata, agganciata alla mano del visitatore */
+  .guida-fantasma{ position:fixed; inset:0; width:100vw; height:100vh; z-index:15; pointer-events:none; }
   .hand-cursor{
     position:fixed;
     left:0; top:0;
     width:28px; height:28px;
-    z-index:25;
+    z-index:250;            /* sopra anche l'entrata (200): lì il cursore si impara */
     pointer-events:none;
     transition:opacity .3s ease;
   }
+  /* "tieni fermo = clic": mentre il cursore resta fermo su un tasto, l'anello si riempie */
+  .hand-cursor.sosta .ring{ background:conic-gradient(var(--ink) calc(var(--sosta, 0) * 360deg), rgba(255,255,255,0.4) 0); }
   .hand-cursor .ring{
     position:absolute; inset:0;
     width:28px; height:28px;
@@ -276,7 +303,7 @@
   }
   .hand-cursor .tag{
     position:absolute; left:100%; top:50%; transform:translateY(-50%);
-    margin-left:4px; font-size:9px; letter-spacing:0.08em; color:var(--faint);
+    margin-left:4px; font-size:9px; letter-spacing:0.01em; color:var(--faint);
   }
   .hand-cursor.pinch .ring{ background:var(--ink); }
   .hand-cursor.pinch .halo{ animation:none; border-style:solid; border-color:var(--ink); }
@@ -346,7 +373,7 @@
   .signature{
     color:var(--ink);
     font-weight:600;
-    letter-spacing:0.06em;
+    letter-spacing:0.01em;
   }
   #indexToggle{ border-bottom:1px solid transparent; }
   #indexToggle:hover{ color:var(--ink); border-bottom-color:var(--ink); }
@@ -471,7 +498,7 @@
   .index-del{
     color:var(--faint);
     font-size:11px;
-    letter-spacing:0.14em;
+    letter-spacing:0.01em;
     padding:0.65rem 0.2rem;
     white-space:nowrap;
   }
@@ -504,7 +531,7 @@
     gap:0.7rem;
   }
   .panel.open{ display:flex; }
-  .panel h2{ font-size:12px; font-weight:600; letter-spacing:0.1em; }
+  .panel h2{ font-size:12px; font-weight:600; letter-spacing:0.01em; }
 
   .pastezone{
     border:1px dashed var(--faint);
@@ -590,12 +617,12 @@
   /* voce con un modello 3D (fotogrammetria) */
   .tile .badge3d{
     position:absolute; right:4px; top:4px;
-    font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:0.08em;
+    font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:0.01em;
     background:var(--ink); color:var(--paper);
     padding:1px 4px;
     pointer-events:none;
   }
-  .tile .label .kind{ font-family:var(--mono); color:var(--faint); font-size:9.5px; letter-spacing:0.06em; }
+  .tile .label .kind{ font-family:var(--mono); color:var(--faint); font-size:9.5px; letter-spacing:0.01em; }
   .tile .label{
     position:absolute;
     left:0; top:100%;
@@ -619,7 +646,7 @@
     background:var(--paper);
     color:var(--faint);
     font-family:var(--mono);
-    font-size:9px; letter-spacing:0.08em; text-transform:uppercase;
+    font-size:9px; letter-spacing:0.01em; text-transform:none;
     text-align:center; padding:0.4rem;
   }
   dialog .caption .when{
@@ -636,8 +663,8 @@
     margin-top:0.15rem;
     font-family:var(--mono);
     font-size:10.5px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
+    letter-spacing:0.01em;
+    text-transform:none;
   }
   .tile:hover .label,
   .tile:focus-visible .label{ opacity:1; }
@@ -708,7 +735,7 @@
     border-top:1px solid var(--ink);
     padding-top:0.7rem;
   }
-  dialog .caption .no{ font-weight:600; letter-spacing:0.06em; }
+  dialog .caption .no{ font-weight:600; letter-spacing:0.01em; }
   dialog .caption .desc{
     color:var(--faint);
     display:block;
@@ -730,8 +757,8 @@
     position:fixed;
     top:1.2rem; right:1.5rem;
     font-size:11px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
+    letter-spacing:0.01em;
+    text-transform:none;
   }
   /* breadcrumb "← categoria": stesso linguaggio del close, ma a
      sinistra — torna indietro portando con sé il contesto (il
@@ -740,8 +767,8 @@
     position:fixed;
     top:1.2rem; left:1.5rem;
     font-size:11px;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
+    letter-spacing:0.01em;
+    text-transform:none;
     color:var(--faint);
     border-bottom:1px solid transparent;
   }
@@ -762,7 +789,7 @@
   .lb-frame model-viewer:focus-visible{ outline:2px solid var(--ink); }
   .ar-btn{
     position:absolute; left:50%; bottom:0.8rem; transform:translateX(-50%);
-    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.01em; text-transform:none;
     background:var(--ink); color:var(--paper);
     border:1px solid var(--ink); padding:0.5rem 0.9rem;
     white-space:nowrap;
@@ -770,7 +797,7 @@
   .ar-btn:hover{ background:var(--paper); color:var(--ink); }
   .model-hint{
     position:absolute; left:0.6rem; top:0.5rem;
-    font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; color:var(--faint);
+    font-family:var(--mono); font-size:9.5px; letter-spacing:0.01em; color:var(--faint);
     pointer-events:none;
   }
 
@@ -779,7 +806,7 @@
     display:flex; flex-wrap:wrap; justify-content:center;
     gap:0.35rem 1.1rem;
     margin-top:0.75rem;
-    font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:0.01em; text-transform:none;
   }
   .lb-actions a, .lb-actions button{
     color:var(--faint); text-decoration:none;
@@ -791,7 +818,7 @@
   .lb-actions [hidden]{ display:none; }
   dialog .caption .kind-tag{
     display:inline-block;
-    font-family:var(--mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase;
+    font-family:var(--mono); font-size:9.5px; letter-spacing:0.01em; text-transform:none;
     border:1px solid var(--line); color:var(--faint);
     padding:0 0.35rem; margin-left:0.4rem; vertical-align:1px;
   }
@@ -806,7 +833,7 @@
   .lb-note::before{
     content:attr(data-label);
     display:block; margin-bottom:0.25rem;
-    font-family:var(--mono); font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint);
+    font-family:var(--mono); font-size:9.5px; letter-spacing:0.01em; text-transform:none; color:var(--faint);
   }
   .copied-flash{ color:var(--ink) !important; }
 
@@ -836,7 +863,7 @@
   .about-cue{
     position:absolute; left:50%; bottom:4.4rem; transform:translateX(-50%);
     z-index:3;
-    font-family:var(--mono); font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.01em; text-transform:none;
     color:#9b9b9b; border-bottom:1px solid transparent;
   }
   .about-cue:hover{ color:#fff; border-bottom-color:#fff; }
@@ -857,7 +884,7 @@
   }
   .about-info dt{
     min-width:9.5rem;
-    font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#9b9b9b;
+    font-family:var(--mono); font-size:10px; letter-spacing:0.01em; text-transform:none; color:#9b9b9b;
   }
   .about-info dd{ font-size:14px; line-height:1.55; }
   .about-info dd a{ border-bottom:1px solid #fff; }
@@ -874,12 +901,12 @@
   }
   #view-about a{ color:inherit; text-decoration:none; }
 
-  #view-about .about-close{
-    position:fixed; top:1.3rem; right:1.5rem; z-index:6;
-    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
-    color:#9b9b9b; border-bottom:1px solid transparent;
-  }
-  #view-about .about-close:hover{ color:#fff; border-bottom-color:#fff; }
+  /* la testata dell'about: la stessa delle altre pagine, in negativo */
+  #view-about .about-header{ z-index:6; }
+  #view-about .about-header .wordmark{ color:#fff; }
+  #view-about .about-header .sitenav a{ color:#9b9b9b; }
+  #view-about .about-header .sitenav a:hover,
+  #view-about .about-header .sitenav a.current{ color:#fff; border-bottom-color:#fff; }
 
   .reel-about{
     position:relative;
@@ -913,16 +940,16 @@
     display:flex; justify-content:space-between; align-items:baseline;
     flex-wrap:wrap; gap:0.4rem 1.5rem;
     padding:1.1rem 1.5rem;
-    font-size:10px; letter-spacing:0.1em; text-transform:uppercase;
+    font-size:10px; letter-spacing:0.01em; text-transform:none;
     color:#9b9b9b;
   }
   #view-about .about-foot .signature{
-    color:#fff; font-weight:600; letter-spacing:0.06em; text-transform:none;
+    color:#fff; font-weight:600; letter-spacing:0.01em; text-transform:none;
   }
   #view-about .about-foot .footer-links{ display:flex; gap:1.1rem; }
   #view-about .about-foot .footer-links a{ border-bottom:1px solid transparent; }
   #view-about .about-foot .footer-links a:hover{ color:#fff; border-bottom-color:#fff; }
-  #view-about .about-foot .view-label{ color:#9b9b9b; }
+  #view-about .about-foot .view-label{ color:#6b6b6b; }
 
 
 
@@ -931,7 +958,7 @@
   :root{
     --paper: #ffffff;
     --ink:   #0a0a0a;
-    --faint: #9b9b9b;
+    --faint: #6b6b6b;   /* come in testa: era #9b9b9b */
     --line:  #e3e3e3;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -966,7 +993,7 @@
     flex-wrap:wrap; gap:0.4rem 1.5rem; padding:1.1rem 1.5rem;
     color:var(--faint); font-size:11px; z-index:10;
   }
-  .signature{ color:var(--ink); font-weight:600; letter-spacing:0.06em; }
+  .signature{ color:var(--ink); font-weight:600; letter-spacing:0.01em; }
 
   main{
     min-height:100%;
@@ -981,7 +1008,7 @@
   }
   .row{ display:flex; justify-content:space-between; gap:1rem; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:0.9rem; }
   .row:last-child{ border-bottom:none; padding-bottom:0; }
-  .row .label{ color:var(--faint); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; }
+  .row .label{ color:var(--faint); font-size:11px; letter-spacing:0.01em; text-transform:none; }
   .row a{ font-weight:600; letter-spacing:0.02em; }
 
   /* ---- contatti: tipografia protagonista ----
@@ -1001,9 +1028,9 @@
     margin-bottom:0.35rem;
     font-family:var(--mono);
     font-size:11px;
-    letter-spacing:0.14em;
+    letter-spacing:0.01em;
     color:var(--faint);
-    text-transform:uppercase;
+    text-transform:none;
   }
   .contatti-hero .c-big{
     font-size:clamp(26px, 6.5vw, 84px);
@@ -1027,7 +1054,7 @@
   .collab{ max-width:44ch; }
   .collab-toggle{
     font-family:var(--mono);
-    font-size:12px; letter-spacing:0.06em;
+    font-size:12px; letter-spacing:0.01em;
     color:var(--faint); border-bottom:1px solid transparent;
   }
   .collab-toggle:hover{ color:var(--ink); border-bottom-color:var(--ink); }
@@ -1051,9 +1078,9 @@
     flex:none; display:flex; justify-content:space-between; align-items:baseline; gap:1rem;
     padding:0.7rem 1.5rem; border-bottom:1px solid var(--ink);
   }
-  .cw-title{ font-size:12px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; }
+  .cw-title{ font-size:12px; font-weight:600; letter-spacing:0.01em; text-transform:none; }
   .cw-close{
-    font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    font-size:11px; letter-spacing:0.01em; text-transform:none;
     color:var(--faint); border-bottom:1px solid transparent;
   }
   .cw-close:hover{ color:var(--ink); border-bottom-color:var(--ink); }
@@ -1086,12 +1113,12 @@
   .collab-form .two > .field{ flex:1; min-width:0; }
   .collab-form label{
     font-family:var(--mono);
-    font-size:11px; letter-spacing:0.14em; text-transform:uppercase;
+    font-size:11px; letter-spacing:0.01em; text-transform:none;
     color:var(--faint);
   }
   .collab-form .field > label:first-child::before{
     content:counter(voce, decimal-leading-zero); margin-right:0.9em;
-    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.06em; color:var(--ink);
+    font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:0.01em; color:var(--ink);
   }
   /* le due domande sono frasi, non etichette: si leggono come testo */
   .collab-form label.q{
@@ -1113,7 +1140,7 @@
   .collab-form label.cw-check{
     align-self:flex-start; display:inline-flex; align-items:center; gap:0.5rem;
     margin-top:0.15rem; cursor:pointer;
-    font-size:12px; letter-spacing:0.06em; text-transform:none; color:var(--ink);
+    font-size:12px; letter-spacing:0.01em; text-transform:none; color:var(--ink);
   }
   .cw-check input{
     -webkit-appearance:none; appearance:none; flex:none;
@@ -1150,7 +1177,7 @@
      programma di posta configurato e il mailto: non fa nulla) */
   .c-copy{
     display:inline-block; margin-left:0.8rem; vertical-align:middle;
-    font-family:var(--mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    font-family:var(--mono); font-size:11px; letter-spacing:0.01em; text-transform:none;
     color:var(--faint); border:1px solid var(--line); padding:0.3rem 0.6rem;
   }
   .c-copy:hover{ color:var(--ink); border-color:var(--ink); }
@@ -1206,11 +1233,11 @@
   #projCase .pc-text h2{ font-size:clamp(24px, 4vw, 40px); font-weight:600; letter-spacing:-0.02em; line-height:1.05; }
   #projCase dl{ display:flex; flex-direction:column; border-top:1px solid var(--line); }
   #projCase .pc-row{ display:flex; gap:1.2rem; padding:0.5rem 0; border-bottom:1px solid var(--line); font-size:13px; }
-  #projCase .pc-row dt{ min-width:8.5rem; font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint); padding-top:0.15rem; }
+  #projCase .pc-row dt{ min-width:8.5rem; font-family:var(--mono); font-size:10px; letter-spacing:0.01em; text-transform:none; color:var(--faint); padding-top:0.15rem; }
   #projCase .pc-desc{ font-size:14px; line-height:1.7; white-space:pre-wrap; max-width:64ch; }
   #projCase .pc-desc[data-label]::before{
     content:attr(data-label); display:block; margin-bottom:0.3rem;
-    font-family:var(--mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--faint);
+    font-family:var(--mono); font-size:10px; letter-spacing:0.01em; text-transform:none; color:var(--faint);
   }
   #projCase .pc-cta{
     align-self:flex-start;
@@ -1280,10 +1307,24 @@
   #intro:not(.no-cam) .intro-gesti .sl-gesto.fatto{ opacity:1; }
   #intro .intro-gesti .sl-gesto b{ padding:0 0.25em; transition:background .15s ease, color .15s ease; }
   #intro .intro-gesti .sl-gesto.ora b{ background:var(--ink); color:var(--paper); }
+  /* i gesti si fanno in ordine: quello da fare adesso è acceso e sottolineato, quelli fatti hanno la spunta */
+  #intro:not(.no-cam) .intro-gesti .sl-gesto.passo{ opacity:1; }
+  #intro:not(.no-cam) .intro-gesti .sl-gesto.passo b{ text-decoration:underline; text-underline-offset:4px; }
+  #intro .intro-gesti .sl-gesto.fatto b::after{ content:' ✓'; }
+  /* la riga del compito: dice che i gesti servono per entrare, e a che punto sei */
+  #intro .intro-passo{ font-size:13px; line-height:1.4; color:var(--ink); text-align:center; margin:-0.4rem 0 -0.6rem; padding:0 1.5rem; }
+  #intro.no-cam .intro-passo{ display:none; }
   @media (max-height:600px){ #intro .intro-specchio{ height:8rem; } }
   @media (max-height:420px){ #intro .intro-specchio{ height:5.5rem; margin:-0.3rem 0; } }
   /* senza camera i gesti non si possono usare: restano, attenuati */
   #intro.no-cam .intro-gesti{ opacity:0.5; }
+  /* "entra senza gesti": una riga piccola e grigia come la seconda riga, sottolineata perché è un comando */
+  #intro .intro-senza{
+    font:inherit; font-size:12px; color:var(--faint); background:none; border:0; padding:6px 4px; cursor:pointer;
+    text-decoration:underline; text-underline-offset:3px;
+  }
+  #intro .intro-senza:hover, #intro .intro-senza:focus-visible{ color:var(--ink); }
+  #intro.no-cam .intro-senza{ display:none; }
   @media (max-height:600px){
     #intro .intro-in{ gap:1rem; }
     #intro .intro-gesti .sl-box{ max-height:5.5rem; }
@@ -1301,13 +1342,12 @@
     #intro .intro-sub, #intro .intro-gesti{ animation:introSu .9s ease .5s backwards; }
   }
   @keyframes introSu{ from{ opacity:0; transform:translateY(6px); } }
-  /* il nome in alto a sinistra, nell'intro e nell'about (che non hanno testata):
+  /* il nome in alto a sinistra nell'intro (che non ha testata):
      stessa posizione e stesso peso del nome nelle testate */
-  .intro-mark, .about-mark{ position:fixed; top:1.55rem; left:1.5rem; z-index:6; }
-  .about-mark{ color:#fff; }
+  .intro-mark{ position:fixed; top:1.55rem; left:1.5rem; z-index:6; }
   #intro .intro-title{
     font-size:clamp(20px, 3vw, 34px);
-    letter-spacing:0.1em;
+    letter-spacing:0.01em;
     font-weight:600;
   }
   #intro .intro-canvas{ display:block; max-width:92vw; }
@@ -1324,6 +1364,69 @@
   /* il nome è anche la porta segreta del rickroll (pressione lunga):
      niente selezione del testo né menu del telefono */
   .wordmark{ -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+
+  /* ---- L'ENTRATA (v2) ----
+     Un passo alla volta, a tutto schermo: invito → caricamento che insegna →
+     alza la mano → muovi il cursore → pizzica "entra". Il passo in corso sta in
+     #intro[data-fase]; i blocchi che non servono a quel passo si nascondono. */
+  #intro:not(.no-cam){ cursor:default; }
+  #intro .ent-passo-n{ font-size:11px; color:var(--faint); letter-spacing:0.02em; min-height:1em; margin-bottom:-0.8rem; font-variant-numeric:tabular-nums; }
+  #intro:not(.no-cam) .intro-text{ font-size:clamp(20px, 2.8vw, 30px); font-weight:600; letter-spacing:-0.025em; line-height:1.12; max-width:24em; text-wrap:balance; }
+  #intro .intro-sub{ color:var(--faint); max-width:34em; }
+  #intro .ent-scena{ position:relative; width:min(36rem, calc(100vw - 3rem)); height:min(18rem, 34vh); }
+  #intro .ent-scena canvas, #intro .ent-scena video{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+  #intro .ent-scena video{ object-fit:contain; background:var(--paper); }
+  #intro .ent-dida{ font-size:15px; font-weight:600; min-height:1.4em; text-align:center; padding:0 1.5rem; margin-top:-0.6rem; }
+  #intro .ent-carica{ display:flex; flex-direction:column; align-items:center; gap:0.4rem; font-size:12px; color:var(--faint); font-variant-numeric:tabular-nums; }
+  #intro .ent-barra{ width:min(14rem, 60vw); height:2px; background:var(--line); position:relative; overflow:hidden; }
+  #intro .ent-barra i{ position:absolute; inset:0 auto 0 0; width:0; background:var(--ink); transition:width .3s ease; }
+  #intro .ent-barra.vaga i{ width:30%; animation:entVaga 1.4s ease-in-out infinite; }
+  @keyframes entVaga{ from{ left:-30%; } to{ left:100%; } }
+  #intro .ent-scelte{ display:flex; flex-wrap:wrap; justify-content:center; gap:0.6rem; padding:0 1.5rem; }
+  #intro .ent-tasto{
+    font:inherit; font-size:14px; padding:0.7rem 1.2rem; cursor:pointer;
+    border:1px solid var(--ink); background:var(--paper); color:var(--ink);
+  }
+  #intro .ent-tasto.pieno{ background:var(--ink); color:var(--paper); }
+  #intro .ent-tasto:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
+  /* "entra": grande, perché lo si colpisce con la mano */
+  #intro .ent-entra{
+    font:inherit; font-size:clamp(20px, 3vw, 28px); font-weight:600; letter-spacing:-0.02em;
+    padding:1.1rem 3.4rem; border:2px solid var(--ink); background:var(--paper); color:var(--ink); cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  #intro .ent-entra.sopra, #intro .ent-entra:hover{ background:var(--ink); color:var(--paper); }
+  #intro .ent-aiuto{ font-size:13px; min-height:1.3em; text-align:center; padding:0 1.5rem; color:var(--ink); }
+  /* i due punti del passo "muovi": a sinistra e a destra dello schermo */
+  #intro .ent-punto{
+    position:fixed; top:50%; width:44px; height:44px; margin:-22px 0 0 -22px; border-radius:50%;
+    border:2px dashed var(--ink); background:transparent; pointer-events:none; transition:background .2s ease, transform .2s ease;
+  }
+  #intro .ent-punto.fatto{ background:var(--ink); border-style:solid; }
+  #intro .ent-punto.ora{ transform:scale(1.15); }
+  #intro .ent-sopra{ position:fixed; inset:0; width:100vw; height:100vh; pointer-events:none; z-index:5; }
+  /* "entra col mouse": sempre visibile, a contrasto pieno; dopo 20 s senza mani diventa il tasto principale */
+  #intro .intro-senza{ color:var(--ink); font-size:13px; }
+  #intro .intro-senza.rilievo{ font-size:15px; font-weight:600; text-decoration-thickness:2px; }
+  /* cosa si vede in ogni passo */
+  #intro .ent-scelte, #intro .ent-carica, #intro .ent-entra, #intro .ent-punto, #intro .ent-scena{ display:none; }
+  #intro[data-fase="invito"] .ent-scelte{ display:flex; }
+  #intro[data-fase="invito"] .ent-scena, #intro[data-fase="carica"] .ent-scena, #intro[data-fase="alza"] .ent-scena{ display:block; }
+  #intro[data-fase="carica"] .ent-carica{ display:flex; }
+  #intro[data-fase="muovi"] .ent-punto{ display:block; }
+  #intro[data-fase="entra"] .ent-entra{ display:inline-block; }
+  #intro[data-fase="invito"] .intro-senza{ display:none; }   /* nell'invito c'è già il tasto */
+  #intro.no-cam .ent-dida, #intro.no-cam .ent-aiuto, #intro.no-cam .ent-passo-n{ display:none; }
+  /* la legenda: quattro gesti in fila (due per riga sul telefono), sempre in vista con la camera */
+  #intro .ent-legenda{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:0.8rem; width:min(40rem, calc(100vw - 3rem)); }
+  #intro .ent-legenda figure{ margin:0; display:flex; flex-direction:column; align-items:center; gap:0.3rem; text-align:center; min-width:0; }
+  #intro .ent-legenda canvas{ width:100%; height:84px; display:block; }
+  #intro .ent-legenda figcaption{ font-size:11px; line-height:1.35; color:var(--faint); }
+  #intro .ent-legenda figcaption b{ display:block; color:var(--ink); font-size:12px; font-weight:600; }
+  #intro.no-cam .ent-legenda{ display:none; }
+  @media (max-width:560px){ #intro .ent-legenda{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+  @media (max-height:600px){ #intro .ent-legenda canvas{ height:44px; } }
+  @media (max-height:600px){ #intro .ent-scena{ height:28vh; } }
 
 
 </style>
@@ -1512,8 +1615,42 @@ const I18N = {
     lbSource:'fonte ↗', copyLink:'copia link', copied:'copiato ✓', fromProject:'dal progetto', photo:'foto',
     arButton:'vedi nella tua stanza', modelHint:'trascina per ruotare · pizzica per avvicinare', modelError:'modello non disponibile',
     /* MODIFICA: la seconda riga della pagina d'ingresso (con e senza camera) */
+    introHands:'mostra le mani alla camera', introEnter:'clicca per entrare', introEnterTouch:'tocca per entrare',
     introSub:'nessuna immagine viene mostrata o salvata',
     introSubNoCam:'la camera non è attiva: i gesti si accendono dopo, dalla freccia in basso',
+    introSenzaGesti:'entra senza gesti',
+    /* MODIFICA: L'ENTRATA, un passo alla volta ({p} = percentuale, {n}/{tot} = passo) */
+    entInvito:'questo sito si muove con le mani',
+    entInvitoSub:'la camera legge solo la posizione delle dita. nessuna immagine viene mostrata o salvata.',
+    entCamera:'accendi la camera', entMouse:'entra col mouse', entTocca:'tocca per entrare', entMani:'usa le mani',
+    entCarica:'intanto, i gesti che userai',
+    entScena1:'mano aperta: muovi il cursore', entScena2:'pizzica: è il clic', entScena3:'pugno: afferri e trascini',
+    entCaricoPct:'carico le mani… {p}%', entCarico:'carico le mani…', entQuasi:'quasi pronto…',
+    entLento:'ci mette più del solito: entra col mouse, le mani si accendono dopo',
+    entAlza:'alza una mano aperta e riempi la sagoma', entVisto:'ti vedo ✓',
+    entVicino:'avvicinati: la mano deve riempire la sagoma', entNonVedo:'non ti vedo: più luce, mano all\'altezza del petto',
+    entMuovi:'porta il cursore sui due punti', entMuoviAiuto:'muovi la mano aperta: il cerchio la segue',
+    entEntra:'porta il cursore su entra e pizzica', entEntraSub:'unisci pollice e indice, poi riapri. oppure tienilo fermo sopra.',
+    entEntraTasto:'entra', entBene:'bene. ora sopra il tasto', entPiano:'più piano', entOppure:'oppure clicca il tasto',
+    entPasso:'{n} / {tot}',
+    /* MODIFICA: le guide dei gesti (nuvola e indice) e il tasto che le riapre */
+    scanCome:'come', ggIndice:'indice', ggNuvola:'nuvola', ggSalta:'salta',
+    gn1:'trascina', gn1How:'chiudi la mano a pugno e muovila',
+    gn2:"apri l'indice", gn2How:'pizzica con tutte e due le mani',
+    gn3:'cambia sezione', gn3How:'porta il cursore su una voce del menu in alto e tienilo fermo un secondo',
+    gg1:'scorri', gg1How:'chiudi la mano a pugno e muovila su e giù',
+    gg2:'apri una voce', gg2How:'pizzica sopra una voce',
+    gg3:'torna alla nuvola', gg3How:'pizzica con tutte e due le mani',
+    ggVoce:'voce', gv1:'sfoglia', gv1How:'muovi la mano di lato, veloce: passi alla voce dopo',
+    gv2:'torna indietro', gv2How:'allontana la mano dalla camera: la scheda si chiude',
+    /* MODIFICA: il vocabolario dei gesti nella legenda */
+    lgMuovi:'muovi', lgMuoviHow:'mano aperta: il cerchio la segue',
+    lgPizzica:'pizzica', lgPizzicaHow:'pollice e indice: è il clic',
+    lgFermo:'tieni fermo', lgFermoHow:'un secondo sopra il menu: cambi sezione',
+    lgPugno:'pugno', lgPugnoHow:'afferri: trascini la nuvola, scorri le pagine',
+    lgDue:'due pizzichi', lgDueHow:"apri e chiudi l'indice",
+    lgLato:'di lato, veloce', lgLatoHow:'in una voce aperta: sfogli',
+    lgIndietro:'allontana la mano', lgIndietroHow:'torni indietro: la scheda si chiude',
     /* MODIFICA: l'infografica dei gesti (i tre riquadri) e il suo promemoria */
     scanTitle:'Muovi il sito con le mani',
     scanLine1:'La camera legge i tuoi gesti e li trasforma in comandi.',
@@ -1521,7 +1658,7 @@ const I18N = {
     scanMove:'sposta', scanMoveHow:'muovi la mano di lato',
     scanPinch:'clicca', scanPinchHow:'unisci pollice e indice',
     scanWrite:'scrivimi', scanWriteHow:'indice e medio alzati',
-    scanMore:'<b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice',
+    scanMore:'scorciatoie: <b>indice e medio alzati</b> scrivimi · <b>mano che si allontana</b> chiude la scheda · <b>di lato</b> sfogli le voci aperte',
     scanNoCamHttps:'camera non disponibile: apri il sito da https o localhost',
     scanAsk:'consenti la camera…', scanLoading:'carico il modello delle mani…', scanShow:'mostra le mani alla camera',
     scanDenied:'permesso camera negato: abilitalo nelle impostazioni del browser',
@@ -1552,11 +1689,11 @@ const I18N = {
     collabNeedEmail:'Lascia la tua email, così posso risponderti.',
     collabSending:'invio…', collabSent:'Ricevuto, grazie. Ti rispondo presto.',
     viewLabelContatti:'contatti',
-    propBtn:'+ aggiungi', propTitle:"AGGIUNGI ALL'ARCHIVIO",
+    propBtn:'+ aggiungi', propTitle:"aggiungi all'archivio",
     propDrop:"trascina un'immagine qui oppure clicca per scegliere un file",
     propPhTitle:'Titolo', propPhAuthor:'Autore / studio', propPhSource:'Link alla fonte (https://…)',
     propPhWhy:'Perché dovrebbe stare qui?', propPhName:'Il tuo nome (facoltativo)',
-    propSend:'AGGIUNGI',
+    propSend:'aggiungi',
     propNote:"Quello che aggiungi non compare subito: lo guardo io prima che entri nell'archivio. Manda solo immagini che puoi condividere e indica la fonte.",
     propNeedImg:"Scegli prima un'immagine.", propNeedTitle:'Dalle un titolo.',
     propReady:'Immagine pronta.', propBadImg:"Non sono riuscito a leggere l'immagine. Prova con un JPEG o un PNG.",
@@ -1587,15 +1724,46 @@ const I18N = {
     lbWhy:"why it's here ↓", lbWhyOpen:"why it's here ↑", lbWhyLabel:"why it's here",
     lbSource:'source ↗', copyLink:'copy link', copied:'copied ✓', fromProject:'from the project', photo:'photo',
     arButton:'view in your room', modelHint:'drag to rotate · pinch to zoom', modelError:'model not available',
+    introHands:'show your hands to the camera', introEnter:'click to enter', introEnterTouch:'tap to enter',
     introSub:'no image is ever shown or saved',
     introSubNoCam:'the camera is off: turn gestures on later, from the arrow below',
+    introSenzaGesti:'enter without gestures',
+    entInvito:'this site moves with your hands',
+    entInvitoSub:'the camera only reads where your fingers are. no image is shown or saved.',
+    entCamera:'turn on the camera', entMouse:'enter with the mouse', entTocca:'tap to enter', entMani:'use your hands',
+    entCarica:"meanwhile, the gestures you'll use",
+    entScena1:'open hand: move the cursor', entScena2:'pinch: that is the click', entScena3:'fist: grab and drag',
+    entCaricoPct:'loading hands… {p}%', entCarico:'loading hands…', entQuasi:'almost ready…',
+    entLento:'taking longer than usual: enter with the mouse, hands turn on later',
+    entAlza:'raise an open hand and fill the outline', entVisto:'i see you ✓',
+    entVicino:'come closer: your hand should fill the outline', entNonVedo:"i can't see you: more light, hand at chest height",
+    entMuovi:'move the cursor onto both dots', entMuoviAiuto:'move your open hand: the circle follows it',
+    entEntra:'move the cursor onto enter and pinch', entEntraSub:'touch thumb and index, then open. or hold it still on top.',
+    entEntraTasto:'enter', entBene:'good. now over the button', entPiano:'slower', entOppure:'or click the button',
+    entPasso:'{n} / {tot}',
+    scanCome:'how', ggIndice:'index', ggNuvola:'cloud', ggSalta:'skip',
+    gn1:'drag', gn1How:'close your hand into a fist and move it',
+    gn2:'open the index', gn2How:'pinch with both hands',
+    gn3:'change section', gn3How:'move the cursor onto a menu item at the top and hold it still for a second',
+    gg1:'scroll', gg1How:'close your hand into a fist and move it up and down',
+    gg2:'open an entry', gg2How:'pinch over an entry',
+    gg3:'back to the cloud', gg3How:'pinch with both hands',
+    ggVoce:'entry', gv1:'flip', gv1How:'move your hand sideways, fast: next entry',
+    gv2:'go back', gv2How:'move your hand away from the camera: the card closes',
+    lgMuovi:'move', lgMuoviHow:'open hand: the circle follows it',
+    lgPizzica:'pinch', lgPizzicaHow:'thumb and index: that is the click',
+    lgFermo:'hold still', lgFermoHow:'one second over the menu: change section',
+    lgPugno:'fist', lgPugnoHow:'grab: drag the cloud, scroll the pages',
+    lgDue:'two pinches', lgDueHow:'open and close the index',
+    lgLato:'sideways, fast', lgLatoHow:'in an open entry: flip',
+    lgIndietro:'move your hand away', lgIndietroHow:'go back: the card closes',
     scanTitle:'Move the site with your hands',
     scanLine1:'The camera reads your gestures and turns them into commands.',
     scanLine2:'No image is ever shown or saved.',
     scanMove:'move', scanMoveHow:'slide your hand sideways',
     scanPinch:'click', scanPinchHow:'join thumb and index',
     scanWrite:'write to me', scanWriteHow:'index and middle up',
-    scanMore:'<b>fist</b> drag the cloud · <b>hand forward/back</b> zoom in and out · <b>two pinches</b> index',
+    scanMore:'shortcuts: <b>index and middle up</b> write to me · <b>hand moving away</b> closes the card · <b>sideways</b> flip open entries',
     scanNoCamHttps:'camera unavailable: open the site over https or localhost',
     scanAsk:'allow the camera…', scanLoading:'loading the hand model…', scanShow:'show your hands to the camera',
     scanDenied:'camera permission denied: enable it in your browser settings',
@@ -1626,11 +1794,11 @@ const I18N = {
     collabNeedEmail:'Leave your email so I can reply.',
     collabSending:'sending…', collabSent:"Got it, thank you. I'll get back to you soon.",
     viewLabelContatti:'contact',
-    propBtn:'+ add', propTitle:'ADD TO THE ARCHIVE',
+    propBtn:'+ add', propTitle:'add to the archive',
     propDrop:'drag an image here or click to choose a file',
     propPhTitle:'Title', propPhAuthor:'Author / studio', propPhSource:'Link to the source (https://…)',
     propPhWhy:'Why should it be here?', propPhName:'Your name (optional)',
-    propSend:'ADD',
+    propSend:'add',
     propNote:"What you add doesn't appear right away: I look at it before it enters the archive. Only send images you can share, and name the source.",
     propNeedImg:'Choose an image first.', propNeedTitle:'Give it a title.',
     propReady:'Image ready.', propBadImg:"I couldn't read the image. Try a JPEG or a PNG.",
@@ -1663,37 +1831,48 @@ function t(key){
   <!-- il nome: piccolo, in alto a sinistra, come in tutte le pagine -->
   <div class="wordmark intro-mark">edoardo tavoni</div>
   <div class="intro-in">
-  <!-- MODIFICA: la scritta dell'ingresso (resta uguale in IT e EN) -->
-  <p class="intro-text" id="introText">show your hands to the camera</p>
-  <!-- MODIFICA: la seconda riga (chiavi introSub / introSubNoCam nel dizionario
-       I18N). Cambia da sola se la camera non c'è: vedi introSenzaCamera. -->
-  <p class="intro-sub" id="introSub" data-i18n="introSub">nessuna immagine viene mostrata o salvata</p>
-
-  <!-- I GESTI: tre fotografie di una mano e il nome del gesto.
-       MODIFICA: le fotografie sono tre file nella cartella images/gesti/
-         sposta.jpg    mano aperta
-         clicca.jpg    pollice e indice che si toccano
-         scrivimi.jpg  indice e medio alzati
-       Per cambiarle basta sostituire i file (stesso nome). Meglio quadrate,
-       mano ben staccata dallo sfondo: il sito le stampa in caratteri, come
-       il nome. Se un file manca, quel riquadro sparisce e resta la scritta.
-       I testi stanno nel dizionario I18N (chiavi scan…). Gli stessi tre
-       vengono ricopiati nel promemoria che apre la freccia del cursore in basso. -->
-  <!-- PROTOTIPO "specchio": qui compare la mano di chi guarda, tracciata dalla
-       camera e stampata in caratteri. Nessuna immagine della camera viene
-       mostrata: solo la forma della mano, ricostruita dai suoi punti. -->
-  <canvas class="intro-specchio" id="introSpecchio" aria-hidden="true"></canvas>
-  <div class="sl-gesti intro-gesti" id="introGesti">
-    <div class="sl-gesto" data-gesto="sposta">
-      <p><b data-i18n="scanMove">sposta</b> <span data-i18n="scanMoveHow">muovi la mano di lato</span></p>
-    </div>
-    <div class="sl-gesto" data-gesto="clicca">
-      <p><b data-i18n="scanPinch">clicca</b> <span data-i18n="scanPinchHow">unisci pollice e indice</span></p>
-    </div>
-    <div class="sl-gesto" data-gesto="scrivimi">
-      <p><b data-i18n="scanWrite">scrivimi</b> <span data-i18n="scanWriteHow">indice e medio alzati</span></p>
-    </div>
+  <!-- L'ENTRATA (v2): un passo alla volta. Tutti i testi stanno nel dizionario I18N
+       (chiavi ent…): lo script li cambia a ogni passo, vedi "L'ENTRATA" nello script. -->
+  <p class="ent-passo-n" id="entPassoN" aria-hidden="true"></p>
+  <p class="intro-text" id="introText" data-i18n="entInvito">questo sito si muove con le mani</p>
+  <p class="intro-sub" id="introSub" data-i18n="entInvitoSub">la camera legge solo la posizione delle dita. nessuna immagine viene mostrata o salvata.</p>
+  <!-- la scena: qui si vedono i gesti (le mani registrate in mani-guida/) e poi la tua mano.
+       IL VIDEO: quando lo giri, salvalo come video/entrata.mp4 (e .webm): tre scene da 4 s
+       in quest'ordine, mano aperta che muove il cursore, pizzico che apre un'immagine, pugno
+       che trascina la nuvola. Se il file c'è, prende il posto del disegno nell'invito e nel
+       caricamento; se manca, resta il disegno. -->
+  <div class="ent-scena" id="entScena">
+    <video id="entVideo" muted playsinline loop preload="none" aria-hidden="true" hidden>
+      <source src="video/entrata.webm" type="video/webm">
+      <source src="video/entrata.mp4" type="video/mp4">
+    </video>
+    <canvas id="entTela" aria-hidden="true"></canvas>
   </div>
+  <p class="ent-dida" id="entDida" aria-live="polite"></p>
+  <!-- LA LEGENDA dell'entrata: i quattro gesti del sito, tutti insieme e sempre in vista
+       (la scena sopra ne mostra uno alla volta). Le mani sono quelle registrate in mani-guida/.
+       MODIFICA: i testi sono le chiavi lg… nel dizionario I18N -->
+  <div class="ent-legenda" id="entLegenda">
+    <figure data-gesto="aperta" data-moto="lato"><canvas aria-hidden="true"></canvas><figcaption><b data-i18n="lgMuovi">muovi</b> <span data-i18n="lgMuoviHow">mano aperta: il cerchio la segue</span></figcaption></figure>
+    <figure data-gesto="pizzico"><canvas aria-hidden="true"></canvas><figcaption><b data-i18n="lgPizzica">pizzica</b> <span data-i18n="lgPizzicaHow">pollice e indice: è il clic</span></figcaption></figure>
+    <figure data-gesto="pugno"><canvas aria-hidden="true"></canvas><figcaption><b data-i18n="lgPugno">pugno</b> <span data-i18n="lgPugnoHow">afferri: trascini la nuvola, scorri le pagine</span></figcaption></figure>
+    <figure data-gesto="aperta" data-moto="fermo"><canvas aria-hidden="true"></canvas><figcaption><b data-i18n="lgFermo">tieni fermo</b> <span data-i18n="lgFermoHow">un secondo sopra il menu: cambi sezione</span></figcaption></figure>
+  </div>
+  <div class="ent-carica" id="entCarica"><div class="ent-barra vaga" id="entBarra"><i></i></div><span id="entCaricaTesto"></span></div>
+  <div class="ent-scelte" id="entScelte">
+    <button type="button" class="ent-tasto pieno" id="entCamera">accendi la camera</button>
+    <button type="button" class="ent-tasto" id="entMouse">entra col mouse</button>
+  </div>
+  <button type="button" class="ent-entra" id="entEntra" data-i18n="entEntraTasto">entra</button>
+  <p class="ent-aiuto" id="entAiuto" aria-live="polite"></p>
+  <span class="ent-punto" id="entPunto0" aria-hidden="true"></span>
+  <span class="ent-punto" id="entPunto1" aria-hidden="true"></span>
+  <canvas class="ent-sopra" id="entSopra" aria-hidden="true"></canvas>
+
+  <!-- l'uscita per chi non può o non vuole usare le mani: c'è in tutti i passi dopo
+       l'invito. Senza camera sparisce: lì entra il clic.
+       MODIFICA: il testo è la chiave entMouse nel dizionario I18N -->
+  <button type="button" class="intro-senza" id="introSenzaGesti" data-i18n="entMouse">entra col mouse</button>
   </div>
 </div>
 
@@ -1703,17 +1882,36 @@ function t(key){
      guardando, non solo l'archivio. -->
 <div class="scan-ui" id="scanUI" hidden>
   <video id="scanVideo" playsinline muted aria-hidden="true"></video>
+  <button type="button" class="scan-come" id="scanCome" data-i18n="scanCome">come</button>
   <span id="scanStatus">avvio…</span>
 </div>
+<!-- la guida dei gesti dell'indice (vedi GUIDA DELL'INDICE nello script).
+     MODIFICA: i testi sono le chiavi gg… nel dizionario I18N -->
+<div class="guida-gesti" id="guidaGesti" role="status" aria-live="polite" hidden>
+  <div class="gg-passo" id="ggPasso"></div>
+  <div class="gg-testo" id="ggTesto"></div>
+  <div class="gg-come" id="ggCome"></div>
+  <button type="button" id="ggSalta" data-i18n="ggSalta">salta</button>
+</div>
+<canvas class="guida-fantasma" id="guidaFantasma" aria-hidden="true" hidden></canvas>
 <div class="scan-legend hide" id="scanLegend" role="note" aria-live="polite">
   <button type="button" id="scanLegendClose" aria-label="Chiudi la legenda">✕</button>
   <!-- MODIFICA: i testi dell'infografica stanno nel dizionario I18N (chiavi scan…) -->
   <h2 data-i18n="scanTitle">Muovi il sito con le mani</h2>
   <p class="sl-text" data-i18n="scanLine1">La camera legge i tuoi gesti e li trasforma in comandi.</p>
   <p class="sl-text" data-i18n="scanLine2">Nessuna immagine viene mostrata o salvata.</p>
-  <!-- i tre riquadri sono quelli della pagina d'ingresso: li ricopia qui lo script -->
-  <div class="sl-gesti" id="scanLegendGesti"></div>
-  <p class="sl-more" data-i18n-html="scanMore"><b>pugno</b> trascini la nuvola · <b>mano avanti/indietro</b> entri ed esci · <b>due pizzichi</b> indice</p>
+  <!-- il vocabolario dei gesti, uguale in tutto il sito: muovi, pizzica, tieni fermo, pugno, due pizzichi.
+       MODIFICA: i testi sono le chiavi lg… nel dizionario I18N -->
+  <div class="sl-gesti" id="scanLegendGesti">
+    <div class="sl-gesto"><p><b data-i18n="lgMuovi">muovi</b> <span data-i18n="lgMuoviHow">mano aperta: il cerchio la segue</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgPizzica">pizzica</b> <span data-i18n="lgPizzicaHow">pollice e indice: è il clic</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgFermo">tieni fermo</b> <span data-i18n="lgFermoHow">un secondo sopra un tasto del menu: è il clic</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgPugno">pugno</b> <span data-i18n="lgPugnoHow">afferri: trascini la nuvola, scorri le pagine</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgDue">due pizzichi</b> <span data-i18n="lgDueHow">apri e chiudi l'indice</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgLato">di lato, veloce</b> <span data-i18n="lgLatoHow">in una voce aperta: sfogli</span></p></div>
+    <div class="sl-gesto"><p><b data-i18n="lgIndietro">allontana la mano</b> <span data-i18n="lgIndietroHow">torni indietro: la scheda si chiude</span></p></div>
+  </div>
+  <p class="sl-more" data-i18n-html="scanMore">scorciatoie: <b>indice e medio alzati</b> scrivimi · <b>mano che si allontana</b> chiude la scheda · <b>di lato</b> sfogli le voci aperte</p>
 </div>
 <div class="hand-cursor" id="handCursorL" hidden><span class="halo"></span><span class="ring"></span><span class="tag">L</span></div>
 <div class="hand-cursor" id="handCursorR" hidden><span class="halo"></span><span class="ring"></span><span class="tag">R</span></div>
@@ -1738,10 +1936,10 @@ function t(key){
 <!-- coda di revisione: solo tua (modalità modifica). Qui approvi o
      rifiuti quello che i visitatori hanno aggiunto. -->
 <div class="panel" id="revPanel" role="dialog" aria-label="Schede da revisionare">
-  <h2>DA REVISIONARE</h2>
+  <h2>da revisionare</h2>
   <form id="revLogin" class="rev-login" hidden>
     <input type="password" id="revCode" autocomplete="current-password" placeholder="Codice di revisione">
-    <button type="submit">ENTRA</button>
+    <button type="submit">entra</button>
   </form>
   <p id="revMsg" role="status"></p>
   <div id="revList"></div>
@@ -1751,7 +1949,7 @@ function t(key){
 <!-- pannello "aggiungi": quello dei visitatori. Compare solo se
      PROPONI_ENDPOINT (in fondo al file) è impostato. -->
 <form class="panel" id="propPanel" aria-label="Aggiungi all'archivio" novalidate>
-  <h2 data-i18n="propTitle">AGGIUNGI ALL'ARCHIVIO</h2>
+  <h2 data-i18n="propTitle">aggiungi all'archivio</h2>
   <div class="pastezone" id="propZone" tabindex="0" role="button">
     <span data-i18n="propDrop">trascina un'immagine qui oppure clicca per scegliere un file</span>
     <img id="propPreview" alt="" hidden>
@@ -1763,7 +1961,7 @@ function t(key){
   <textarea id="propInWhy" maxlength="1200" data-i18n-placeholder="propPhWhy" placeholder="Perché dovrebbe stare qui?"></textarea>
   <input type="text" id="propInName" maxlength="60" autocomplete="name" data-i18n-placeholder="propPhName" placeholder="Il tuo nome (facoltativo)">
   <label class="hp" aria-hidden="true">sito <input type="text" id="propHp" tabindex="-1" autocomplete="off"></label>
-  <button type="submit" id="propSend" data-i18n="propSend">AGGIUNGI</button>
+  <button type="submit" id="propSend" data-i18n="propSend">aggiungi</button>
   <p id="propMsg" role="status"></p>
   <p class="note" data-i18n="propNote">Quello che aggiungi non compare subito: lo guardo io prima che entri nell'archivio. Manda solo immagini che puoi condividere e indica la fonte.</p>
 </form>
@@ -2387,6 +2585,9 @@ if (indexSearch){
 
 function toggleIndex(open){
   indexOpen = open ?? !indexOpen;
+  /* le guide dei gesti: aprendo o chiudendo l'indice si passa dalla guida della nuvola a
+     quella dell'indice; quella lasciata a metà riprende quando torni */
+  if (typeof guida === 'object' && guida) guidaVisibilita();   /* (guida è var: undefined finché lo script delle guide non è partito) */
   if (indexOpen) buildIndex();
   indexView.hidden = false;                 /* visibile per la transizione */
   requestAnimationFrame(() => indexView.classList.toggle('open', indexOpen));
@@ -2766,6 +2967,7 @@ function caricaManoNelWorker(){
     w.onerror = ev => { w.terminate(); no(new Error('load worker: ' + (ev.message || ''))); };
     w.onmessage = ev => {
       const m = ev.data;
+      if (m.tipo === 'progresso'){ if (typeof entrataProgresso === 'function') entrataProgresso(m.ricevuti, m.totale); return; }
       if (m.tipo === 'errore'){ w.terminate(); no(new Error('load worker: ' + m.messaggio)); return; }
       if (m.tipo !== 'pronto') return;
       w.onerror = () => { maniInVolo = false; };
@@ -2803,10 +3005,7 @@ async function caricaManoSullaPagina(){
 /* promemoria dei gesti. L'infografica vera sta nella pagina d'ingresso:
    questo la ripropone, uguale, quando accendi le mani dalla freccia in basso
    (per chi è entrato da un link diretto e l'ingresso non l'ha visto). */
-(function(){
-  const da = document.getElementById('introGesti'), a = document.getElementById('scanLegendGesti');
-  if (da && a) a.innerHTML = da.innerHTML;
-})();
+/* (la legenda ora ha il suo vocabolario fisso nell'HTML: muovi, pizzica, tieni fermo, pugno, due pizzichi) */
 
 /* ---- le fotografie dei gesti, stampate in caratteri ----
    Sono fotografie vere (images/gesti/…), ma arrivano sulla pagina come
@@ -2910,6 +3109,270 @@ function mostraLegenda(){
 }
 document.getElementById('scanLegendClose').addEventListener('click', () => scanLegend.classList.add('hide'));
 
+/* ---- LE GUIDE DEI GESTI: nuvola e indice ----
+   Dopo l'entrata, la guida insegna i gesti dove servono, un passo alla volta (come il
+   "how" di lavori), con la mano fantasma:
+     nuvola   trascina col pugno, poi apri l'indice con due pizzichi
+     indice   scorri col pugno, poi apri una voce con un pizzico
+   Così i due pizzichi si imparano PRIMA di trovarsi nell'indice. Il passo va avanti
+   solo quando il gesto lo fai davvero (gli stessi rilevatori che comandano il sito).
+   Mentre guardi una voce si nasconde; se cambi posto a metà, riprende quando torni.
+   Finita o saltata, non torna più da sola: la riapre il tasto "come".
+   Per rivederle da capo: ?guida nell'indirizzo. */
+/* il giro completo, senza buchi: nuvola (trascina → apri l'indice) → indice (scorri → apri
+   una voce → torna alla nuvola) → voce (sfoglia → torna indietro, vedi GUIDA DELLA VOCE) →
+   di nuovo nuvola (cambia sezione col menu). "evento" = passo che riesce quando succede
+   quella cosa (vedi guidaEvento), invece che con una posa della mano. */
+const GUIDE_GESTI = {
+  nuvola: { chiave: 'nuvola_guida_v2', nome: 'ggNuvola', passi: [
+    { testo: 'gn1', come: 'gn1How', ok: r => r.fist,              tenere: 400, fantasma: 'pugno',   mani: 1 },
+    { testo: 'gn2', come: 'gn2How', ok: r => r.both,              tenere: 0,   fantasma: 'pizzico', mani: 2 },
+    { testo: 'gn3', come: 'gn3How', ok: () => false, evento: 'menu', tenere: 0, fantasma: 'aperta', mani: 1 },
+  ]},
+  indice: { chiave: 'indice_guida_v4', nome: 'ggIndice', passi: [
+    { testo: 'gg1', come: 'gg1How', ok: r => r.fist,              tenere: 400, fantasma: 'pugno',   mani: 1 },
+    { testo: 'gg2', come: 'gg2How', ok: r => r.pinch && !r.both,  tenere: 0,   fantasma: 'pizzico', mani: 1 },
+    { testo: 'gg3', come: 'gg3How', ok: r => r.both,              tenere: 0,   fantasma: 'pizzico', mani: 2 },
+  ]},
+};
+const FORZA_GUIDA = /[?&]guida\b/.test(location.search);
+const statoGuide = {};
+Object.keys(GUIDE_GESTI).forEach(k => {
+  let fatta = false;
+  try { fatta = !FORZA_GUIDA && localStorage.getItem(GUIDE_GESTI[k].chiave) === '1'; } catch (e){}
+  statoGuide[k] = { fatta, attiva: false, i: 0, okDa: -1, t0: 0 };
+});
+var guida = { attiva: false, i: 0, okDa: -1, t0: 0 };   /* la guida del posto in cui sei (vedi guidaVisibilita) */
+let guidaMostrata = '';
+const guidaGesti = document.getElementById('guidaGesti');
+/* dove sei, per le guide: nella nuvola, nell'indice, o in nessuna delle due */
+function contestoGuida(){
+  if (!scanning || (typeof introAperta === 'function' && introAperta()) || dialogAperto() || currentViewName() !== 'archivio') return null;
+  return indexOpen ? 'indice' : 'nuvola';
+}
+const passoGuida = () => { const c = contestoGuida(); return c && statoGuide[c].attiva ? GUIDE_GESTI[c].passi[statoGuide[c].i] : null; };
+function avviaGuida(c){
+  if (!c) return;
+  Object.assign(statoGuide[c], { attiva: true, i: 0, okDa: -1, t0: performance.now() });
+  guidaMostrata = '';
+  guidaVisibilita();
+}
+function fineGuida(c){
+  if (!c) return;
+  Object.assign(statoGuide[c], { attiva: false, fatta: true });
+  try { localStorage.setItem(GUIDE_GESTI[c].chiave, '1'); } catch (e){}
+  guidaVisibilita();
+}
+/* si vede solo con le mani accese, nella nuvola o nell'indice, senza voci aperte */
+function guidaVisibilita(){
+  if (!guidaGesti) return;
+  const c = contestoGuida();
+  if (c && !statoGuide[c].attiva && !statoGuide[c].fatta) avviaGuida(c);
+  guida = c ? statoGuide[c] : { attiva: false, i: 0, okDa: -1, t0: 0 };
+  const vedi = !!(c && guida.attiva);
+  if (guidaGesti.hidden === vedi) guidaGesti.hidden = !vedi;
+  if (vedi) accendiFantasma();
+  if (!vedi) return;
+  const g = GUIDE_GESTI[c], p = g.passi[guida.i];
+  const chiave = LANG + c + guida.i;
+  if (guidaMostrata === chiave) return;
+  guidaMostrata = chiave;
+  document.getElementById('ggPasso').textContent = t(g.nome) + ' · ' + (guida.i + 1) + ' / ' + g.passi.length;
+  document.getElementById('ggTesto').textContent = t(p.testo);
+  document.getElementById('ggCome').textContent = t(p.come);
+}
+/* r = { fist, pinch, both } della mano (o delle mani) in questo fotogramma */
+function guidaPasso(r){
+  const c = contestoGuida();
+  if (!c || !statoGuide[c].attiva) return;
+  const s = statoGuide[c], p = GUIDE_GESTI[c].passi[s.i], ora = performance.now();
+  if (!p.ok(r)){ s.okDa = -1; return; }
+  if (s.okDa < 0) s.okDa = ora;
+  if (ora - s.okDa < p.tenere) return;
+  s.i++; s.okDa = -1; s.t0 = ora;
+  if (s.i >= GUIDE_GESTI[c].passi.length) fineGuida(c); else guidaVisibilita();
+}
+/* un passo "evento" riesce quando succede quella cosa (es. 'menu': hai premuto una voce del
+   menu con la mano). Si chiama PRIMA dell'effetto, finché si è ancora nel posto della guida */
+function guidaEvento(tipo){
+  const c = contestoGuida();
+  if (!c || !statoGuide[c].attiva) return;
+  const s = statoGuide[c], p = GUIDE_GESTI[c].passi[s.i];
+  if (!p || p.evento !== tipo) return;
+  s.i++; s.okDa = -1; s.t0 = performance.now();
+  if (s.i >= GUIDE_GESTI[c].passi.length) fineGuida(c); else guidaVisibilita();
+}
+
+/* ---- LA GUIDA DELLA VOCE ----
+   La prima volta che apri una voce con le mani accese, DENTRO la scheda (che sta sopra a
+   tutto il resto, per questo non può usare il riquadro di prima) compare lo stesso riquadro
+   a passi: sfoglia muovendo la mano di lato, poi torna indietro allontanando la mano.
+   Senza mano fantasma: dentro la scheda il cursore non si vede. */
+const GUIDA_VOCE_FATTA = 'voce_guida_v1';
+const PASSI_VOCE = [
+  { testo: 'gv1', come: 'gv1How', evento: 'sfoglia' },
+  { testo: 'gv2', come: 'gv2How', evento: 'indietro' },
+];
+const statoVoce = { fatta: false, i: 0, mostrata: '' };
+try { statoVoce.fatta = !FORZA_GUIDA && localStorage.getItem(GUIDA_VOCE_FATTA) === '1'; } catch (e){}
+const guidaVoceEl = (function(){
+  const scheda = document.getElementById('lightbox');
+  if (!scheda) return null;
+  const d = document.createElement('div');
+  d.className = 'guida-gesti guida-voce'; d.hidden = true;
+  d.setAttribute('role', 'status'); d.setAttribute('aria-live', 'polite');
+  d.innerHTML = '<div class="gg-passo"></div><div class="gg-testo"></div><div class="gg-come"></div><button type="button" class="gv-salta"></button>';
+  scheda.appendChild(d);
+  d.querySelector('.gv-salta').addEventListener('click', e => { e.stopPropagation(); fineGuidaVoce(); });
+  scheda.addEventListener('close', () => { d.hidden = true; });
+  return d;
+})();
+function mostraGuidaVoce(){
+  if (!guidaVoceEl) return;
+  const scheda = document.getElementById('lightbox');
+  const vedi = !statoVoce.fatta && scanning && !!(scheda && scheda.open);
+  if (guidaVoceEl.hidden === vedi) guidaVoceEl.hidden = !vedi;
+  if (!vedi) return;
+  const chiave = LANG + statoVoce.i;
+  if (statoVoce.mostrata === chiave) return;
+  statoVoce.mostrata = chiave;
+  const p = PASSI_VOCE[statoVoce.i];
+  guidaVoceEl.querySelector('.gg-passo').textContent = t('ggVoce') + ' · ' + (statoVoce.i + 1) + ' / ' + PASSI_VOCE.length;
+  guidaVoceEl.querySelector('.gg-testo').textContent = t(p.testo);
+  guidaVoceEl.querySelector('.gg-come').textContent = t(p.come);
+  guidaVoceEl.querySelector('.gv-salta').textContent = t('ggSalta');
+}
+function fineGuidaVoce(){
+  statoVoce.fatta = true;
+  try { localStorage.setItem(GUIDA_VOCE_FATTA, '1'); } catch (e){}
+  mostraGuidaVoce();
+}
+function guidaVoceEvento(tipo){
+  if (statoVoce.fatta) return;
+  const p = PASSI_VOCE[statoVoce.i];
+  if (!p || p.evento !== tipo) return;
+  statoVoce.i++;
+  if (statoVoce.i >= PASSI_VOCE.length) fineGuidaVoce(); else mostraGuidaVoce();
+}
+
+/* ---- la mano fantasma della guida ----
+   Come in lavori: le registrazioni delle mani di Edoardo (mani-guida/<gesto>.json)
+   rigiocate in loop, tratteggiate, con il palmo agganciato alla mano del visitatore
+   e scalate sulla sua mano. Se la mano del visitatore è girata al contrario rispetto
+   alla registrazione (l'altra mano, o il dorso), il fantasma si specchia.
+   Senza mani in vista sta sopra il riquadro della guida. Al passo dei due pizzichi
+   i fantasmi sono due, uno per mano. */
+const FANTASMI = { aperta: null, pugno: null, pizzico: null };
+Object.keys(FANTASMI).forEach(g => fetch('mani-guida/' + g + '.json').then(r => r.ok ? r.json() : null)
+  .then(d => { if (d && d.fotogrammi && d.fotogrammi.length > 1) FANTASMI[g] = d; }).catch(() => {}));
+const OSSA_MANO = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[17,18],[18,19],[19,20],[0,17]];
+/* verso della mano nell'immagine: +1 o -1 (cambia tra destra e sinistra, e tra palmo e dorso) */
+function versoMano(p){
+  const c = (p[5].x - p[0].x) * (p[17].y - p[0].y) - (p[5].y - p[0].y) * (p[17].x - p[0].x);
+  return c >= 0 ? 1 : -1;
+}
+/* la registrazione al tempo ms (in loop, con una pausa), interpolando i 21 punti (px della camera) */
+function fantasmaAl(d, ms){
+  const f = d.fotogrammi, fine = f[f.length - 1].t;
+  let t = ms % (fine + 400); if (t > fine) t = fine;
+  let i = 0; while (i < f.length - 2 && f[i + 1].t < t) i++;
+  const a = f[i], b = f[i + 1], k = b.t > a.t ? Math.min(1, Math.max(0, (t - a.t) / (b.t - a.t))) : 0;
+  const ma = a.mani[0], mb = (b.mani[0] || ma);
+  if (!ma) return null;
+  const s = d.scala, w = d.camera.w, h = d.camera.h, punti = [];
+  for (let j = 0; j < 21; j++){
+    const xa = ma.punti[j * 3] / s, ya = ma.punti[j * 3 + 1] / s, xb = mb.punti[j * 3] / s, yb = mb.punti[j * 3 + 1] / s;
+    punti.push({ x: (xa + (xb - xa) * k) * w, y: (ya + (yb - ya) * k) * h });
+  }
+  return punti;
+}
+const fantasmaCv = document.getElementById('guidaFantasma');
+const fantasmaCtx = fantasmaCv ? fantasmaCv.getContext('2d') : null;
+let fantasmaAcceso = false, fantasmaCarta = '#fff';
+/* disegna il fantasma con il centro del palmo (punto 9) su "ancora" e il palmo lungo "palmo" px;
+   "specchia" = la mano del visitatore ha il verso opposto a quello della registrazione */
+/* i 21 punti portati sullo schermo: palmo (punto 9) su "ancora", lungo "palmo" px, specchiati come lo schermo */
+function puntiSu(p, ancora, palmo, specchia){
+  const A = p[9], s = palmo / (Math.hypot(p[9].x - p[0].x, p[9].y - p[0].y) || 1);
+  const verso = specchia ? 1 : -1;   /* lo schermo è lo specchio della camera */
+  return p.map(v => ({ x: ancora.x + verso * (v.x - A.x) * s, y: ancora.y + (v.y - A.y) * s }));
+}
+/* una mano a tratto pieno (q già in px): palmo chiaro, dita piene. Per le dimostrazioni dell'entrata */
+function manoPiena(c, q, palmo, colore){
+  c.save();
+  c.lineCap = c.lineJoin = 'round';
+  c.strokeStyle = c.fillStyle = colore;
+  c.globalAlpha = 0.18;
+  c.beginPath(); [0, 1, 5, 9, 13, 17].forEach((k, n) => n ? c.lineTo(q[k].x, q[k].y) : c.moveTo(q[k].x, q[k].y)); c.closePath(); c.fill();
+  c.globalAlpha = 1; c.lineWidth = Math.max(3, palmo * 0.13);
+  [[0,1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20],[5,9,13,17],[0,17]].forEach(d => {
+    c.beginPath(); d.forEach((k, n) => n ? c.lineTo(q[k].x, q[k].y) : c.moveTo(q[k].x, q[k].y)); c.stroke();
+  });
+  c.restore();
+}
+function disegnaFantasma(p, ancora, palmo, specchia, ctx){
+  const q = puntiSu(p, ancora, palmo, specchia);
+  const c = ctx || fantasmaCtx;
+  c.beginPath();
+  for (const [a, b] of OSSA_MANO){ c.moveTo(q[a].x, q[a].y); c.lineTo(q[b].x, q[b].y); }
+  /* l'alone chiaro: una traccia larga color carta sotto il tratteggio, per staccarlo dal testo */
+  c.save();
+  c.globalAlpha = 0.9; c.strokeStyle = fantasmaCarta; c.lineWidth = Math.max(10, palmo * 0.16);
+  c.lineCap = c.lineJoin = 'round'; c.shadowColor = fantasmaCarta; c.shadowBlur = 12;
+  c.stroke();
+  c.restore();
+  c.setLineDash([5, 5]); c.stroke(); c.setLineDash([]);
+  for (const v of q){ c.beginPath(); c.arc(v.x, v.y, 2, 0, Math.PI * 2); c.fill(); }
+  return q;
+}
+function accendiFantasma(){
+  if (fantasmaAcceso || !fantasmaCtx) return;
+  fantasmaAcceso = true; fantasmaCv.hidden = false;
+  requestAnimationFrame(cicloFantasma);
+}
+function cicloFantasma(now){
+  const dpr = Math.min(devicePixelRatio || 1, 2), W = innerWidth, H = innerHeight;
+  if (fantasmaCv.width !== Math.round(W * dpr) || fantasmaCv.height !== Math.round(H * dpr)){
+    fantasmaCv.width = Math.round(W * dpr); fantasmaCv.height = Math.round(H * dpr);
+  }
+  const c = fantasmaCtx;
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, W, H);
+  const passo = passoGuida();
+  if (guidaGesti.hidden || !passo){ fantasmaAcceso = false; fantasmaCv.hidden = true; return; }
+  const d = FANTASMI[passo.fantasma];
+  const p = d && fantasmaAl(d, now - guida.t0);
+  if (p){
+    const stile = getComputedStyle(document.documentElement);
+    const ink = stile.getPropertyValue('--ink').trim() || '#111';
+    fantasmaCarta = stile.getPropertyValue('--paper').trim() || '#fff';
+    c.strokeStyle = c.fillStyle = ink; c.globalAlpha = 0.55; c.lineWidth = 2;
+    const vRec = versoMano(p);
+    const mani = [0, 1].filter(i => !handCursors[i].hidden && cursoriVisti[i].x !== null && handState[i].palmo);
+    if (mani.length && (passo.mani === 1 || mani.length === 2)){
+      /* sulla mano (o sulle due mani) del visitatore */
+      mani.slice(0, passo.mani).forEach(i => disegnaFantasma(p, { x: cursoriVisti[i].x, y: cursoriVisti[i].y },
+        handState[i].palmo, handState[i].verso !== vRec));
+    } else {
+      /* dove dovrebbe stare: sopra il riquadro della guida */
+      const box = guidaGesti.getBoundingClientRect(), palmo = Math.min(H * 0.09, 80);
+      const y = box.top - palmo * 1.5;
+      if (passo.mani === 1) disegnaFantasma(p, { x: W / 2, y }, palmo, false);
+      else { disegnaFantasma(p, { x: W / 2 - palmo * 1.4, y }, palmo, false); disegnaFantasma(p, { x: W / 2 + palmo * 1.4, y }, palmo, true); }
+    }
+    c.globalAlpha = 1;
+  }
+  requestAnimationFrame(cicloFantasma);
+}
+document.getElementById('ggSalta').addEventListener('click', e => { e.stopPropagation(); fineGuida(contestoGuida()); });
+/* "come": nella nuvola o nell'indice riapre la guida di quel posto da capo, altrove il promemoria dei gesti */
+document.getElementById('scanCome').addEventListener('click', e => {
+  e.stopPropagation();
+  const c = contestoGuida();
+  if (c){ statoGuide[c].fatta = false; avviaGuida(c); }
+  else mostraLegenda();
+});
+
 async function startScan(){
   if (scanning || scanStarting) return;
   scanStarting = true;
@@ -2925,6 +3388,10 @@ async function startScan(){
   }
 
   let stream = null;
+  /* il modello parte subito, insieme alla richiesta del permesso: mentre il visitatore
+     risponde al dialogo del browser, i ~10 MB stanno già arrivando (l'entrata mostra quanto) */
+  const modelloInArrivo = handLandmarker ? null : caricaManoModello();
+  if (modelloInArrivo) modelloInArrivo.catch(() => {});
   try{
     /* prima il permesso (così il dialogo del browser compare subito,
        legato al tocco), poi il modello mentre la camera si avvia.
@@ -2941,11 +3408,12 @@ async function startScan(){
     await scanVideo.play();
 
     scanStatus.textContent = t('scanLoading');
-    if (!handLandmarker) handLandmarker = await caricaManoModello();
+    if (!handLandmarker) handLandmarker = await (modelloInArrivo || caricaManoModello());
     if (!scanStarting){ stream.getTracks().forEach(tr => tr.stop()); return; }   /* spento nel frattempo */
 
     scanning = true;
     scanStarting = false;
+    if (typeof entrataPronta === 'function') entrataPronta();
     const _st = document.getElementById('scanToggle');
     if (_st) _st.setAttribute('aria-pressed', 'true');
 
@@ -3001,6 +3469,7 @@ function stopScan(){
   scanStarting = false;
   scanUI.hidden = true;
   if (scanLegend) scanLegend.classList.add('hide');
+  guidaVisibilita();
   handCursors.forEach(c => { c.hidden = true; c.classList.remove('pinch'); });
   mouseX = null; mouseY = null;
   handState = [nuovoStatoMano(), nuovoStatoMano()];
@@ -3027,7 +3496,7 @@ if (scanToggle){
      - con un clic / tocco / Invio: avvia la camera (se non è già
        attiva) ed entra. Se la camera viene negata si entra lo stesso.
    Dove la camera non può esistere (http, permesso negato, nessuna
-   camera), la scritta diventa "click to enter": nessuno resta fuori.
+   camera), la scritta diventa "clicca/tocca per entrare": nessuno resta fuori.
    In quel caso i gesti restano in vista, attenuati, e la seconda riga
    dice da dove si accendono. */
 const intro     = document.getElementById('intro');
@@ -3043,21 +3512,20 @@ function dismissIntro(){
 }
 function introSenzaCamera(){
   if (!intro || intro.classList.contains('hide')) return;
-  if (introText) introText.textContent = 'click to enter';
+  /* "clicca" col mouse, "tocca" sul telefono — nella lingua di chi arriva */
+  if (introText){
+    introText.dataset.i18n = (typeof COARSE_PTR !== 'undefined' && COARSE_PTR) ? 'introEnterTouch' : 'introEnter';
+    introText.textContent = t(introText.dataset.i18n);
+  }
   intro.classList.add('no-cam');
+  intro.dataset.fase = 'senza';
   /* la chiave cambia sul nodo, così anche il cambio lingua trova il testo giusto */
   if (introSub){ introSub.dataset.i18n = 'introSubNoCam'; introSub.textContent = t('introSubNoCam'); }
 }
 function introEnter(){
-  /* con la camera il sito parte solo dopo i tre gesti (vedi specchioIntro):
-     il clic serve soltanto ad accendere la camera, se non è già accesa.
-     Senza camera (negata, assente, non disponibile) si entra con il clic,
-     altrimenti nessuno potrebbe entrare. */
-  if (cameraPossibile() && !intro.classList.contains('no-cam')){
-    if (!scanning && !scanStarting) startScan();
-    return;
-  }
-  dismissIntro();
+  /* il clic sullo sfondo dell'entrata fa entrare solo senza camera (negata, assente,
+     non disponibile): con la camera si entra dai tasti o col pizzico su "entra" */
+  if (intro.classList.contains('no-cam')) dismissIntro();
 }
 /* sul telefono un lieve movimento del dito annulla il 'click':
    pointerdown/pointerup entro 12px = tocco valido. 'click' resta come
@@ -3069,10 +3537,17 @@ intro.addEventListener('pointerup', e => {
   introDown = null;
 });
 intro.addEventListener('click', introEnter);
-/* da tastiera: Invio o spazio */
+/* "entra senza gesti": entra subito, camera accesa o no. Ferma il tocco prima che
+   arrivi all'intro, che altrimenti accenderebbe la camera (introEnter) */
+const introSenzaGesti = document.getElementById('introSenzaGesti');
+if (introSenzaGesti){
+  ['pointerdown', 'pointerup'].forEach(tipo => introSenzaGesti.addEventListener(tipo, e => e.stopPropagation()));
+  introSenzaGesti.addEventListener('click', e => { e.stopPropagation(); dismissIntro(); });
+}
+/* da tastiera: Invio o spazio fanno entrare (su un tasto dell'entrata vale il tasto) */
 document.addEventListener('keydown', e => {
-  if (intro.classList.contains('hide')) return;
-  if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); introEnter(); }
+  if (intro.classList.contains('hide') || (e.target && e.target.closest && e.target.closest('button'))) return;
+  if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); dismissIntro(); }
 });
 /* chi apre un link diretto (#lavori/…, #archivio/3) non passa dall'intro */
 if (/^#(archivio\/|lavori|about|contatti)/.test(location.hash)) dismissIntro();
@@ -3125,6 +3600,9 @@ function trackHand(lm, i){
 
   /* scala della mano = quanto è vicina alla camera */
   const size = lmDist(lm[0], lm[9]);
+  /* per la mano fantasma della guida: lunghezza del palmo in px e verso della mano */
+  st.palmo = Math.hypot((lm[9].x - lm[0].x) * innerWidth, (lm[9].y - lm[0].y) * innerHeight);
+  st.verso = versoMano(lm);
 
   /* palmo → cursore virtuale (specchiato, come uno specchio) */
   const rawX = (1 - lm[9].x) * innerWidth;
@@ -3149,8 +3627,17 @@ function trackHand(lm, i){
     cursor.style.transform = `translate(${x - 14}px, ${y - 14}px)`;
   }
 
-  /* pizzico pollice–indice = clic (di quella mano) */
-  const pinch = lmDist(lm[4], lm[8]) < size * 0.45;
+  /* pizzico pollice–indice = clic (di quella mano). Stessa regola di lavori: si chiude sotto
+     PIZZICO, si riapre solo sopra PIZZICO × 1,5 (isteresi), così un pizzico sul confine non
+     dà due clic. Misure corrette per il formato della camera, come in lavori. */
+  /* Il pugno si decide PRIMA: in un pugno il pollice tocca il lato dell'indice e sembrerebbe un
+     pizzico. Pugno = al massimo un dito disteso (si riapre con almeno tre), come in lavori:
+     prima bastava che le punte fossero vicine alla nocca del medio, e sulle mani registrate
+     risultava "pugno" anche la mano aperta e il pizzico. */
+  const distese = [[8, 6], [12, 10], [16, 14], [20, 18]].filter(([p, n]) => lmDist(lm[p], lm[0]) > lmDist(lm[n], lm[0]) * 1.12).length;
+  const fist = st.fistWas ? distese < 3 : distese <= 1;
+  st.fistWas = fist;
+  const pinch = !fist && pizzicoChiuso(lm, st.pinchWas);
   cursor.classList.toggle('pinch', pinch);
   const modello = window.activeModelViewer && window.activeModelViewer.isConnected ? window.activeModelViewer : null;
   if (pinch && !st.pinchWas){
@@ -3160,6 +3647,7 @@ function trackHand(lm, i){
       const target = el && el.closest ? el.closest(PINCH_TARGET) : null;
       if (target){
         if (target.classList.contains('tile')) dragDist = 0;
+        if (target.matches('.sitenav a')) guidaEvento('menu');   /* passo "cambia sezione" della guida */
         if (target.matches('input, select')) target.focus();
         else target.click();
       }
@@ -3172,9 +3660,7 @@ function trackHand(lm, i){
   }
   if (!pinch) st.pinchOnModel = false;
 
-  /* pugno chiuso = trascina la nuvola (solo quando la nuvola è in vista) */
-  const tips = [8, 12, 16, 20];
-  const fist = !pinch && tips.every(t => lmDist(lm[t], lm[9]) < size * 1.05);
+  /* pugno chiuso = trascina la nuvola (solo quando la nuvola è in vista); il pugno è deciso sopra */
   /* "scrivimi": indice e medio alzati, anulare e mignolo chiusi. La
      distanza dal polso dice se un dito è steso o piegato. Si riconosce
      prima del trascinamento, così mentre lo fai la nuvola resta ferma. */
@@ -3207,10 +3693,11 @@ function trackHand(lm, i){
     st.vDa = null;
   }
 
-  /* swipe orizzontale a mano aperta = cambia sezione del sito */
-  /* a voce aperta lo sfogliare vale con la mano in qualsiasi posa (lì non c'è nulla da trascinare) */
+  /* di lato, veloce = sfogli. Vale SOLO con una voce aperta (successiva / precedente):
+     prima cambiava anche sezione del sito, e chi gesticolava veloce si ritrovava altrove.
+     Le sezioni ora si cambiano col menu: pizzica o tieni fermo il cursore su una voce. */
   const voceAperta = !!(document.getElementById('lightbox') && document.getElementById('lightbox').open);
-  if (!pinch && !dueDita && (!fist || voceAperta)){
+  if (voceAperta && !pinch && !dueDita){
     if (st.swipeRefX === null){ st.swipeRefX = x; st.swipeRefT = now; }
     else if (now - st.swipeRefT > 260){
       st.swipeRefX = x; st.swipeRefT = now;   /* finestra scaduta: si ricomincia a misurare */
@@ -3219,9 +3706,8 @@ function trackHand(lm, i){
       if (Math.abs(dx) > 260 && now - lastGestureAt > GESTURE_COOLDOWN){
         lastGestureAt = now;
         /* con una voce dell'archivio aperta, di lato si sfoglia: successiva / precedente */
-        const voce = document.getElementById('lightbox');
-        if (voce && voce.open && typeof openItem === 'function') openItem(currentIndex + (dx > 0 ? 1 : -1));
-        else changeView(dx > 0 ? 1 : -1);
+        guidaVoceEvento('sfoglia');
+        if (typeof openItem === 'function') openItem(currentIndex + (dx > 0 ? 1 : -1));
         st.swipeRefX = x; st.swipeRefT = now;
       }
     }
@@ -3229,18 +3715,17 @@ function trackHand(lm, i){
     st.swipeRefX = null;
   }
 
-  /* profondità: mano avanti = entri, mano indietro = esci.
-     Passa da camZTarget, come rotella e pizzico sul trackpad: prima
-     scriveva camZ direttamente e il fotogramma successivo lo
-     "riportava indietro" verso il target → zoom a scatti. */
+  /* profondità: la grandezza della mano serve solo al gesto di uscita dalla scheda (sotto).
+     Lo zoom "mano avanti/indietro" nella nuvola è spento: è il gesto che la camera legge
+     peggio e partiva da solo a ogni movimento. Lo zoom resta su rotella e trackpad. */
   if (st.sizeSmooth === null) st.sizeSmooth = size;
-  const prevSmooth = st.sizeSmooth;
   st.sizeSmooth = st.sizeSmooth * 0.8 + size * 0.2;
-  const dz = st.sizeSmooth - prevSmooth;
-  if (!fist && !pinch && !dialogAperto() && Math.abs(dz) > 0.0015){
-    focusAnim = null;
-    camZTarget = clampZ(camZTarget + dz * 4500);
-  }
+
+  /* TIENI FERMO = CLIC (lo "schermo invisibile"): il cursore fermo per SOSTA_MS su un tasto
+     del menu, una ✕ o "come" lo preme, e intanto l'anello si riempie. È il gesto che viene
+     spontaneo a chi tocca l'aria. Solo su questi tasti, non sulle immagini o sulle righe
+     dell'indice, dove fermarsi a guardare è normale. Per ripremere, esci e rientra. */
+  sostaClic(i, x, y, !pinch && !fist, now);
 
   /* uscire da una scheda: la mano che si allontana in fretta la chiude,
      come "mano indietro = esci" nella nuvola. Si tara da sola su chi la
@@ -3260,6 +3745,7 @@ function trackHand(lm, i){
       lastGestureAt = now;
       st.storia = [];
       const chiudi = scheda.querySelector('.close, .cw-close');
+      if (scheda.id === 'lightbox') guidaVoceEvento('indietro');
       if (chiudi) chiudi.click(); else scheda.close();
     }
   }
@@ -3274,150 +3760,377 @@ function trackHand(lm, i){
 }
 
 let bothDistPrev = null;
-/* ---- PROTOTIPO: lo "specchio" della pagina d'ingresso ----
-   Finché l'ingresso è aperto, le mani non comandano il sito: si vedono.
-   La forma della mano viene ricostruita dai suoi 21 punti (nessuna
-   immagine della camera) e stampata in caratteri, con l'alfabeto e la
-   cella della scritta del nome. Sotto, il nome del gesto che stai
-   facendo si accende. Fatti tutti e tre, si entra; il clic entra sempre. */
-const introSpecchio = document.getElementById('introSpecchio');
-const specchioCtx   = introSpecchio ? introSpecchio.getContext('2d') : null;
-const specchioOff   = document.createElement('canvas');
-const SPECCHIO_RAMPA = "@#%*+=-:. ";
-const SPECCHIO_DITA  = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]];
-const specchioStato  = { refX: null, refT: 0, spostaFino: 0, fatti: {}, chiude: null };
-const introAperta = () => !!intro && !intro.classList.contains('hide');
 
-/* disegna le mani (vere o della dimostrazione) come stampa in caratteri;
-   risponde false se la tela non c'è o è nascosta */
-function disegnaSpecchio(list){
-  const r = introSpecchio ? introSpecchio.getBoundingClientRect() : null;
-  if (!specchioCtx || !r || r.width < 8) return false;
+/* il pizzico, uguale nell'entrata e nel sito (e come in lavori): pollice–indice diviso il palmo,
+   in proporzioni vere (la x corretta per il formato della camera). Sotto PIZZICO si chiude,
+   sopra PIZZICO × 1,5 si riapre. */
+const PIZZICO = 0.32;
+function pizzicoChiuso(lm, eraChiuso){
+  const f = (scanVideo.videoWidth && scanVideo.videoHeight) ? scanVideo.videoWidth / scanVideo.videoHeight : 4 / 3;
+  const d = (a, b) => Math.hypot((lm[a].x - lm[b].x) * f, lm[a].y - lm[b].y);
+  const r = d(4, 8) / (d(0, 9) || 1e-3);
+  return eraChiuso ? r < PIZZICO * 1.5 : r < PIZZICO;
+}
 
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  const W = Math.round(r.width * dpr), H = Math.round(r.height * dpr);
-  if (introSpecchio.width !== W || introSpecchio.height !== H){ introSpecchio.width = W; introSpecchio.height = H; }
-  const cella = Math.max(4, Math.round(5 * dpr));
-  const gw = Math.ceil(W / cella), gh = Math.ceil(H / cella);
-
-  /* la sagoma, piccola quanto la griglia: un valore per cella */
-  specchioOff.width = gw; specchioOff.height = gh;
-  const o = specchioOff.getContext('2d', { willReadFrequently: true });
-  o.fillStyle = '#fff'; o.fillRect(0, 0, gw, gh);
-  const px = p => gw / 2 + (0.5 - p.x) * gh * (4 / 3);   /* specchiata, come uno specchio */
-  const py = p => p.y * gh;
-  o.lineCap = 'round'; o.lineJoin = 'round';
-  list.slice(0, 2).forEach(lm => {
-    const misura = Math.hypot(px(lm[0]) - px(lm[9]), py(lm[0]) - py(lm[9]));
-    const traccia = punti => { o.beginPath(); punti.forEach((k, n) => n ? o.lineTo(px(lm[k]), py(lm[k])) : o.moveTo(px(lm[k]), py(lm[k]))); };
-    o.fillStyle = o.strokeStyle = '#4a4a4a'; o.lineWidth = misura * 0.18;      /* il palmo, più chiaro */
-    traccia([0, 1, 5, 9, 13, 17]); o.closePath(); o.fill(); o.stroke();
-    o.strokeStyle = '#0a0a0a'; o.lineWidth = misura * 0.2;                      /* le dita, piene */
-    SPECCHIO_DITA.forEach(d => { traccia(d); o.stroke(); });
-  });
-  const dati = o.getImageData(0, 0, gw, gh).data;
-
-  specchioCtx.clearRect(0, 0, W, H);
-  specchioCtx.fillStyle = '#0a0a0a';
-  specchioCtx.font = cella + 'px ' + SITE_FONT;
-  specchioCtx.textAlign = 'center'; specchioCtx.textBaseline = 'middle';
-  for (let y = 0; y < gh; y++){
-    for (let x = 0; x < gw; x++){
-      const lum = dati[(y * gw + x) * 4];
-      if (lum > 240) continue;
-      const ch = SPECCHIO_RAMPA[Math.min(SPECCHIO_RAMPA.length - 1, Math.floor(lum / 255 * SPECCHIO_RAMPA.length))];
-      if (ch !== ' ') specchioCtx.fillText(ch, x * cella + cella / 2, y * cella + cella / 2);
-    }
+/* tieni fermo = clic: i tasti che lo accettano, e il tempo */
+const SOSTA_TASTI = '.sitenav a, .close, .cw-close, #scanCome, #ggSalta, #scanLegendClose, .ent-entra, [data-sosta]';
+const SOSTA_MS = 1200, SOSTA_RAGGIO = 26;
+const soste = [{ el: null, da: 0, x: 0, y: 0, fatto: false }, { el: null, da: 0, x: 0, y: 0, fatto: false }];
+function sostaClic(i, x, y, aperta, now){
+  const s = soste[i], cursore = handCursors[i];
+  const el = aperta ? (document.elementFromPoint(x, y) || null) : null;
+  const tasto = el && el.closest ? el.closest(SOSTA_TASTI) : null;
+  if (!tasto || tasto !== s.el || Math.hypot(x - s.x, y - s.y) > SOSTA_RAGGIO){
+    if (tasto !== s.el) s.fatto = false;
+    Object.assign(s, { el: tasto, da: now, x, y });
+    cursore.classList.remove('sosta'); cursore.style.removeProperty('--sosta');
+    return false;
   }
+  if (s.fatto) return false;
+  const k = Math.min(1, (now - s.da) / SOSTA_MS);
+  cursore.classList.add('sosta'); cursore.style.setProperty('--sosta', k.toFixed(3));
+  if (k < 1) return false;
+  s.fatto = true;
+  cursore.classList.remove('sosta'); cursore.style.removeProperty('--sosta');
+  if (tasto.matches('.sitenav a') && typeof guidaEvento === 'function') guidaEvento('menu');
+  tasto.click();
   return true;
 }
+/* ---- L'ENTRATA (v2) ----
+   Nata dalla prova con un architetto: tre gesti in ordine, nomi piccoli e una mano
+   in caratteri non bastavano. Ora si impara un gesto alla volta, a tutto schermo:
+     invito    "questo sito si muove con le mani" + due tasti di pari peso,
+               "accendi la camera" e "entra col mouse". Il permesso parte dal tasto.
+     carica    mentre arriva il modello (~10 MB la prima volta) la scena mostra i
+               gesti che userai, con le mani registrate in mani-guida/, e la barra
+               dice quanto manca. Al ritorno il modello è già nel browser.
+     alza      "alza una mano aperta e riempi la sagoma": la sagoma è grande quanto
+               una mano alla distanza giusta, così la distanza si impara senza numeri.
+     muovi     "porta il cursore sul punto": due punti, a sinistra e a destra.
+     entra     "porta il cursore su entra e pizzica" (o tienilo fermo sopra): entrare
+               è il primo clic vero. Il fantasma del pizzico sta sulla tua mano.
+   Ogni passo ha un aiuto a tempo e non blocca mai: "entra col mouse" c'è sempre.
+   Al ritorno (entrata_v2 in localStorage) si salta "muovi". Per rivederla da capo:
+   ?entrata nell'indirizzo. Senza camera (http, negata, assente) resta "clicca per entrare".
+   IL VIDEO: se esiste video/entrata.mp4 (vedi il commento nell'HTML), prende il posto
+   del disegno nell'invito e nel caricamento. */
+const introAperta = () => !!intro && !intro.classList.contains('hide');
+const ENTRATA_FATTA = 'entrata_v2';
+let entrataVista = false;
+try { entrataVista = localStorage.getItem(ENTRATA_FATTA) === '1' && !/[?&]entrata\b/.test(location.search); } catch (e){}
+const $ent = id => document.getElementById(id);
+const entTela = $ent('entTela'), entCtx = entTela ? entTela.getContext('2d') : null;
+const entSopra = $ent('entSopra'), entSopraCtx = entSopra ? entSopra.getContext('2d') : null;
+const entVideo = $ent('entVideo'), entEntraEl = $ent('entEntra');
+const entPunti = [$ent('entPunto0'), $ent('entPunto1')];
+const SCENE = [
+  { gesto: 'aperta',  testo: 'entScena1' },
+  { gesto: 'pizzico', testo: 'entScena2' },
+  { gesto: 'pugno',   testo: 'entScena3' },
+];
+const SCENA_MS = 4000;
+const ent = {
+  fase: 'invito', t0: performance.now(), pronto: false, progresso: -1, video: false,
+  mani: [], lontane: false, vistaA: 0, perse: [], okDa: -1, visto: 0,
+  cur: { x: null, y: null, palmo: 0, verso: 1, pinch: false },
+  punto: 0, puntoDa: -1, pizzicoFuori: 0, pizzicoA: 0
+};
+const scriviSe = (el, testo) => { if (el && el.textContent !== testo) el.textContent = testo; };
+const PASSI_CAMERA = () => entrataVista ? ['alza', 'entra'] : ['alza', 'muovi', 'entra'];
 
-function specchioIntro(list){
-  /* nessuna mano in vista: la tela resta alla dimostrazione (vedi sotto) */
+function faseEntrata(f){
+  Object.assign(ent, { fase: f, t0: performance.now(), okDa: -1, visto: 0, punto: 0, puntoDa: -1, pizzicoFuori: 0, perse: [] });
+  intro.dataset.fase = f;
+  const titolo = { invito: 'entInvito', carica: 'entCarica', alza: 'entAlza', muovi: 'entMuovi', entra: 'entEntra' }[f];
+  const sotto = { invito: 'entInvitoSub', entra: 'entEntraSub' }[f];
+  if (titolo && introText){ introText.dataset.i18n = titolo; introText.textContent = t(titolo); }
+  if (introSub){
+    if (sotto){ introSub.dataset.i18n = sotto; introSub.textContent = t(sotto); }
+    else { delete introSub.dataset.i18n; introSub.textContent = ''; }
+  }
+  if (introSenzaGesti) introSenzaGesti.classList.remove('rilievo');
+  entPunti.forEach(p => { if (p){ p.classList.remove('fatto'); p.classList.toggle('ora', f === 'muovi'); } });
+  if (f === 'muovi') posizionaPunti();
+  if (f === 'carica' && entVideo && ent.video){ try { entVideo.currentTime = 0; } catch (e){} }
+  aggiornaVideo();
+}
+function posizionaPunti(){
+  entPunti.forEach((p, i) => { if (p) p.style.left = (i ? 78 : 22) + 'vw'; });
+}
+/* invito: sul computer "accendi la camera" è il tasto pieno; sul telefono si entra col tocco */
+function preparaInvito(){
+  const cam = $ent('entCamera'), mou = $ent('entMouse');
+  if (!cam || !mou) return;
+  const tel = typeof COARSE_PTR !== 'undefined' && COARSE_PTR;
+  cam.dataset.i18n = tel ? 'entMani' : 'entCamera'; cam.textContent = t(cam.dataset.i18n);
+  mou.dataset.i18n = tel ? 'entTocca' : 'entMouse'; mou.textContent = t(mou.dataset.i18n);
+  cam.classList.toggle('pieno', !tel); mou.classList.toggle('pieno', tel);
+  if (tel) mou.parentNode.insertBefore(mou, cam);
+  [cam, mou, entEntraEl].forEach(b => b && ['pointerdown', 'pointerup', 'click'].forEach(tipo => b.addEventListener(tipo, e => e.stopPropagation())));
+  cam.addEventListener('click', () => { faseEntrata('carica'); startScan(); });
+  mou.addEventListener('click', () => dismissIntro());
+  if (entEntraEl) entEntraEl.addEventListener('click', entra);
+}
+/* il video, se c'è: solo nell'invito e nel caricamento */
+function aggiornaVideo(){
+  if (!entVideo) return;
+  const usa = ent.video && (ent.fase === 'invito' || ent.fase === 'carica') && !reduceMotion;
+  entVideo.hidden = !usa;
+  if (usa){ const p = entVideo.play(); if (p && p.catch) p.catch(() => {}); } else entVideo.pause();
+}
+if (entVideo){
+  entVideo.addEventListener('loadeddata', () => { ent.video = true; aggiornaVideo(); });
+  try { entVideo.load(); } catch (e){}
+}
+function entra(){
+  if (!introAperta()) return;
+  try { localStorage.setItem(ENTRATA_FATTA, '1'); } catch (e){}
+  /* si entra a mani "pulite": un pizzico ancora chiuso non deve cliccare nulla */
+  handState.forEach(s => { s.pinchWas = true; });
+  soste.forEach(s => { s.fatto = true; });
+  lastGestureAt = performance.now();
+  handCursors.forEach(c => c.classList.remove('sosta'));
+  dismissIntro();
+}
+/* chiamate dalla camera e dal worker */
+function entrataPronta(){ ent.pronto = true; }
+function entrataProgresso(ricevuti, totale){ ent.progresso = totale ? Math.min(1, ricevuti / totale) : -1; }
+
+/* le mani, finché l'entrata è aperta (da onHands): non comandano il sito, servono ai passi */
+function entrataMani(list, lontane){
+  const now = performance.now(), c = handCursors[0], cv = cursoriVisti[0];
+  ent.lontane = lontane;
   if (!list.length){
-    intro.querySelectorAll('#introGesti .sl-gesto.ora').forEach(g => g.classList.remove('ora'));
-    specchioStato.refX = null;
+    if (ent.mani.length) ent.perse.push(now);
+    ent.mani = []; ent.cur.x = null; ent.cur.pinch = false;
+    c.hidden = true; c.classList.remove('pinch', 'sosta');
+    if (entEntraEl) entEntraEl.classList.remove('sopra');
     return;
   }
-  specchioStato.vera = performance.now();
-  introSpecchio.classList.remove('demo');
-  intro.querySelectorAll('#introGesti .sl-gesto.demo').forEach(g => g.classList.remove('demo'));
-  /* senza tela (o tela nascosta) vale la regola di prima: la prima mano fa entrare */
-  if (!disegnaSpecchio(list)){ dismissIntro(); return; }
-
-  /* quale gesto stai facendo (gli stessi criteri che poi comandano il sito) */
-  const ora = { sposta: false, clicca: false, scrivimi: false };
-  const now = performance.now();
+  ent.mani = list; ent.vistaA = now;
   const lm = list[0];
-  if (lm){
-    const size = lmDist(lm[0], lm[9]);
-    const pinch = lmDist(lm[4], lm[8]) < size * 0.45;
-    const steso   = k => lmDist(lm[k], lm[0]) > size * 1.6;
-    const piegato = k => lmDist(lm[k], lm[0]) < size * 1.3;
-    const due = !pinch && steso(8) && steso(12) && piegato(16) && piegato(20);
-    ora.clicca = pinch; ora.scrivimi = due;
-    if (!pinch && !due){
-      const x = lm[9].x;
-      if (specchioStato.refX === null || now - specchioStato.refT > 500){ specchioStato.refX = x; specchioStato.refT = now; }
-      else if (Math.abs(x - specchioStato.refX) > 0.16){ specchioStato.spostaFino = now + 500; specchioStato.refX = x; specchioStato.refT = now; }
-    } else {
-      specchioStato.refX = null;
-    }
-    if (now < specchioStato.spostaFino) ora.sposta = true;
-  } else {
-    specchioStato.refX = null;
-  }
-  intro.querySelectorAll('#introGesti .sl-gesto').forEach(g => {
-    const k = g.dataset.gesto;
-    g.classList.toggle('ora', !!ora[k]);
-    if (ora[k]){ g.classList.add('fatto'); specchioStato.fatti[k] = true; }
-  });
-  if (specchioStato.fatti.sposta && specchioStato.fatti.clicca && specchioStato.fatti.scrivimi && !specchioStato.chiude){
-    specchioStato.chiude = setTimeout(() => {
-      /* si entra a mani "pulite": un pizzico ancora chiuso non deve cliccare nulla */
-      handState.forEach(s => { s.pinchWas = true; });
-      lastGestureAt = performance.now();
-      dismissIntro();
-    }, 1000);
+  const rawX = (1 - lm[9].x) * innerWidth, rawY = lm[9].y * innerHeight;
+  if (ent.cur.x === null){ ent.cur.x = rawX; ent.cur.y = rawY; }
+  ent.cur.x = ent.cur.x * 0.65 + rawX * 0.35;
+  ent.cur.y = ent.cur.y * 0.65 + rawY * 0.35;
+  ent.cur.palmo = Math.hypot((lm[9].x - lm[0].x) * innerWidth, (lm[9].y - lm[0].y) * innerHeight);
+  ent.cur.verso = versoMano(lm);
+  const eraPizzico = ent.cur.pinch;
+  ent.cur.pinch = pizzicoChiuso(lm, eraPizzico);
+  if (ent.cur.pinch && !eraPizzico) ent.pizzicoA = now;
+  /* il cursore si vede da "muovi" in poi: è lì che si impara */
+  if (ent.fase !== 'muovi' && ent.fase !== 'entra'){ c.hidden = true; return; }
+  c.hidden = false; c.style.opacity = 1;
+  cv.tx = ent.cur.x; cv.ty = ent.cur.y;
+  if (cv.x === null){ cv.x = ent.cur.x; cv.y = ent.cur.y; c.style.transform = `translate(${cv.x - 14}px, ${cv.y - 14}px)`; }
+  c.classList.toggle('pinch', ent.cur.pinch);
+  if (ent.fase === 'entra' && entEntraEl){
+    const suEntra = sopra(entEntraEl, ent.cur.x, ent.cur.y);
+    entEntraEl.classList.toggle('sopra', suEntra);
+    if (ent.cur.pinch && !eraPizzico){ if (suEntra) entra(); else ent.pizzicoFuori = now; }
+    else sostaClic(0, ent.cur.x, ent.cur.y, !ent.cur.pinch, now);
   }
 }
 
-/* ---- la dimostrazione ----
-   Finché nessuna mano vera è in vista, nello specchio una mano di esempio
-   (più chiara) fa i tre gesti uno dopo l'altro, e sotto si illumina il
-   nome di quello che sta facendo: chi entra capisce subito che il sito
-   si usa con le mani, e come. Appena compare una mano vera, lascia il
-   posto a quella. */
-const DEMO_BASE = [[.5,.9],[.44,.84],[.39,.77],[.35,.71],[.32,.65],[.44,.64],[.42,.53],[.41,.46],[.40,.40],[.5,.62],[.5,.50],[.5,.42],[.5,.35],[.555,.64],[.57,.53],[.58,.46],[.585,.40],[.60,.68],[.63,.60],[.645,.55],[.655,.50]];
-const DEMO_POSE = {
-  sposta:   {},
-  clicca:   { 3:[.38,.62], 4:[.405,.555], 6:[.42,.56], 7:[.41,.545], 8:[.405,.55] },
-  scrivimi: { 3:[.44,.72], 4:[.47,.70], 6:[.415,.53], 7:[.40,.45], 8:[.385,.38], 14:[.57,.60], 15:[.565,.66], 16:[.56,.70], 18:[.62,.66], 19:[.615,.70], 20:[.61,.74] }
-};
-const DEMO_GIRO = ['sposta', 'clicca', 'scrivimi'], DEMO_DURATA = 2200;
-function manoDemo(now){
-  const fase = Math.floor(now / DEMO_DURATA) % 3, k = (now % DEMO_DURATA) / DEMO_DURATA;
-  const gesto = DEMO_GIRO[fase], prima = DEMO_GIRO[(fase + 2) % 3];
-  const m = Math.min(1, k / 0.18);                       /* passa morbida da un gesto all'altro */
-  const dx = gesto === 'sposta' ? Math.sin(k * Math.PI * 2) * 0.16 : 0;
-  const lm = DEMO_BASE.map((b, i) => {
-    const a = DEMO_POSE[prima][i] || b, z = DEMO_POSE[gesto][i] || b;
-    return { x: a[0] + (z[0] - a[0]) * m + dx, y: a[1] + (z[1] - a[1]) * m - 0.12 };
-  });
-  return { gesto, lm };
+/* una tela alla misura del suo riquadro; coordinate in px CSS */
+function telaPronta(cv, ctx){
+  const r = cv.getBoundingClientRect();
+  if (r.width < 8 || r.height < 8) return null;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  if (cv.width !== Math.round(r.width * dpr) || cv.height !== Math.round(r.height * dpr)){
+    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, r.width, r.height);
+  return { W: r.width, H: r.height };
 }
-(function dimostra(){
-  if (!introAperta()) return;
-  const now = performance.now();
-  if (!intro.classList.contains('no-cam') && now - (specchioStato.vera || 0) > 700){
-    const d = manoDemo(now);
-    if (disegnaSpecchio([d.lm])){
-      introSpecchio.classList.add('demo');
-      intro.querySelectorAll('#introGesti .sl-gesto').forEach(g => g.classList.toggle('demo', g.dataset.gesto === d.gesto));
+const rapportoPizzicoDi = p => Math.hypot(p[4].x - p[8].x, p[4].y - p[8].y) / (Math.hypot(p[0].x - p[9].x, p[0].y - p[9].y) || 1);
+/* il cerchio del cursore, come quello del sito: pieno quando "clicca" */
+function cerchio(c, x, y, pieno, colore){
+  c.save(); c.lineWidth = 2; c.strokeStyle = colore; c.fillStyle = pieno ? colore : 'rgba(255,255,255,0.6)';
+  c.beginPath(); c.arc(x, y, 14, 0, Math.PI * 2); c.fill(); c.stroke(); c.restore();
+}
+/* la dimostrazione: tre scene da 4 s con le mani registrate, a tratto pieno */
+function disegnaScene(c, W, H, ms, colore){
+  const n = Math.floor(ms / SCENA_MS) % SCENE.length, scena = SCENE[n];
+  const loc = reduceMotion ? SCENA_MS * 0.4 : ms % SCENA_MS, k = loc / SCENA_MS;
+  const d = FANTASMI[scena.gesto];
+  const p = d && fantasmaAl(d, loc);
+  if (!p) return scena;
+  const palmo = H * 0.26;
+  let ax = W / 2, ay = H * 0.62;
+  if (scena.gesto === 'aperta' && !reduceMotion) ax += Math.sin(k * Math.PI * 2) * W * 0.2;
+  if (scena.gesto === 'pugno'){
+    const dx = reduceMotion ? 0 : Math.sin(k * Math.PI * 2) * W * 0.14;
+    ax += dx - W * 0.12;
+    /* la nuvola che si trascina: cinque riquadri che seguono il pugno */
+    c.save(); c.strokeStyle = colore; c.lineWidth = 1.5;
+    [[0.62, 0.28], [0.74, 0.44], [0.66, 0.62], [0.8, 0.7], [0.86, 0.3]].forEach(([fx, fy], j) => {
+      const s = H * (0.1 + (j % 3) * 0.025);
+      c.strokeRect(W * fx + dx * 0.9 - s / 2, H * fy - s / 2, s, s * 1.2);
+    });
+    c.restore();
+  }
+  const q = puntiSu(p, { x: ax, y: ay }, palmo, false);
+  manoPiena(c, q, palmo, colore);
+  if (scena.gesto !== 'pugno') cerchio(c, q[9].x, q[9].y - palmo * 0.15, scena.gesto === 'pizzico' && rapportoPizzicoDi(p) < 0.42, colore);
+  return scena;
+}
+/* "alza": la sagoma (mano aperta registrata) grande quanto una mano alla soglia, e la tua mano sopra */
+function disegnaAlza(c, W, H, colore, ok){
+  const f = (scanVideo.videoWidth && scanVideo.videoHeight) ? scanVideo.videoWidth / scanVideo.videoHeight : 4 / 3;
+  const d = FANTASMI.aperta, palmoSoglia = MANO_VICINA * H;
+  const p = d && fantasmaAl(d, 0);
+  if (p){
+    c.strokeStyle = c.fillStyle = colore; c.lineWidth = 3; c.globalAlpha = ok ? 1 : 0.85;
+    if (ok) manoPiena(c, puntiSu(p, { x: W / 2, y: H * 0.55 }, palmoSoglia, false), palmoSoglia, colore);
+    else disegnaFantasma(p, { x: W / 2, y: H * 0.55 }, palmoSoglia, false, c);
+    c.globalAlpha = 1;
+  }
+  /* la mano vera: la camera vista come uno specchio, alta quanto la tela */
+  const fw = H * f, x0 = (W - fw) / 2;
+  ent.mani.slice(0, 2).forEach(lm => {
+    const q = lm.map(v => ({ x: x0 + (1 - v.x) * fw, y: v.y * H }));
+    c.globalAlpha = ent.lontane ? 0.4 : 0.9;
+    manoPiena(c, q, Math.hypot(q[9].x - q[0].x, q[9].y - q[0].y), colore);
+    c.globalAlpha = 1;
+  });
+}
+
+/* la legenda: ogni gesto con la sua mano registrata, in piccolo e in loop */
+const entLegendaFig = Array.from(document.querySelectorAll('#entLegenda figure')).map(f => {
+  const cv = f.querySelector('canvas');
+  return { f, cv, ctx: cv ? cv.getContext('2d') : null, gesto: f.dataset.gesto, moto: f.dataset.moto || '' };
+});
+function disegnaLegenda(now, colore){
+  if (intro.classList.contains('no-cam')) return;
+  const ms = reduceMotion ? 1200 : now;
+  entLegendaFig.forEach(L => {
+    if (!L.ctx) return;
+    const tela = telaPronta(L.cv, L.ctx);
+    const d = FANTASMI[L.gesto];
+    if (!tela || !d) return;
+    const p = fantasmaAl(d, L.moto === 'fermo' ? 0 : ms % 3200);
+    if (!p) return;
+    const palmo = tela.H * 0.3;
+    const dx = L.moto === 'lato' && !reduceMotion ? Math.sin(ms / 700) * tela.W * 0.16 : 0;
+    const q = puntiSu(p, { x: tela.W / 2 + dx, y: tela.H * 0.62 }, palmo, false);
+    manoPiena(L.ctx, q, palmo, colore);
+    if (L.gesto === 'pugno') return;
+    const cx = q[9].x, cy = q[9].y - palmo * 0.15, c = L.ctx;
+    if (L.moto === 'fermo'){
+      /* l'anello che si riempie, come il cursore quando lo tieni fermo su un tasto */
+      const k = reduceMotion ? 0.7 : Math.min(1, (ms % 1800) / 1200);
+      c.save(); c.fillStyle = 'rgba(255,255,255,0.7)'; c.strokeStyle = colore; c.lineWidth = 1.5;
+      c.beginPath(); c.arc(cx, cy, 9, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.fillStyle = colore; c.beginPath(); c.moveTo(cx, cy); c.arc(cx, cy, 9, -Math.PI / 2, -Math.PI / 2 + k * Math.PI * 2); c.closePath(); c.fill();
+      c.restore();
+    } else {
+      c.save(); c.lineWidth = 1.5; c.strokeStyle = colore;
+      c.fillStyle = L.gesto === 'pizzico' && rapportoPizzicoDi(p) < 0.42 ? colore : 'rgba(255,255,255,0.7)';
+      c.beginPath(); c.arc(cx, cy, 9, 0, Math.PI * 2); c.fill(); c.stroke(); c.restore();
+    }
+  });
+}
+
+function cicloEntrata(now){
+  if (!introAperta()){
+    if (entSopraCtx) entSopraCtx.clearRect(0, 0, entSopra.width, entSopra.height);
+    return;
+  }
+  const stile = getComputedStyle(document.documentElement);
+  const colore = stile.getPropertyValue('--ink').trim() || '#0a0a0a';
+  fantasmaCarta = stile.getPropertyValue('--paper').trim() || '#fff';
+  const dt = now - ent.t0, f = ent.fase;
+  const passi = PASSI_CAMERA(), n = passi.indexOf(f);
+  scriviSe($ent('entPassoN'), n >= 0 ? t('entPasso').replace('{n}', n + 1).replace('{tot}', passi.length) : '');
+  let dida = '', aiuto = '';
+
+  /* la scena */
+  const tela = entCtx && (f === 'invito' || f === 'carica' || f === 'alza') ? telaPronta(entTela, entCtx) : null;
+  if (tela && (f === 'invito' || f === 'carica') && !(ent.video && !reduceMotion)){
+    const scena = disegnaScene(entCtx, tela.W, tela.H, dt, colore);
+    dida = t(scena.testo);
+  } else if (tela && (f === 'invito' || f === 'carica')){
+    dida = t(SCENE[Math.floor(dt / SCENA_MS) % SCENE.length].testo);   /* il video: le didascalie seguono i suoi 4 s */
+  }
+
+  if (f === 'carica'){
+    const barra = $ent('entBarra'), testo = $ent('entCaricaTesto');
+    if (barra){
+      barra.classList.toggle('vaga', ent.progresso < 0 && !ent.pronto);
+      const i = barra.querySelector('i'); if (i) i.style.width = ent.pronto ? '100%' : ent.progresso >= 0 ? Math.round(ent.progresso * 100) + '%' : '';
+    }
+    scriviSe(testo, ent.pronto ? '' : ent.progresso >= 0.999 ? t('entQuasi') : ent.progresso >= 0 ? t('entCaricoPct').replace('{p}', Math.round(ent.progresso * 100)) : t('entCarico'));
+    if (!ent.pronto && dt > 25000){ aiuto = t('entLento'); introSenzaGesti.classList.add('rilievo'); }
+    /* si va avanti quando le mani sono pronte e si sono viste almeno due scene (la prima volta) */
+    if (ent.pronto && dt >= (entrataVista ? 0 : SCENA_MS * 2)) faseEntrata('alza');
+  }
+
+  else if (f === 'alza'){
+    const vede = ent.mani.length > 0 && !ent.lontane;
+    if (vede){ if (ent.okDa < 0) ent.okDa = now; } else ent.okDa = -1;
+    if (!ent.visto && ent.okDa > 0 && now - ent.okDa > 600) ent.visto = now;
+    if (tela) disegnaAlza(entCtx, tela.W, tela.H, colore, !!ent.visto);
+    if (ent.visto){ dida = t('entVisto'); if (now - ent.visto > 700) faseEntrata(passi[1]); }
+    else if (ent.lontane) aiuto = t('entVicino');
+    else if (dt > 8000 && now - ent.vistaA > 2000) aiuto = t('entNonVedo');
+    if (dt > 20000 && !ent.visto) introSenzaGesti.classList.add('rilievo');
+  }
+
+  else if (f === 'muovi'){
+    /* i due punti valgono in qualsiasi ordine: si parte da quello più vicino alla mano */
+    let sopraUno = false;
+    if (ent.cur.x !== null) entPunti.forEach(p => {
+      if (!p || p.classList.contains('fatto')) return;
+      const r = p.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      if (Math.hypot(ent.cur.x - cx, ent.cur.y - cy) < 46){
+        sopraUno = true;
+        if (ent.puntoDa < 0) ent.puntoDa = now;
+        if (now - ent.puntoDa > 300){ p.classList.add('fatto'); p.classList.remove('ora'); ent.punto++; ent.puntoDa = -1; }
+      }
+    });
+    if (!sopraUno) ent.puntoDa = -1;
+    if (ent.lontane) aiuto = t('entVicino');
+    else if (dt > 10000) aiuto = t('entMuoviAiuto');
+    if (ent.punto >= entPunti.length && !ent.visto) ent.visto = now;
+    if (ent.visto && now - ent.visto > 400) faseEntrata('entra');
+    else if (dt > 20000) faseEntrata('entra');   /* non blocca mai */
+  }
+
+  else if (f === 'entra'){
+    ent.perse = ent.perse.filter(x => now - x < 5000);
+    if (ent.lontane) aiuto = t('entVicino');
+    else if (ent.perse.length >= 3) aiuto = t('entPiano');
+    else if (ent.pizzicoFuori && now - ent.pizzicoFuori < 2500) aiuto = t('entBene');
+    else if (dt > 25000) aiuto = t('entOppure');
+  }
+  scriviSe($ent('entDida'), dida);
+  scriviSe($ent('entAiuto'), aiuto);
+  disegnaLegenda(now, colore);
+
+  /* sopra a tutto: il fantasma del pizzico, sulla mano del visitatore (o vicino a "entra") */
+  if (entSopraCtx){
+    const tutta = telaPronta(entSopra, entSopraCtx);
+    const d = FANTASMI.pizzico;
+    if (tutta && f === 'entra' && d){
+      const p = fantasmaAl(d, reduceMotion ? 600 : (now - ent.t0) * (dt > 10000 ? 0.5 : 1));   /* dopo 10 s, al rallentatore */
+      if (p){
+        entSopraCtx.strokeStyle = entSopraCtx.fillStyle = colore; entSopraCtx.globalAlpha = 0.55; entSopraCtx.lineWidth = 2;
+        if (ent.cur.x !== null && ent.cur.palmo) disegnaFantasma(p, { x: ent.cur.x, y: ent.cur.y }, ent.cur.palmo, ent.cur.verso !== versoMano(p), entSopraCtx);
+        else if (entEntraEl){
+          const r = entEntraEl.getBoundingClientRect(), palmo = Math.min(tutta.H * 0.08, 70);
+          disegnaFantasma(p, { x: r.left + r.width / 2, y: r.top - palmo * 1.6 }, palmo, false, entSopraCtx);
+        }
+        entSopraCtx.globalAlpha = 1;
+      }
     }
   }
-  requestAnimationFrame(dimostra);
-})();
+  requestAnimationFrame(cicloEntrata);
+}
+preparaInvito();
+faseEntrata('invito');
+requestAnimationFrame(cicloEntrata);
 
 /* scorrere con la mano: fuori dalla nuvola (lavori, about, contatti, indice,
    schede aperte) la mano chiusa trascina la pagina su e giù, come un dito
@@ -3451,6 +4164,8 @@ function manoMisura(lm){
   return Math.hypot((lm[0].x - lm[9].x) * formato, lm[0].y - lm[9].y);
 }
 
+/* (nell'entrata, la mano oltre la soglia fa comparire "avvicinati: la mano deve riempire la sagoma": vedi cicloEntrata) */
+
 function onHands(list){
   list = list || [];
   const misure = list.slice(0, 2).map(manoMisura);
@@ -3461,7 +4176,7 @@ function onHands(list){
   const taratura = () => { if (TARATURA && misure.length) scanStatus.textContent += ' · ' + misure.map(m => m.toFixed(3)).join(' / '); };
 
   if (introAperta()){
-    specchioIntro(list);
+    entrataMani(list, troppoLontane);
     if (TARATURA){ scanStatus.textContent = t(troppoLontane ? 'scanFar' : 'scanShow'); taratura(); }
     return;
   }
@@ -3479,6 +4194,8 @@ function onHands(list){
     }
   }
 
+  guidaVisibilita();
+  mostraGuidaVoce();
   if (!list.length){
     scanStatus.textContent = t(troppoLontane ? 'scanFar' : 'scanNoHands');
     taratura();
@@ -3490,6 +4207,8 @@ function onHands(list){
   const anyPinch = results.some(r => r.pinch);
   const anyFist  = results.some(r => r.fist);
   const bothPinch = list.length === 2 && results[0].pinch && results[1].pinch;
+  /* la guida dell'indice legge i gesti prima che i due pizzichi chiudano l'indice */
+  guidaPasso({ fist: anyFist, pinch: anyPinch, both: bothPinch });
 
   if (bothPinch && window.activeModelViewer && window.activeModelViewer.isConnected){
     /* due pizzichi con un modello aperto: allarga le mani = avvicina */
@@ -3529,14 +4248,12 @@ addEventListener('resize', () => {
 buildCloud();
 frame();
 
-/* ---- avvio della camera per l'intro ----
-   Perché "show your hands to the camera" sia vero da subito:
-     - permesso già concesso → la camera parte da sola;
-     - permesso negato o camera impossibile → "click to enter";
-     - computer → la richiesta parte subito all'apertura;
-     - telefono → la richiesta parte dal primo tocco: iOS e molti
-       Android rifiutano in silenzio una richiesta senza gesto, e quel
-       primo rifiuto può bloccare anche i tentativi successivi.
+/* ---- avvio della camera per l'entrata ----
+   Il permesso non parte più all'apertura: prima si spiega, poi si chiede.
+     - permesso già concesso → la camera parte da sola e si salta l'invito;
+     - permesso negato o camera impossibile → "clicca per entrare";
+     - altrimenti → l'invito, e la richiesta parte dal tasto "accendi la camera"
+       (anche sul telefono, dove una richiesta senza gesto viene rifiutata).
    Chi arriva da un link diretto (intro già chiusa) non riceve
    nessuna richiesta: la camera resta sulla freccia in basso.             */
 (async function avvioScan(){
@@ -3545,11 +4262,10 @@ frame();
   try{
     if (navigator.permissions && navigator.permissions.query){
       const st = await navigator.permissions.query({ name: 'camera' });
-      if (st.state === 'granted'){ startScan(); return; }
+      if (st.state === 'granted' && !COARSE_PTR){ faseEntrata('carica'); startScan(); return; }
       if (st.state === 'denied'){ introSenzaCamera(); return; }
     }
-  }catch(err){ /* Safari senza query 'camera': si decide sotto */ }
-  if (!COARSE_PTR) startScan();
+  }catch(err){ /* Safari senza query 'camera': resta l'invito */ }
 })();
 </script>
 
@@ -3558,7 +4274,18 @@ frame();
 <div id="view-about" hidden>
 
 
-<a class="about-close" href="#" data-i18n="aboutClose" onclick="showView('archivio');return false;">Chiudi &#10005;</a>
+<!-- stessa testata delle altre pagine (nome + menu): si esce dall'about come da ogni altra pagina -->
+<header class="about-header">
+  <div class="wordmark">edoardo tavoni</div>
+  <nav class="sitenav">
+    <a href="#archivio" data-view="archivio" onclick="showView('archivio');return false;">archivio</a>
+    <a href="#lavori" data-view="lavori" onclick="showView('lavori');return false;">lavori</a>
+    <a href="#about" data-view="about" class="current" onclick="showView('about');return false;">about</a>
+    <a href="#contatti" data-view="contatti" onclick="showView('contatti');return false;">contatti</a>
+  </nav>
+  <div class="hdr-actions">
+  </div>
+</header>
 
 <main class="reel-about">
   <div class="reel-lines" id="reelLines" role="img" aria-label="Chi sono"></div>
@@ -3574,12 +4301,11 @@ frame();
 </section>
 
 <!-- il nome sta solo in alto a sinistra, come nelle altre pagine -->
-<div class="wordmark about-mark">edoardo tavoni</div>
 
 <footer class="about-foot">
   <div class="footer-links">
-    <a href="mailto:edoardotavoni@gmail.com">EMAIL</a>
-    <a href="https://instagram.com/edoardotavonii" target="_blank" rel="noopener">INSTAGRAM</a>
+    <a href="mailto:edoardotavoni@gmail.com">email</a>
+    <a href="https://instagram.com/edoardotavonii" target="_blank" rel="noopener">instagram</a>
   </div>
   <span class="view-label" data-i18n="viewLabelAbout">about</span>
 </footer>
@@ -4546,8 +5272,8 @@ const PROPONI_ENDPOINT = 'https://proponi.edoardotavoni.workers.dev/';
       a.textContent = s.fonte; el.appendChild(a);
     }
     const azioni = document.createElement('div'); azioni.className = 'rev-actions';
-    const si = document.createElement('button'); si.type = 'button'; si.className = 'rev-ok'; si.textContent = 'APPROVA';
-    const no = document.createElement('button'); no.type = 'button'; no.className = 'rev-no'; no.textContent = 'RIFIUTA';
+    const si = document.createElement('button'); si.type = 'button'; si.className = 'rev-ok'; si.textContent = 'approva';
+    const no = document.createElement('button'); no.type = 'button'; no.className = 'rev-no'; no.textContent = 'rifiuta';
     azioni.appendChild(si); azioni.appendChild(no); el.appendChild(azioni);
 
     async function decidi(azione){
@@ -4569,7 +5295,7 @@ const PROPONI_ENDPOINT = 'https://proponi.edoardotavoni.workers.dev/';
     si.addEventListener('click', () => decidi('approva'));
     /* rifiutare cancella: chiede conferma con un secondo clic */
     no.addEventListener('click', () => {
-      if (!no.classList.contains('sure')){ no.classList.add('sure'); no.textContent = 'SICURO?'; return; }
+      if (!no.classList.contains('sure')){ no.classList.add('sure'); no.textContent = 'sicuro?'; return; }
       decidi('rifiuta');
     });
     return el;
@@ -4665,7 +5391,7 @@ function applyLang(){
     if (typeof window[f] === 'function') window[f]();
   });
   if (typeof indexOpen !== 'undefined' && indexOpen && typeof buildIndex === 'function') buildIndex();
-  if (typeof currentViewName === 'function') document.title = 'EdoardoTavoni_P_A — ' + t('nav' + currentViewName().charAt(0).toUpperCase() + currentViewName().slice(1));
+  if (typeof currentViewName === 'function') document.title = 'edoardo tavoni — ' + t('nav' + currentViewName().charAt(0).toUpperCase() + currentViewName().slice(1));
 }
 
 function setLang(l){
@@ -4692,7 +5418,7 @@ applyLang();
         a.classList.toggle('current', a.dataset.view === name);
         if (a.dataset.view === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
       });
-      document.title = 'EdoardoTavoni_P_A — ' + t('nav' + name.charAt(0).toUpperCase() + name.slice(1));
+      document.title = 'edoardo tavoni — ' + t('nav' + name.charAt(0).toUpperCase() + name.slice(1));
       if (location.hash.split('/')[0] !== '#' + name) safeReplaceHash('#' + name);
     };
     /* dissolvenza tra le viste (View Transitions API): nativa,
