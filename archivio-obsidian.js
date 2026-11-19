@@ -1,6 +1,6 @@
-/* Generato da sincronizza-archivio.ps1 il 2026-10-21 12:19.
+/* Generato da sincronizza-archivio.ps1 il 2026-11-19 12:01.
    Non modificarlo a mano: verrebbe sovrascritto. Cambia le note nel vault. */
-window.ARCHIVE_SYNC = "2026-10-21T12:19";
+window.ARCHIVE_SYNC = "2026-11-19T12:01";
 window.ARCHIVE_OBSIDIAN = [
     {
         "id":  "inspo-bitscape-moonseopseo",
@@ -1087,6 +1087,601 @@ window.ARCHIVE_OBSIDIAN = [
         "kind":  "riferimento",
         "note":  "La giacca sembra bagnata o laccata: un nylon testurizzato trattato con resina e termopressato, che diventa lucido e si piega in grinze rigide, come carta stagnola. Il colore arancio-rosso pieno, dalla giacca ai cargo sbiaditi, rende la figura un unico blocco cromatico; la posa, le mani giunte davanti al volto, toglie il viso e lascia parlare il materiale.",
         "source":  "https://culted.com/fashion/fakemink-skepta-and-more-front-stone-islands-latest-campa/"
+    },
+    {
+        "id":  "inspo-breuer-wassily",
+        "src":  "images/obsidian/inspo-breuer-wassily.png",
+        "thumb":  "images/obsidian/thumbs/inspo-breuer-wassily.jpg",
+        "title":  "Sedia Wassily — Marcel Breuer",
+        "description":  "Sedia Wassily, 1925 — Marcel Breuer. Immagine: Wikimedia Commons.",
+        "domain":  [
+                       "product-design",
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "bauhaus",
+                     "seduta",
+                     "metallo"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Una sedia che è essenzialmente uno schizzo tecnico reso oggetto: telaio in tubolare d\u0027acciaio piegato a freddo che sostituisce la falegnameria tradizionale, con superfici in tessuto/cuoio tese come vele. È l\u0027esempio perfetto di come un principio tecnico — la lavorazione del tubolare metallico, mutuata dal telaio delle biciclette — possa generare una nuova grammatica formale, non solo un nuovo materiale."
+    },
+    {
+        "id":  "inspo-durand-dystopian-series",
+        "src":  "images/obsidian/inspo-durand-dystopian-series.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-durand-dystopian-series.jpg",
+        "title":  "Dystopian Remains — Jean-Baptiste Durand",
+        "description":  "Non Vase 01, Dystopian Series 2 (2024) — Jean-Baptiste Durand. Immagine: Yatzer.",
+        "domain":  [
+                       "product-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "design-speculativo",
+                     "fantascienza",
+                     "archeologia-del-futuro"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Serie concettuale che immagina i propri oggetti come \"artefatti scoperti da archeologi futuri\" in un mondo post-fossile, dove le risorse odierne sono ormai esaurite. Non è un semplice esercizio stilistico: è un dispositivo narrativo che usa il progetto per rendere visibile — e discutibile — l\u0027ansia tecnologica ed ecologica del presente, invece di rassicurare chi guarda.",
+        "source":  "https://www.yatzer.com/jean-baptiste-durand"
+    },
+    {
+        "id":  "inspo-durand-fcnd002",
+        "src":  "images/obsidian/inspo-durand-fcnd002.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-durand-fcnd002.jpg",
+        "title":  "Techno Exuberance — Jean-Baptiste Durand",
+        "description":  "FCND-002 Light fixture (2025) — Jean-Baptiste Durand. Immagine: Yatzer.",
+        "domain":  [
+                       "product-design",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "design-speculativo",
+                     "tecno-estetica",
+                     "bricolage",
+                     "francia"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Designer francese (Beaux-Arts de Saint-Étienne, 5 anni nello studio di Mathieu Lehanneur) che rifiuta il minimalismo contemporaneo per costruire artefatti ibridi a metà tra architettura d\u0027interni, scenografia, mobile e oggetto. Il suo metodo è \"opportunistico\": costruisce un repertorio di immagini, dettagli e riferimenti visivi che poi ricombina, come un campionatore musicale — non parte da un piano ideale, parte da quello che ha già raccolto.",
+        "source":  "https://jeanbaptistedurand.com/"
+    },
+    {
+        "id":  "inspo-durand-hyperbeast",
+        "src":  "images/obsidian/inspo-durand-hyperbeast.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-durand-hyperbeast.jpg",
+        "title":  "Hyperbeast Armchair — Jean-Baptiste Durand",
+        "description":  "Hyperbeast Armchair (2024) — Jean-Baptiste Durand. Foto: Grégory Copitet.",
+        "domain":  [
+                       "product-design",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "seduta",
+                     "gamer-estetica",
+                     "acciaio",
+                     "led"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Una poltrona-struttura in acciaio e compensato che sembra \"strappata da cavi\", con un chiaro riferimento all\u0027estetica gamer/hyperbeast: LED, componenti elettrici a vista, tessuti tecnici. Non nasconde nulla del proprio apparato tecnologico — anzi lo espone come ornamento, ribaltando l\u0027idea che l\u0027elettronica debba sparire dentro un involucro neutro.",
+        "source":  "https://www.yatzer.com/jean-baptiste-durand"
+    },
+    {
+        "id":  "inspo-echo-alu-edition",
+        "src":  "images/obsidian/inspo-echo-alu-edition.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-echo-alu-edition.jpg",
+        "title":  "01 Alu Edition — ECHO, Dutch Design Week",
+        "description":  "01 Alu Edition — ECHO, Dutch Design Week 2026. Immagine: Dezeen.",
+        "domain":  [
+                       "product-design",
+                       "brand-identity"
+                   ],
+        "tags":  [
+                     "scarto-industriale",
+                     "alluminio",
+                     "bricolage-collettivo",
+                     "economia-circolare"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Il bricolage, nel vault, è sempre stato un gesto individuale: un designer che ricombina un repertorio eterogeneo di oggetti trovati secondo una logica personale. Qui 14 designer diversi lavorano sullo stesso repertorio — ritagli scartati da un unico processo industriale (pali per l\u0027illuminazione stradale, profilati estrusi) — e ne escono 14 risultati diversi. Non è più bricolage di un autore su materiali eterogenei: è bricolage comparativo, un esperimento quasi scientifico su quanta varietà di esito nasca da un vincolo di materiale condiviso e fisso.",
+        "source":  "https://www.dezeen.com/2026/10/12/ten-exhibitions-installations-dutch-design-week-2026/amp/"
+    },
+    {
+        "id":  "inspo-eliasson-domestic-motion",
+        "src":  "images/obsidian/inspo-eliasson-domestic-motion.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-eliasson-domestic-motion.jpg",
+        "title":  "Domestic Motion — Olafur Eliasson",
+        "description":  "Domestic Motion, 2005 — Olafur Eliasson, Jamie Residence, Pasadena. Foto: Fredrik Nilsen.",
+        "domain":  [
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "luce",
+                     "prisma",
+                     "colore",
+                     "soglia",
+                     "installazione"
+                 ],
+        "addedAt":  "2026-09-16",
+        "kind":  "riferimento",
+        "note":  "Il dettaglio che conta, qui, non è l\u0027effetto ottico ma dove Eliasson decide di metterlo: non su una parete di museo, ma incastrato dentro lo stipite di una porta, in una casa privata di Pasadena, come parte di una mostra che si chiamava — con un titolo che è già un manifesto — Meant to be lived in (Today I\u0027m feeling prismatic). Una soglia è lo spazio che si attraversa senza guardarlo: la usiamo per passare da una stanza all\u0027altra, mai come destinazione. Domestic Motion trasforma esattamente quel punto cieco dell\u0027attenzione domestica nel luogo dove succede tutto.",
+        "source":  "https://olafureliasson.net/artwork/domestic-motion-2005/"
+    },
+    {
+        "id":  "inspo-eliasson-riverbed",
+        "src":  "images/obsidian/inspo-eliasson-riverbed.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-eliasson-riverbed.jpg",
+        "title":  "Fenomeni percettivi e naturali — Olafur Eliasson",
+        "description":  "Riverbed, 2014 — Olafur Eliasson, Louisiana Museum of Modern Art. Foto: Anders Sune Berg.",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "installazione",
+                     "luce",
+                     "percezione",
+                     "arte-ambientale"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Artista islandese-danese (Studio Olafur Eliasson, Berlino) che costruisce installazioni immersive su scala architettonica usando fenomeni fisici reali — nebbia, luce monocromatica, vetro dicroico, acqua corrente — non come effetti speciali ma come materiale primario dell\u0027opera. Opere come Riverbed (un intero paesaggio roccioso con acqua corrente dentro un museo) o Complementary colour chart (nebbia monocromatica con luci fluorescenti) trasformano lo spazio espositivo in un fenomeno naturale simulato ma fisicamente reale.",
+        "source":  "https://olafureliasson.net/"
+    },
+    {
+        "id":  "inspo-eliasson-sito",
+        "src":  "images/obsidian/inspo-eliasson-sito.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-eliasson-sito.jpg",
+        "title":  "Grafica del sito — Studio Olafur Eliasson",
+        "description":  "La home di olafureliasson.net, screenshot del 27/10/2026.",
+        "domain":  [
+                       "ui-ux",
+                       "editoriale"
+                   ],
+        "tags":  [
+                     "web-design",
+                     "minimalismo",
+                     "white-cube"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Il sito non prova a \"essere interessante\" per conto proprio: sfondo bianco neutro, tipografia semplice, griglia di immagini con didascalie minime, navigazione gerarchica chiara (Current, Work, Explore, Projects, About). Ogni accento di colore viene dalle opere stesse — il sito si comporta come una parete di galleria, non come un\u0027opera grafica indipendente. È una scelta editoriale precisa, non un\u0027assenza di scelta.",
+        "source":  "https://olafureliasson.net/"
+    },
+    {
+        "id":  "inspo-front-mimmik",
+        "src":  "images/obsidian/inspo-front-mimmik.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-front-mimmik.jpg",
+        "title":  "Mimmik Tile — Front × Biomason",
+        "description":  "Mimmik Tile — Front × Biomason. Immagine: Front.",
+        "domain":  [
+                       "product-design",
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "biofabbricazione",
+                     "biomineralizzazione",
+                     "materiali-da-costruzione",
+                     "carbonio"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Non è un materiale che imita l\u0027aspetto del corallo con un pattern stampato: è un materiale che si forma con lo stesso processo chimico del corallo, perché viene letteralmente fatto crescere da batteri che precipitano carbonato di calcio sugli aggregati. La texture porosa e le venature naturali non sono una decisione estetica di superficie — sono un sottoprodotto diretto di come il materiale si è formato, nello stesso modo in cui la grana del legno non è disegnata ma cresciuta. È il tipo di coerenza tra processo e aspetto che di solito si trova solo nei materiali naturali, qui ottenuta deliberatamente in fabbrica.",
+        "source":  "https://materialmatters.design/front-and-biomason, https://www.front-materials.com/news/the-story-of-mimmik/"
+    },
+    {
+        "id":  "inspo-lehanneur-inverted-gravity",
+        "src":  "images/obsidian/inspo-lehanneur-inverted-gravity.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-lehanneur-inverted-gravity.jpg",
+        "title":  "Inverted Gravity — Mathieu Lehanneur",
+        "description":  "Inverted Gravity — Mathieu Lehanneur, Design Miami/Basel 2019. Immagine: Design Milk.",
+        "domain":  [
+                       "product-design",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "vetro-soffiato",
+                     "pietra",
+                     "struttura"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Bolle di vetro soffiato che sostengono lastre massive di pietra: l\u0027elemento che ci si aspetterebbe più fragile diventa la struttura portante, mentre quello massiccio sembra fluttuare. Il titolo stesso dichiara il rovesciamento — non un trucco visivo, ma una vera prova di carico che sfida l\u0027intuizione su cosa \"dovrebbe\" reggere cosa.",
+        "source":  "https://www.forbes.com/sites/yjeanmundelsalle/2026/01/25/mathieu-lehanneur-on-turning-science-into-emotional-design/"
+    },
+    {
+        "id":  "inspo-lehanneur-ocean-memories",
+        "src":  "images/obsidian/inspo-lehanneur-ocean-memories.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-lehanneur-ocean-memories.jpg",
+        "title":  "Ocean Memories — Mathieu Lehanneur",
+        "description":  "Ocean Memories — Mathieu Lehanneur, Carpenters Workshop Gallery 2018. Immagine: Dezeen.",
+        "domain":  [
+                       "product-design",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "marmo",
+                     "bronzo",
+                     "fabbricazione-digitale",
+                     "natura"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Tavoli, panche e sgabelli in marmo bianco e grigio o bronzo lucidato, lavorati digitalmente per catturare in forma solida il movimento complesso delle onde — \"fotografie tridimensionali immobili\" di un oceano congelato nel proprio movimento. Lehanneur lo descrive così: \"la transizione da solido a liquido è una magia della fisica, un momento di inclinazione dallo statico al movimento\". Il contrasto tra geometria (il mobile, l\u0027oggetto d\u0027uso) e forma organica (l\u0027onda) è il cuore del pezzo.",
+        "source":  "https://carpentersworkshopgallery.com/exhibitions/ocean-memories-paris-2/"
+    },
+    {
+        "id":  "inspo-meindertsma-local-linoleum",
+        "src":  "images/obsidian/inspo-meindertsma-local-linoleum.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-meindertsma-local-linoleum.jpg",
+        "title":  "Local Linoleum — Christien Meindertsma",
+        "description":  "Local Linoleum — Christien Meindertsma. Immagine: MaterialDistrict.",
+        "domain":  [
+                       "product-design",
+                       "interior-design",
+                       "editoriale"
+                   ],
+        "tags":  [
+                     "filiera-locale",
+                     "lino",
+                     "economia-circolare",
+                     "dutch-design-week"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Il gesto fondativo di questo progetto non è il materiale finito, è l\u0027acquisto a monte: comprare un intero raccolto di lino da coltivatori locali per ricostruire una filiera completa — campo, fibra, olio, pannello — nello stesso territorio. E a differenza del linoleum industriale, che una volta pressato è fissato per sempre, questo può essere ri-pressato e ri-modellato come argilla: la stessa piastrella può tornare fluida e prendere una nuova forma. È un materiale che rifiuta sia l\u0027anonimato della filiera globale sia l\u0027irreversibilità della lavorazione industriale classica — due forme diverse di \"chiusura\" che il progetto apre entrambe.",
+        "source":  "https://materialdistrict.com/article/linoleum-tiles-that-can-be-remoulded-like-clay/, https://ddw.nl/en/programme/local-linoleum"
+    },
+    {
+        "id":  "inspo-phyta-fauna",
+        "src":  "images/obsidian/inspo-phyta-fauna.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-phyta-fauna.jpg",
+        "title":  "Fauna e Apia — Phyta Biodesign",
+        "description":  "Fauna — Phyta Biodesign, Material Matters London 2026. Immagine: Material Matters.",
+        "domain":  [
+                       "architettura",
+                       "product-design"
+                   ],
+        "tags":  [
+                     "design-multispecie",
+                     "facciata",
+                     "ceramica-3d",
+                     "biodiversità-urbana"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "La maggior parte del design \"pro-biodiversità\" aggiunge un elemento a parte — una casetta per uccelli appesa a un balcone, un hotel per insetti in un angolo di giardino. Qui l\u0027ospitalità per un\u0027altra specie non è un accessorio: è incisa nella geometria del pannello di facciata stesso, stampato in 3D in ceramica per creare cavità e superfici dimensionate per una specie specifica (un uccello, un\u0027ape solitaria). Il pannello smette di essere \"involucro dell\u0027edificio con un buco per gli animali\" e diventa \"habitat con funzione anche di involucro\" — un\u0027inversione di priorità tra le due funzioni, non solo un\u0027aggiunta.",
+        "source":  "https://materialmatters.design/phyta-biodesign"
+    },
+    {
+        "id":  "inspo-studiosaar-pangolin-shield",
+        "src":  "images/obsidian/inspo-studiosaar-pangolin-shield.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-studiosaar-pangolin-shield.jpg",
+        "title":  "Pangolin Shield — Studio Saar × Atelier One",
+        "description":  "Pangolin Shield — Studio Saar × Atelier One, London Design Festival 2026. Immagine: Dezeen.",
+        "domain":  [
+                       "architettura",
+                       "interior-design",
+                       "brand-identity"
+                   ],
+        "tags":  [
+                     "riuso",
+                     "critica-coloniale",
+                     "struttura-a-intreccio",
+                     "london-design-festival"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Il padiglione ricombina materiali di scarto esattamente come fa da anni il resto del bricolage raccolto nel vault — ma qui per la prima volta il recupero non è un gesto estetico o tecnico, è una dichiarazione politica esplicita: scudi antisommossa indiani riusati e knups (i tradizionali copripioggia intrecciati usati dai contadini del Meghalaya) diventano i due strati di un involucro che parla di eredità coloniale ed estrazione ecologica.",
+        "source":  "https://www.dezeen.com/eventsguide/london-design-festival-2026/"
+    },
+    {
+        "id":  "inspo-watson-trent-falls",
+        "src":  "images/obsidian/inspo-watson-trent-falls.png",
+        "thumb":  "images/obsidian/thumbs/inspo-watson-trent-falls.jpg",
+        "title":  "Trent Falls — Chris Watson, The Art of Sound",
+        "description":  "The Art of Sound — Chris Watson, Wapping, London Design Festival 2026. Immagine: Wallpaper*.",
+        "domain":  [
+                       "interior-design",
+                       "editoriale"
+                   ],
+        "tags":  [
+                     "field-recording",
+                     "soundscape",
+                     "audio-immersivo",
+                     "london-design-festival"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "La maggior parte delle installazioni sonore immersive lavora per accumulo — strati di suono che costruiscono un\u0027atmosfera. Qui invece il materiale sonoro segue una struttura narrativa precisa: la marea che risale un estuario, dalle canne di una riserva naturale fino al mare aperto, passando per un treno merci e una folla allo stadio. Il paesaggio sonoro non accompagna un racconto — è il racconto, con un inizio geografico (la foce) e una fine (il mare), montato dentro un edificio industriale vittoriano che aggiunge un terzo livello narrativo (la centrale stessa, riconvertita) a quello naturale e a quello umano già registrati.",
+        "source":  "https://chriswatson.net/?p=2037, https://www.wallpaper.com/design-interiors/design-events/chris-watson-wapping-power-station-london-design-festival-2026"
+    },
+    {
+        "id":  "inspo-weckert-digital-camouflage",
+        "src":  "images/obsidian/inspo-weckert-digital-camouflage.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-weckert-digital-camouflage.jpg",
+        "title":  "Digital Camouflage — Simon Weckert",
+        "description":  "Digital Camouflage — Simon Weckert. Immagine: Dezeen.",
+        "domain":  [
+                       "product-design",
+                       "brand-identity",
+                       "ui-ux"
+                   ],
+        "tags":  [
+                     "camouflage",
+                     "sorveglianza",
+                     "adversarial-design",
+                     "anti-ia"
+                 ],
+        "addedAt":  "2026-10-15",
+        "kind":  "riferimento",
+        "note":  "Quasi tutto il design \"intelligente\" di oggi vuole essere letto da un sistema automatico — un tag RFID, un codice QR, un sensore. Questo capo fa l\u0027esatto contrario: è progettato per essere deliberatamente illeggibile a un sistema specifico (riconoscimento video per sorveglianza), usando lo stesso principio che un secolo fa serviva a confondere l\u0027occhio umano di un ufficiale nemico. È un oggetto che non comunica con la macchina, le mente contro — un design che tratta la leggibilità algoritmica come una minaccia da disinnescare, non come un obiettivo da raggiungere.",
+        "source":  "https://www.dezeen.com/2026/08/25/digital-camouflage-shirt-ai-video-surveillance-simon-weckert/amp/"
+    },
+    {
+        "id":  "inspo-stoneisland-ice-jacket",
+        "src":  "images/obsidian/inspo-stoneisland-ice-jacket.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-stoneisland-ice-jacket.jpg",
+        "title":  "Ice Jacket — Stone Island, tessuto termosensibile",
+        "description":  "Ice Jacket, Stone Island — capo in tessuto termosensibile, archivio \"Prototype Research Series\" (principio introdotto nel 1989, qui in versione Poly Strata AW24). Foto: courtesy Stone Island.",
+        "domain":  [
+                       "moda"
+                   ],
+        "tags":  [
+                     "stone-island",
+                     "termocromia",
+                     "tessuto-reattivo",
+                     "poly-strata"
+                 ],
+        "addedAt":  "2026-09-30",
+        "kind":  "riferimento",
+        "note":  "Il capo cambia colore, dal rosa a un bianco sporco, semplicemente spostandosi da un ambiente caldo a uno freddo — e nella zona di transizione tra le due temperature, le due tonalità si mescolano in macchie che ricordano una scansione termografica. Non è un effetto stampato o applicato in superficie: nasce da pigmenti termocromici micro-incapsulati infusi in un doppio strato di poliuretano che riveste un nylon ripstop.",
+        "source":  "https://www.stoneisland.com/en-us/archive-thermosensitive-pieces.html (versione AW24 Poly Strata: designboom)"
+    },
+    {
+        "id":  "inspo-ambasz-casa-de-retiro",
+        "src":  "images/obsidian/inspo-ambasz-casa-de-retiro.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-ambasz-casa-de-retiro.jpg",
+        "title":  "Casa de Retiro Espiritual — Emilio Ambasz",
+        "year":  "2000",
+        "description":  "Casa de Retiro Espiritual, colline vicino a Siviglia — Emilio Ambasz (progettata nel 1975, completata nel 2000).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura"
+                   ],
+        "tags":  [
+                     "emilio-ambasz",
+                     "casa",
+                     "siviglia",
+                     "andalusia",
+                     "architettura-ipogea",
+                     "muro",
+                     "patio",
+                     "paesaggio"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Della casa si vedono solo due muri. Due pareti bianche altissime si incontrano ad angolo retto sulla collina andalusa, senza tetto, come una quinta teatrale piantata nel paesaggio. Tutto il resto, gli spazi in cui si vive davvero, sta sotto, coperto dalla terra dello stesso sito: dall\u0027esterno la casa quasi non esiste.",
+        "source":  "https://www.domusweb.it/en/architecture/2026/01/26/emilio-ambasz-casa-de-ritiro-espiritual-house.html"
+    },
+    {
+        "id":  "inspo-ando-bourse-de-commerce",
+        "src":  "images/obsidian/inspo-ando-bourse-de-commerce.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-ando-bourse-de-commerce.jpg",
+        "title":  "Bourse de Commerce, Pinault Collection — Tadao Ando",
+        "year":  "2021",
+        "description":  "Bourse de Commerce, Parigi — trasformata da Tadao Ando nel museo della Pinault Collection (aperto nel 2021).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "tadao-ando",
+                     "museo",
+                     "parigi",
+                     "calcestruzzo",
+                     "cilindro",
+                     "riuso",
+                     "cupola"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Dentro un edificio rotondo del 1767, nato come mercato del grano e poi diventato borsa, Ando non tocca quasi niente: ci appoggia dentro un altro cerchio. Un cilindro in calcestruzzo gettato in opera, largo 29 metri, sta sotto la cupola vetrata come un oggetto posato, staccato dai muri storici. Tra il cemento liscio e grigio e la rotonda carica di decorazioni resta un\u0027intercapedine che si percorre a piedi.",
+        "source":  "https://www.azuremagazine.com/article/tadao-ando-revives-paris-iconic-bourse-de-commerce/"
+    },
+    {
+        "id":  "inspo-barragan-casa-gilardi",
+        "src":  "images/obsidian/inspo-barragan-casa-gilardi.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-barragan-casa-gilardi.jpg",
+        "title":  "Casa Gilardi — Luis Barragán",
+        "year":  "1976",
+        "description":  "Casa Gilardi, San Miguel Chapultepec, Città del Messico — Luis Barragán (1976), la sua ultima opera.",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "luis-barragan",
+                     "casa",
+                     "citta-del-messico",
+                     "colore",
+                     "rosa",
+                     "piscina",
+                     "luce",
+                     "jacaranda"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Una piccola casa rosa che volta le spalle alla strada. Barragán la finisce nel 1976, a 80 anni, dopo quasi dieci anni senza costruire: è la sua ultima opera. Il progetto parte da un albero, un grande jacaranda che non doveva essere abbattuto e attorno al quale si avvolge tutta la casa: il corridoio gira intorno al cortile dove sta l\u0027albero.",
+        "source":  "https://www.architecturelab.net/gilardi-house-luis-barragan/"
+    },
+    {
+        "id":  "inspo-carmassi-santa-marta",
+        "src":  "images/obsidian/inspo-carmassi-santa-marta.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-carmassi-santa-marta.jpg",
+        "title":  "Facoltà di Economia, Provianda di Santa Marta — Massimo Carmassi",
+        "year":  "2015",
+        "description":  "Ex Provianda di Santa Marta, Verona — restauro e riuso di Massimo Carmassi come sede di Economia dell\u0027Università di Verona (progetto 2005-2015).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "massimo-carmassi",
+                     "restauro",
+                     "riuso",
+                     "archeologia-industriale",
+                     "mattone",
+                     "universita",
+                     "verona"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Un panificio militare diventa un\u0027università senza smettere di essere un panificio militare. La Provianda di Santa Marta è stata costruita dal Genio austriaco tra il 1863 e il 1865 per produrre pane e gallette per tutta la guarnigione di Verona: muri massicci in pietra e mattone, volte in laterizio, tetti in legno, circa 100.000 m³ su cinque livelli. Carmassi la trasforma nella sede di Economia dell\u0027Università di Verona, con la biblioteca nel sottotetto, lavorando per sottrazione più che per aggiunta.",
+        "source":  "https://www.carmassiarchitecture.com/selected-projects/santa-marta-bakery-verona/"
+    },
+    {
+        "id":  "inspo-hadid-maxxi",
+        "src":  "images/obsidian/inspo-hadid-maxxi.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-hadid-maxxi.jpg",
+        "title":  "MAXXI — Zaha Hadid",
+        "year":  "2010",
+        "description":  "MAXXI, Museo nazionale delle arti del XXI secolo, quartiere Flaminio, Roma — Zaha Hadid (concorso 1998-99, aperto nel 2010).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "zaha-hadid",
+                     "museo",
+                     "roma",
+                     "calcestruzzo",
+                     "flusso",
+                     "luce-zenitale",
+                     "riuso"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Non è una scatola con delle sale dentro: è un fascio di linee. Hadid lo descriveva come \"un campo di edifici\", una confluenza di muri che si incrociano e si separano e, così facendo, generano gli spazi interni ed esterni. Le gallerie sono nastri curvi in calcestruzzo a vista che si sovrappongono, si piegano, si attraversano con scale nere sospese. Il percorso non ha un inizio e una fine obbligati: il museo si cammina come un pezzo di città.",
+        "source":  "https://en.wikipedia.org/wiki/MAXXI"
+    },
+    {
+        "id":  "inspo-lehanneur-ritratto",
+        "src":  "images/obsidian/inspo-lehanneur-ritratto.png",
+        "thumb":  "images/obsidian/thumbs/inspo-lehanneur-ritratto.jpg",
+        "title":  "Scienza come materiale progettuale — Mathieu Lehanneur",
+        "description":  "Mathieu Lehanneur, ritratto. Immagine: mathieulehanneur.fr.",
+        "domain":  [
+                       "product-design",
+                       "interior-design",
+                       "architettura"
+                   ],
+        "tags":  [
+                     "scienza-e-design",
+                     "farmacologia",
+                     "meraviglia",
+                     "francia"
+                 ],
+        "addedAt":  "2026-09-14",
+        "kind":  "riferimento",
+        "note":  "Designer francese, studio di riferimento anche per Jean-Baptiste Durand, che vi ha lavorato cinque anni prima di intraprendere la propria pratica. Lehanneur ha studiato farmacologia prima del design, e da lì porta un\u0027attenzione reale — non decorativa — al modo in cui corpo, mente e materia si intrecciano. Il suo metodo dichiarato: \"chiudo gli occhi, lascio che le idee arrivino e si compongano da sole, senza disegnare\". Il risultato oscilla tra razionalità tecnica e \"magia\" — la sua definizione di equilibrio tra \"matematica e magia, funzione ed emozione\".",
+        "source":  "https://www.mathieulehanneur.fr/why"
+    },
+    {
+        "id":  "inspo-sanaa-rolex-learning-center",
+        "src":  "images/obsidian/inspo-sanaa-rolex-learning-center.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-sanaa-rolex-learning-center.jpg",
+        "title":  "Rolex Learning Center — SANAA (Kazuyo Sejima e Ryue Nishizawa)",
+        "year":  "2010",
+        "description":  "Rolex Learning Center, campus EPFL, Losanna — SANAA (concorso 2004, aperto il 22 febbraio 2010).",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura",
+                       "interior-design"
+                   ],
+        "tags":  [
+                     "sanaa",
+                     "kazuyo-sejima",
+                     "ryue-nishizawa",
+                     "biblioteca",
+                     "campus",
+                     "guscio",
+                     "spazio-continuo",
+                     "patio"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Un edificio di un solo piano che però non è mai piatto. Pavimento e copertura corrono paralleli e si sollevano insieme come un tappeto ondulato: dove il suolo si alza, sotto si passa; dove si abbassa, si crea una valle. Al posto delle scale ci sono pendii, terrazze e altipiani, e i cambi di quota bastano a separare le zone silenziose da quelle rumorose senza costruire un solo muro. Quattordici patii vetrati e arrotondati bucano la superficie e fanno entrare il paesaggio dentro la biblioteca.",
+        "source":  "https://www.designboom.com/architecture/sanaa-rolex-learning-center/"
+    },
+    {
+        "id":  "inspo-zumthor-bruder-klaus",
+        "src":  "images/obsidian/inspo-zumthor-bruder-klaus.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-zumthor-bruder-klaus.jpg",
+        "title":  "Bruder Klaus Field Chapel — Peter Zumthor",
+        "year":  "2007",
+        "description":  "Bruder Klaus Feldkapelle, Mechernich-Wachendorf, Germania — Peter Zumthor (2007), cappella privata costruita da una famiglia di agricoltori.",
+        "medium":  "architettura",
+        "domain":  [
+                       "architettura"
+                   ],
+        "tags":  [
+                     "peter-zumthor",
+                     "cappella",
+                     "calcestruzzo",
+                     "fuoco",
+                     "cassaforma-bruciata",
+                     "piombo",
+                     "oculo",
+                     "sacro",
+                     "germania"
+                 ],
+        "addedAt":  "2026-10-29",
+        "kind":  "riferimento",
+        "note":  "Una cappella privata in mezzo ai campi, voluta da un agricoltore, Hermann-Josef Scheidtweiler, e da sua moglie Trudel per onorare il loro santo patrono, Bruder Klaus, e costruita con l\u0027aiuto degli agricoltori del posto. Da fuori è un prisma rigido di calcestruzzo, quasi una torre muta. Dentro è il contrario: una grotta nera, alta e stretta, che si apre verso il cielo.",
+        "source":  "https://architectuul.com/architecture/bruder-klaus-field-chapel"
+    },
+    {
+        "id":  "inspo-anno-lab-sun-and-moon-room",
+        "src":  "images/obsidian/inspo-anno-lab-sun-and-moon-room.jpg",
+        "thumb":  "images/obsidian/thumbs/inspo-anno-lab-sun-and-moon-room.jpg",
+        "title":  "Sun and Moon Room — anno lab",
+        "year":  "2020",
+        "description":  "Sun and Moon Room (太陽と月の部屋), Art Museum of Nature and Human Non-Homogeneity, Bungotakada (Oita) — anno lab, 2020. Fotogramma dal reel di @ooka_iwaki.",
+        "medium":  "installazione interattiva, luce solare, aperture motorizzate, sensori, nebbia",
+        "domain":  [
+                       "architettura",
+                       "interior-design",
+                       "arte"
+                   ],
+        "tags":  [
+                     "anno-lab",
+                     "installazione",
+                     "luce-naturale",
+                     "sole",
+                     "aperture-motorizzate",
+                     "sensori",
+                     "nebbia",
+                     "dati-meteo",
+                     "giappone",
+                     "oita",
+                     "media-art"
+                 ],
+        "addedAt":  "2026-11-19",
+        "kind":  "riferimento",
+        "note":  "Un soffitto che è un campo di piccoli oblò circolari, e ognuno si apre solo se serve. Dei sensori leggono dove si trova il visitatore e aprono soltanto le aperture che, da quella posizione, guardano verso il sole: chi cammina nella stanza si porta dietro il proprio fascio di luce, e la chiazza di sole ai suoi piedi si allarga e si restringe come una luna che cresce e cala. Nel fotogramma si vede anche sul soffitto: molti dischi hanno un bordo illuminato a falce, piccole lune crescenti.",
+        "source":  "https://www.bunka.go.jp/j-mediaarts-festival/award/single/sun-and-moon-room/index.html"
     }
 ];
 window.PROJECTS_OBSIDIAN = [];
